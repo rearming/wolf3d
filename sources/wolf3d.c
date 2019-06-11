@@ -6,10 +6,11 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:42:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/11 18:50:38 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/11 19:38:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define STB_IMAGE_IMPLEMENTATION
 #include "wolf3d.h"
 
 int 		main(int argc, char **argv)

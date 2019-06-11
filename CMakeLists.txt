@@ -9,6 +9,7 @@ set(Includes
         includes/fractol.h
 		includes/structs.h
 		includes/wolf3d.h
+		includes/sdb_image.h
         )
 
 set(libft_includes

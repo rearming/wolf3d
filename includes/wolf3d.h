@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/11 19:09:49 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/11 19:15:01 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <SDL.h>
 
+# include "sdb_image.h"
 # include "libft.h"
 # include "structs.h"
 # include "colors.h"
