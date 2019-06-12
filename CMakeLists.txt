@@ -41,7 +41,7 @@ set(main
 		)
 
 set(init
-		sources/init/sdl_init.c
+		sources/init/init.c
 		)
 
 set(utils
@@ -57,7 +57,10 @@ set(render
 		sources/render/render.c
 		sources/render/bresenham.c)
 set(hooks
-		sources/hooks/key_hook.c sources/utils/exit.c)
+		sources/hooks/key_hook.c
+		sources/utils/exit.c)
+set(image_parsing
+		sources/image_parsing/image_parser.c)
 
 add_executable(wolf3d
 
@@ -67,6 +70,7 @@ add_executable(wolf3d
 		${SDL_utils}
 		${render}
 		${hooks}
+		${image_parsing}
         )
 
 target_link_libraries(wolf3d

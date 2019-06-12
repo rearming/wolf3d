@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/11 16:14:55 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/12 22:01:19 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,36 @@ typedef struct			s_sdl
 	SDL_Renderer		*rend;
 }						t_sdl;
 
+typedef struct			s_stb
+{
+	char				*filename;
+	unsigned char		*data;
+	int 				x;
+	int 				y;
+	int 				bpp;
+	long				size;
+}						t_stb;
+
+typedef struct			s_bmp
+{
+	int 				width;
+	int 				height;
+	int 				bpp;
+	long 				file_size;
+	long 				img_size;
+	int 				offset;
+	int 				color_used;
+	int					*table;
+	unsigned char 		*data;
+}						t_bmp;
+
 typedef struct			s_wolf
 {
 	t_sdl				sdl;
-
+	t_bmp				bmp;
+	t_stb				stb;
+	int 				offset_x;
+	int 				offset_y;
 }						t_wolf;
 
 typedef struct			s_point

@@ -16,7 +16,7 @@ void		sdl_loop(t_wolf *wolf)
 {
 	SDL_Event		event;
 
-	while (42)
+	while (21)
 	{
 		while (SDL_PollEvent(&event))
 		{

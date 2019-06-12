@@ -24,3 +24,9 @@ t_sdl		init_sdl(void)
 		raise_error(ERR_SDL_RENDER);
 	return (sdl);
 }
+
+void		wolf_init(t_wolf *wolf)
+{
+	wolf->offset_x = 0;
+	wolf->offset_y = 0;
+}

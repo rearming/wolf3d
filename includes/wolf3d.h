@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/11 19:15:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/12 20:29:44 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,21 @@
 t_sdl		init_sdl(void);
 
 /*
+**	image parsing
+*/
+
+void		get_image_stbi(t_wolf *wolf, char *filename);
+void		get_bmp_image(t_wolf *wolf, char *filename);
+void		get_image_data(t_wolf *wolf);
+
+/*
 **	render
 */
 
 void		render(t_wolf *wolf);
 void		sdl_put_pixel(t_wolf *wolf, t_point point);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
-
+void		print_bmp_params(t_wolf *wolf);
 /*
 **	SDL utils
 */
