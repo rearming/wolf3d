@@ -65,3 +65,9 @@ void		get_image_stbi(t_wolf *wolf, char *filename)
 	printf("filename: [%s], width: [%i], height: [%i], channels: [%i]\n",
 		   filename, wolf->stb.x, wolf->stb.y, wolf->stb.bpp);
 }
+
+void		get_image_data(t_wolf *wolf)
+{
+	//get_bmp_image(wolf, wolf->stb.filename);
+	get_image_stbi(wolf, wolf->stb.filename);
+}

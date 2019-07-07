@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/11 16:55:46 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/07 23:55:28 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ t_sdl		init_sdl(void)
 
 void		wolf_init(t_wolf *wolf)
 {
-	wolf->offset_x = 0;
-	wolf->offset_y = 0;
+	wolf->player = (t_player){3, 5, M_PI / 2, 0, 0.05};
 }

@@ -6,7 +6,7 @@
 /*   By: sselusa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 15:58:41 by sselusa           #+#    #+#             */
-/*   Updated: 2019/06/01 19:27:03 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/06/13 08:39:20 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 /*
-**	Checks whether (s1) string and (s2) string are identical, returns 0 if not.
+**	Checks whether (s1) string and (s2) string are identical.
 */
 int					ft_strequ(char const *s1, char const *s2);
 

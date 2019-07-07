@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-FLAGS = -Wall -Wextra -Werror -O2
+FLAGS = -Wall -Wextra -O2
 
 LIBFT_INCL = ../includes
 

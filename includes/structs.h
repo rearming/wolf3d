@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/12 22:01:19 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/07 12:47:48 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,19 @@ typedef struct			s_bmp
 	unsigned char 		*data;
 }						t_bmp;
 
+typedef struct			s_player
+{
+	double 				x;
+	double 				y;
+	double 				fov;
+	double 				angle;
+	double 				speed;
+}						t_player;
+
 typedef struct			s_wolf
 {
+	t_player			player;
+	char				**map;
 	t_sdl				sdl;
 	t_bmp				bmp;
 	t_stb				stb;

@@ -44,6 +44,10 @@ set(init
 		sources/init/init.c
 		)
 
+set(debug
+		sources/debug/
+		sources/debug/debug.c)
+
 set(utils
 		sources/utils/error.c
 		)
@@ -59,8 +63,10 @@ set(render
 set(hooks
 		sources/hooks/key_hook.c
 		sources/utils/exit.c)
-set(image_parsing
-		sources/image_parsing/image_parser.c)
+set(parsing
+		sources/parsing/image_parser.c
+		sources/render/render_utils.c
+		sources/parsing/map_parser.c)
 
 add_executable(wolf3d
 
@@ -70,7 +76,8 @@ add_executable(wolf3d
 		${SDL_utils}
 		${render}
 		${hooks}
-		${image_parsing}
+		${parsing}
+		${debug}
         )
 
 target_link_libraries(wolf3d
@@ -78,8 +85,7 @@ target_link_libraries(wolf3d
 		"m"
         "ftprintf"
 		"ft"
-        "-framework OpenGL"
-		${SDL2_LIBRARIES}
+        #"-framework OpenGL"
         "SDL2"
 )
 

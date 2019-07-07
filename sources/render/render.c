@@ -6,145 +6,98 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/12 22:08:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/07 23:52:17 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		sdl_put_pixel(t_wolf *wolf, t_point point)
+int 		get_wall_color(int x, int y, char **map)
 {
+	if (map[y][x] == '1')
+		return (LIGHT_GREEN);
+	if (map[y][x] == '2')
+		return (LIGHT_BLUE);
+	if (map[y][x] == '3')
+		return (V_RED);
+	if (map[y][x] == '4')
+		return (WHITE);
+	return (BLACK);
+}
+
+double 		raycast(t_wolf *wolf, double angle, int *color)
+{
+	double 		x;
+	double 		y;
+	double 		distance;
+
+	x = wolf->player.x;
+	y = wolf->player.y;
+	distance = 0;
+	//printf("angle: [%f]\n", angle / M_PI * 180);
+	while (distance < 50)
+	{
+		//printf("x: [%f] | y: [%f]\n", x, y);
+		if (wolf->map[(int)y][(int)x] != '0')
+			break ;
+		x = wolf->player.x + distance * cos(angle);
+		y = wolf->player.y + distance * sin(angle);
+		distance += 0.01;
+	}
+	//printf("distance: [%f]\n", distance);
+	//printf("\n");
+	//distance *= cos(angle);
+	*color = get_wall_color((int)x, (int)y, wolf->map);
+	return (distance);
+}
+
+void		draw_column(t_wolf *wolf, int x, int height, int color)
+{
+	int		y;
+	int 	i;
+
 	int 	r;
 	int 	g;
 	int 	b;
-	int 	a;
 
-	r = (point.color >> 16) & 0xFF;
-	g = (point.color >> 8) & 0xFF;
-	b = point.color & 0xFF;
-	a = 255;
-	SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, a);
-	SDL_RenderDrawPoint(wolf->sdl.rend, point.x, point.y);
-}
-
-void		parse_color(int *r, int *g, int *b, int color)
-{
-	*r = (color >> 16) & 0xFF;
-	*g = (color >> 8) & 0xFF;
-	*b = color & 0xFF;
-}
-
-void		print_bytes(t_stb image)
-{
-	int 		y;
-	int 		x;
-	long 		count;
-
-	count = 0;
-	y = 0;
-	while (y < image.y * 4)
+	parse_color(&r, &g, &b, color);
+	y = (WIN_HEIGHT - height) / 2;
+	i = 0;
+	//printf("height of the column: [%i]\n", height);
+	while (i < height)
 	{
-		x = 0;
-		while (x < image.x * 4)
-		{
-			printf("%i ", image.data[x + y * image.x]);
-			if ((x + 1) % 4 == 0 && x)
-				printf("  ");
-			count++;
-			x++;
-		}
-		printf("\n");
+		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, SDL_ALPHA_OPAQUE);
+		SDL_RenderDrawPoint(wolf->sdl.rend, x, y);
 		y++;
+		i++;
 	}
-	printf("\n\n number of bytes: [%li]\n", count);
 }
 
-void		print_bmp(t_wolf *wolf)
+void		render_columns(t_wolf *wolf)
 {
-	int 		i;
-	int 		x;
-	int 		y;
-
-	int 		r;
-	int 		g;
-	int 		b;
-	int 		a;
+	int 	i;
+	int 	height;
+	double 	angle;
+	int 	color;
 
 	i = 0;
-	x = 0;
-	y = 0;
-	a = 255;
-	printf("%d %d\n",wolf->bmp.width, wolf->bmp.height);
-	while (i < wolf->bmp.img_size)
+	angle = wolf->player.angle + wolf->player.fov / 5;
+	while (i < WIN_WIDTH)
 	{
-		if (wolf->bmp.color_used == 0) // todo if color table needed
-		{
-			r = wolf->bmp.data[i];
-			g = wolf->bmp.data[i + 1];
-			b = wolf->bmp.data[i + 2];
-		}
-		else
-			parse_color(&r, &g, &b, wolf->bmp.table[wolf->bmp.data[i]]);
-		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, a);
-		SDL_RenderDrawPoint(wolf->sdl.rend, x + wolf->offset_x, y + wolf->offset_y);
-		if (i % (wolf->bmp.width * wolf->bmp.bpp) == 0 && i)
-		{
-			x = 0;
-			y++;
-		}
-		x++;
-		i += wolf->bmp.bpp;
+		height = (int)((double)WIN_HEIGHT / raycast(wolf, angle, &color));
+		angle -= wolf->player.fov / WIN_WIDTH;
+		draw_column(wolf, i, height, color);
+		i++;
+		/*if (i % 20 == 0)
+			printf("\n");
+		printf("angle: [%f]\t", angle);*/
 	}
-}
-
-void		print_image(t_wolf *wolf)
-{
-	int 		i;
-	int 		x;
-	int 		y;
-
-	int 		r;
-	int 		g;
-	int 		b;
-	int 		a;
-
-	i = 0;
-	x = 0;
-	y = 0;
-	a = 255;
-	while (i < wolf->stb.y * wolf->stb.x * wolf->stb.bpp)
-	{
-		r = wolf->stb.data[i];
-		g = wolf->stb.data[i + 1];
-		b = wolf->stb.data[i + 2];
-		if (wolf->stb.bpp > 3)
-			a = wolf->stb.data[i + 3];
-		//printf("%i %i %i %i\n", r, g, b, a);
-		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, a);
-		SDL_RenderDrawPoint(wolf->sdl.rend, x + wolf->offset_x, y + wolf->offset_y);
-		if (i % (wolf->stb.x * wolf->stb.bpp) == 0 && i)
-		{
-			//printf("\n");
-			x = 0;
-			y++;
-		}
-		x++;
-		i += wolf->stb.bpp;
-	}
-}
-
-void		get_image_data(t_wolf *wolf)
-{
-	get_bmp_image(wolf, wolf->stb.filename);
-	//get_image_stbi(wolf, wolf->stb.filename);
 }
 
 void		render(t_wolf *wolf)
 {
 	SDL_SetRenderDrawColor(wolf->sdl.rend, 0, 0, 0, 0);
 	SDL_RenderClear(wolf->sdl.rend);
-	print_bmp(wolf);
-	//print_image(wolf);
+	render_columns(wolf);
 	SDL_RenderPresent(wolf->sdl.rend);
-	print_bmp_params(wolf);
 }

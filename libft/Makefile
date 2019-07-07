@@ -6,7 +6,7 @@
 #    By: bshanae <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/05 13:31:11 by bshanae           #+#    #+#              #
-#    Updated: 2019/05/31 12:08:01 by sleonard         ###   ########.fr        #
+#    Updated: 2019/06/13 08:39:20 by rearming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -203,7 +203,7 @@ OBJ = 					\
 
 OBJ_DIR = ./temp/
 
-COMP = gcc -Wall -Wextra -Werror -O2 -I ./includes
+COMP = gcc -Wall -Wextra -O2 -I ./includes
 
 all : $(NAME)
 

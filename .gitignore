@@ -8,3 +8,4 @@ temp
 *.a
 *.o
 wolf3d
+/SDL2/
