@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/11 19:15:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:44:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void		sdl_loop(t_wolf *wolf)
 
 	while (21)
 	{
+		//wolf->player.angle += 0.01;
 		while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_KEYDOWN)
@@ -25,5 +26,6 @@ void		sdl_loop(t_wolf *wolf)
 		}
 		if (event.type == SDL_QUIT)
 			break ;
+		render(wolf);
 	}
 }

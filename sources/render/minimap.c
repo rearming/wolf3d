@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/05 10:01:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 11:26:46 by sleonard         ###   ########.fr       */
+/*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
+/*   Updated: 2019/07/08 13:12:15 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "wolf3d.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	draw_minimap(t_wolf *wolf)
 {
-	if (!alst || !(*alst))
-		return ;
-	while (*alst)
+	t_point		m_size;
+	int 		x;
+	int 		y;
+
+	m_size.x = wolf->minimap.map_size;
+	m_size.y = wolf->minimap.map_size;
+
+	while (x < m_size.x)
 	{
-		del(*alst, (*alst)->content_size);
-		*alst = (*alst)->next;
+		while ()
 	}
 }

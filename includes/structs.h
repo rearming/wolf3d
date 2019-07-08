@@ -6,17 +6,23 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/07 12:47:48 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/08 13:12:15 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct			s_minimap
+{
+	int 				map_size;
+}						t_minimap;
+
 typedef struct			s_sdl
 {
 	SDL_Window			*win;
 	SDL_Renderer		*rend;
+	SDL_Texture			*texture;
 }						t_sdl;
 
 typedef struct			s_stb
@@ -54,6 +60,7 @@ typedef struct			s_player
 typedef struct			s_wolf
 {
 	t_player			player;
+	t_minimap			minimap;
 	char				**map;
 	t_sdl				sdl;
 	t_bmp				bmp;
@@ -105,9 +112,11 @@ typedef struct			s_gnl_fdf
 {
 	char				*temp_str;
 	char				*backup;
+	char 				**result;
 	char				buf[CL_BUFF_SIZE + 1];
 	int					read_res;
 	size_t				sum_len;
+
 }						t_gnl_fdf;
 
 #endif

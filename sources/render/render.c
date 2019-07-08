@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/07 23:52:17 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/08 12:35:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ double 		raycast(t_wolf *wolf, double angle, int *color)
 			break ;
 		x = wolf->player.x + distance * cos(angle);
 		y = wolf->player.y + distance * sin(angle);
-		distance += 0.01;
+		distance += 0.005;
 	}
-	//printf("distance: [%f]\n", distance);
+	printf("distance: [%f]\n", distance);
 	//printf("\n");
-	//distance *= cos(angle);
 	*color = get_wall_color((int)x, (int)y, wolf->map);
 	return (distance);
 }
@@ -66,7 +65,7 @@ void		draw_column(t_wolf *wolf, int x, int height, int color)
 	//printf("height of the column: [%i]\n", height);
 	while (i < height)
 	{
-		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, SDL_ALPHA_OPAQUE);
+		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, 255);
 		SDL_RenderDrawPoint(wolf->sdl.rend, x, y);
 		y++;
 		i++;
@@ -88,16 +87,16 @@ void		render_columns(t_wolf *wolf)
 		angle -= wolf->player.fov / WIN_WIDTH;
 		draw_column(wolf, i, height, color);
 		i++;
-		/*if (i % 20 == 0)
-			printf("\n");
-		printf("angle: [%f]\t", angle);*/
 	}
 }
 
 void		render(t_wolf *wolf)
 {
+	SDL_SetRenderTarget(wolf->sdl.rend, wolf->sdl.texture);
 	SDL_SetRenderDrawColor(wolf->sdl.rend, 0, 0, 0, 0);
 	SDL_RenderClear(wolf->sdl.rend);
 	render_columns(wolf);
+	SDL_SetRenderTarget(wolf->sdl.rend, NULL);
+	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:56:35 by sleonard          #+#    #+#             */
-/*   Updated: 2019/06/03 09:34:21 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:26:46 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 # define LIGHT_BLUE 0x2199F5
 # define LIGHT_GREEN 0x55CD55
 # define ROMA_COLOR 0xFC21EB
+# define GREY 0xA7ADBA
 
 #endif

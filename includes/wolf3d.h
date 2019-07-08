@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/07 13:09:00 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/08 11:26:46 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		get_image_data(t_wolf *wolf);
 */
 
 char		**get_map(char *filename);
-
+char		**fdf_gnl(int fd);
 /*
 **	render
 */

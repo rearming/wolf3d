@@ -59,14 +59,15 @@ set(SDL_utils
 
 set(render
 		sources/render/render.c
-		sources/render/bresenham.c)
+		sources/render/render_utils.c
+		sources/render/bresenham.c sources/render/minimap.c)
 set(hooks
 		sources/hooks/key_hook.c
 		sources/utils/exit.c)
 set(parsing
 		sources/parsing/image_parser.c
-		sources/render/render_utils.c
-		sources/parsing/map_parser.c)
+		sources/parsing/map_parser.c
+		sources/parsing/wolf_gnl.c)
 
 add_executable(wolf3d
 
