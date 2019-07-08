@@ -13,6 +13,14 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct			s_color
+{
+	int 				r;
+	int 				g;
+	int 				b;
+	int 				a;
+}						t_color;
+
 typedef struct			s_minimap
 {
 	int 				map_size;

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 12:28:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 15:58:52 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,9 @@ t_sdl		init_sdl(void)
 void		wolf_init(t_wolf *wolf)
 {
 	wolf->player = (t_player){3, 5, M_PI / 3, 0, 0.05};
+	wolf->player.x = 3;
+	wolf->player.y = 5;
+	wolf->player.fov = M_PI / 3; //60 градусов
+	wolf->player.angle = 0;
+	wolf->player.speed = 0.05;
 }
