@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 16:15:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 19:05:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void 		map_raycast(t_wolf *wolf, double angle)
 			x = wolf->player.x + distance * cos(angle);
 			y = wolf->player.y + distance * sin(angle);
 			distance += 0.05;
-			sdl_put_pixel(wolf, (t_point){x * scale.x, y * scale.y, 0, M_TURQOISE});
-			if (wolf->map[(int) y][(int) x] != '0')
+			sdl_put_pixel((t_point) {x * scale.x, y * scale.y, 0, M_TURQOISE},
+						  wolf->sdl);
+			if (!cell_is_empty(wolf->map[(int) y][(int) x]))
 				break;
 		}
 		angle += wolf->player.fov / 60;
@@ -51,7 +52,7 @@ void		draw_player(t_wolf *wolf)
 	player_pos.x = wolf->player.x * scale.x;
 	player_pos.y = wolf->player.y * scale.y;
 	player_pos.color = BLACK;
-	sdl_put_pixel(wolf, player_pos);
+	sdl_put_pixel(player_pos, wolf->sdl);
 	map_raycast(wolf, wolf->player.angle);
 }
 
@@ -74,12 +75,13 @@ void		draw_minimap(t_wolf *wolf)
 		x = 0;
 		while (x < m_size.x * scale.x)
 		{
-			if (wolf->map[y / scale.y][x / scale.x] == '0')
-				sdl_put_pixel(wolf, (t_point) {x, y, 0, GREY});
+			if (cell_is_empty(wolf->map[y / scale.y][x / scale.x]))
+				sdl_put_pixel((t_point) {x, y, 0, GREY}, wolf->sdl);
 			else
-				sdl_put_pixel(wolf,
-						(t_point){x, y, 0,
-				get_wall_color(x / scale.x, y / scale.y, wolf->map)});
+				sdl_put_pixel((t_point) {x, y, 0,
+										 get_wall_color(x / scale.x,
+														y / scale.y,
+														wolf->map)}, wolf->sdl);
 			x++;
 		}
 		y++;

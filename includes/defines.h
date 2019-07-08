@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 12:27:58 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 17:37:05 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include "wolf3d.h"
 
 # ifdef __APPLE__
-#  define WIN_WIDTH 630
-#  define WIN_HEIGHT 320
+#  define WIN_WIDTH 630 //2550 //630
+#  define WIN_HEIGHT 320 //1300 //320
 # else
 #  define WIN_WIDTH 1200
 #  define WIN_HEIGHT 800
@@ -28,4 +28,5 @@
 
 # define BUFF_SIZE 2000000
 
+# define PLAYER_POS 53
 #endif

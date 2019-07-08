@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:21:00 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/07 12:21:06 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/08 19:43:50 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void		print_bytes(t_stb image)
 
 	count = 0;
 	y = 0;
-	while (y < image.y * 4)
+	while (y < image.heigth * 4)
 	{
 		x = 0;
-		while (x < image.x * 4)
+		while (x < image.width * 4)
 		{
-			printf("%i ", image.data[x + y * image.x]);
+			printf("%i ", image.data[x + y * image.width]);
 			if ((x + 1) % 4 == 0 && x)
 				printf("  ");
 			count++;
@@ -64,7 +64,6 @@ void		print_bmp(t_wolf *wolf)
 		else
 			parse_color(&r, &g, &b, wolf->bmp.table[wolf->bmp.data[i]]);
 		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, a);
-		SDL_RenderDrawPoint(wolf->sdl.rend, x + wolf->offset_x, y + wolf->offset_y);
 		if (i % (wolf->bmp.width * wolf->bmp.bpp) == 0 && i)
 		{
 			x = 0;
@@ -75,38 +74,22 @@ void		print_bmp(t_wolf *wolf)
 	}
 }
 
-void		print_image(t_wolf *wolf)
+void		print_image(t_stb image, t_sdl sdl)
 {
 	int 		i;
-	int 		x;
-	int 		y;
-
-	int 		r;
-	int 		g;
-	int 		b;
-	int 		a;
+	int 		j;
 
 	i = 0;
-	x = 0;
-	y = 0;
-	a = 255;
-	while (i < wolf->stb.y * wolf->stb.x * wolf->stb.bpp)
+	while (i < image.heigth)
 	{
-		r = wolf->stb.data[i];
-		g = wolf->stb.data[i + 1];
-		b = wolf->stb.data[i + 2];
-		if (wolf->stb.bpp > 3)
-			a = wolf->stb.data[i + 3];
-		//printf("%i %i %i %i\t", r, g, b, a);
-		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, a);
-		SDL_RenderDrawPoint(wolf->sdl.rend, x + wolf->offset_x, y + wolf->offset_y);
-		if (i % (wolf->stb.x * wolf->stb.bpp) == 0 && i)
+		j = 0;
+		while (j < image.width)
 		{
-			//printf("\n");
-			x = 0;
-			y++;
+			sdl_put_pixel((t_point){j, i, 0, image.sprite[i][j]}, sdl);
+			j++;
 		}
-		x++;
-		i += wolf->stb.bpp;
+		i++;
 	}
+	printf("image.height: [%i] | width: [%i] | bpp: [%i]\n",
+			image.heigth, image.width, image.bpp);
 }

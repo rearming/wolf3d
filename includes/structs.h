@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 13:12:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:54:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ typedef struct			s_stb
 {
 	char				*filename;
 	unsigned char		*data;
-	int 				x;
-	int 				y;
+	int 				**sprite;
+	int 				width;
+	int 				heigth;
 	int 				bpp;
 	long				size;
 }						t_stb;
@@ -73,8 +74,6 @@ typedef struct			s_wolf
 	t_sdl				sdl;
 	t_bmp				bmp;
 	t_stb				stb;
-	int 				offset_x;
-	int 				offset_y;
 }						t_wolf;
 
 typedef struct			s_point

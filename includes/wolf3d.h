@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 13:39:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:54:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char		**fdf_gnl(int fd);
 */
 
 void		render(t_wolf *wolf);
-void		sdl_put_pixel(t_wolf *wolf, t_point point);
+void sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 void		print_bmp_params(t_wolf *wolf);
 void		parse_color(int *r, int *g, int *b, int color);
@@ -65,6 +65,7 @@ double 		raycast(t_wolf *wolf, double angle, int *color);
 */
 
 int 		get_wall_color(int x, int y, char **map);
+int 		cell_is_empty(char cell);
 
 /*
 **	minimap
@@ -98,6 +99,6 @@ void		sdl_exit(t_wolf *wolf);
 
 void		print_bytes(t_stb image);
 void		print_bmp(t_wolf *wolf);
-void		print_image(t_wolf *wolf);
+void print_image(t_stb image, t_sdl sdl);
 
 #endif

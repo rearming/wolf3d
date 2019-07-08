@@ -6,11 +6,16 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 15:28:53 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/08 20:22:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+double 		ft_dabs(double nbr)
+{
+	return (nbr > 0 ? nbr : -nbr);
+}
 
 double 		raycast(t_wolf *wolf, double angle, int *color)
 {
@@ -21,19 +26,18 @@ double 		raycast(t_wolf *wolf, double angle, int *color)
 	x = wolf->player.x;
 	y = wolf->player.y;
 	distance = 0;
-	//printf("angle: [%f]\n", angle / M_PI * 180);
 	while (distance < 50)
 	{
-		//printf("x: [%f] | y: [%f]\n", x, y);
-		if (wolf->map[(int)y][(int)x] != '0')
+		if (!cell_is_empty(wolf->map[(int)y][(int)x]))
 			break ;
 		x = wolf->player.x + distance * cos(angle);
 		y = wolf->player.y + distance * sin(angle);
 		distance += 0.005;
 	}
-	//printf("distance: [%f]\n", distance);
-	//printf("\n");
 	*color = get_wall_color((int)x, (int)y, wolf->map);
+	if (ft_dabs(x - round(x)) < 0.01 && ft_dabs(y - round(y)) < 0.01)
+		*color = BLACK;
+	//printf("final x: [%f] | y: [%f]\n", x, y);
 	return (distance);
 }
 
@@ -42,16 +46,12 @@ void		draw_column(t_wolf *wolf, int x, int height, int color)
 	int		y;
 	int 	i;
 
-	int 	r;
-	int 	g;
-	int 	b;
-
 	y = (WIN_HEIGHT - height) / 2;
 	i = 0;
 	//printf("height of the column: [%i]\n", height);
 	while (i < height)
 	{
-		sdl_put_pixel(wolf, (t_point){x, y, 0, color});
+		sdl_put_pixel((t_point) {x, y, 0, color}, wolf->sdl);
 		y++;
 		i++;
 	}
@@ -64,24 +64,63 @@ void		render_columns(t_wolf *wolf)
 	double 	angle;
 	int 	color;
 
-	i = WIN_WIDTH;
-	angle = wolf->player.angle + wolf->player.fov / 2;
-	while (i)
+	i = 0;
+	angle = wolf->player.angle - wolf->player.fov / 2;
+	while (i < WIN_WIDTH)
 	{
 		height = (int)((double)WIN_HEIGHT / raycast(wolf, angle, &color));
-		angle -= wolf->player.fov / WIN_WIDTH;
+		angle += wolf->player.fov / WIN_WIDTH;
 		draw_column(wolf, i, height, color);
-		i--;
+		i++;
 	}
+}
+
+int 		get_color_from_bytes(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
+int 		**get_sprite(unsigned char *tilemap, int img_width, int bpp, t_sdl sdl)
+{
+	int 	x;
+	int 	y;
+	int 	i;
+	int 	j;
+	int 	**sprite;
+
+	i = 0;
+	y = 0;
+	sprite = (int**)malloc(sizeof(int*) * (64));
+	while (i < 64)
+	{
+		j = 256;
+		x = 0;
+		sprite[y] = (int*)malloc(sizeof(int) * (64));
+		while (j < 320)
+		{
+			sprite[y][x] = get_color_from_bytes(tilemap[j * bpp + i * bpp * img_width],
+					tilemap[(j * bpp + i * bpp * img_width) + 1],
+					tilemap[(j * bpp + i * bpp * img_width) + 2]);
+			//printf("0x%X\t", sprite[y][x]);
+			j++;
+			x++;
+		}
+		y++;
+		i++;
+	}
+	return (sprite);
 }
 
 void		render(t_wolf *wolf)
 {
+
 	SDL_SetRenderTarget(wolf->sdl.rend, wolf->sdl.texture);
 	SDL_SetRenderDrawColor(wolf->sdl.rend, 0, 0, 0, 0);
 	SDL_RenderClear(wolf->sdl.rend);
+
 	render_columns(wolf);
 	draw_minimap(wolf);
+
 	SDL_SetRenderTarget(wolf->sdl.rend, NULL);
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
