@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 13:20:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:40:27 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		wolf_init(t_wolf *wolf);
 
 void		get_image_stbi(t_wolf *wolf, char *filename);
 void		get_bmp_image(t_bmp *bmp, const char *filename);
-int get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename);
+int			get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename);
 
 /*
 **	textures parsing
@@ -60,7 +60,7 @@ char		**fdf_gnl(int fd);
 */
 
 void		render(t_wolf *wolf);
-double 		raycast(t_wolf *wolf, double angle, int *color);
+t_ray raycast(t_wolf *wolf, double angle, int *color);
 void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 17:37:05 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:25:24 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,8 @@
 
 # define BMP_IMG 100
 # define STB_IMG 101
+
+# define SVA_EAGLE 102
+# define HITLER 103
+
 #endif

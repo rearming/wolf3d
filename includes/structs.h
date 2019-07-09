@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 12:52:45 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:25:24 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct			s_sdl
 	SDL_Texture			*texture;
 }						t_sdl;
 
+typedef	struct			s_ray
+{
+	double 				x;
+	double 				y;
+	double 				distance;
+}						t_ray;
+
 typedef struct			s_player
 {
 	double 				x;
@@ -57,13 +64,22 @@ typedef struct			s_minimap
 	int 				map_size;
 }						t_minimap;
 
+typedef	struct			s_sprite
+{
+	int					**data;
+	int 				size;
+	int 				width;
+	int 				height;
+}						t_sprite;
+
 typedef	struct 			s_textures
 {
-	int 				**sva_flag;
-	int 				**rock_wall;
-	int 				**hitler;
-	int 				**red_bricks;
-	int 				**eagle_svaston;
+
+	t_sprite 			sva_flag;
+	t_sprite 			rock_wall;
+	t_sprite 			hitler;
+	t_sprite 			red_bricks;
+	t_sprite 			eagle_svaston;
 
 }						t_textures;
 

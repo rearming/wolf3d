@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 13:43:21 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:42:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,32 @@ static int 	get_color_from_tilemap(t_stb img, int i, int j)
 					  i * img.bpp * img.width) + 2]));
 }
 
-int			**get_sprite(t_stb img, t_point sprite, int sprite_size)
+t_sprite	get_sprite(t_stb img, t_point sprite_pos, int sprite_size)
 {
-	int 	x;
-	int 	y;
-	int 	i;
-	int 	j;
-	int 	**res_sprite;
+	t_sprite	sprite;
+	int 		i;
+	int 		j;
 
-	i = sprite.y;
-	y = 0;
-	res_sprite = (int**)malloc(sizeof(int*) * (sprite_size));
-	while (i < sprite.y + sprite_size)
+	i = sprite_pos.y;
+	sprite.size = sprite_size;
+	sprite.height = 0;
+	sprite.data = (int**)malloc(sizeof(int*) * (sprite_size));
+	while (i < sprite_pos.y + sprite_size)
 	{
-		j = sprite.x;
-		x = 0;
-		res_sprite[y] = (int*)malloc(sizeof(int) * (sprite_size));
-		while (j < sprite.x + sprite_size)
+		j = sprite_pos.x;
+		sprite.width = 0;
+		sprite.data[sprite.height] = (int*)malloc(sizeof(int) * (sprite_size));
+		while (j < sprite_pos.x + sprite_size)
 		{
-			res_sprite[y][x] = get_color_from_tilemap(img, i, j);
+			sprite.data[sprite.height][sprite.width]
+				= get_color_from_tilemap(img, i, j);
 			j++;
-			x++;
+			sprite.width++;
 		}
-		y++;
+		sprite.height++;
 		i++;
 	}
-	return (res_sprite);
+	return (sprite);
 }
 
 t_textures	get_all_textures(const char *filename)
