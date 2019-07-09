@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.h                                           :+:      :+:    :+:   */
+/*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/06 12:56:35 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 17:52:49 by sleonard         ###   ########.fr       */
+/*   Created: 2019/07/09 18:33:44 by sleonard          #+#    #+#             */
+/*   Updated: 2019/07/09 20:05:36 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#include "wolf3d.h"
 
-# define WHITE 0xFFFFFF
-# define BLACK 0x000000
-# define RED 0xFF0000
-# define V_RED 0xCB1A43
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define YELLOW 0xFFFF00
-# define PURPLE 0x79125D
-# define LIGHT_BLUE 0x2199F5
-# define LIGHT_GREEN 0x55CD55
-# define ROMA_COLOR 0xFC21EB
-# define GREY 0xA7ADBA
-# define M_TURQOISE 0x4682B4
-# define FLOOR_GREY 0x3B3B3B
-
-#endif
+void		mouse_hook(t_wolf *wolf, SDL_Event event)
+{
+	//printf("mouse x: [%i]\n", event.motion.x);
+	//printf("mouse rel_x: [%i]\n", event.motion.xrel) ;
+	wolf->player.angle += (double)event.motion.xrel / 1000;
+}

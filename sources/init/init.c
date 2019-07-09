@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 14:27:48 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 20:12:54 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ t_sdl		init_sdl(void)
 
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		raise_error(ERR_SDL_INIT);
-	if (!(sdl.win = SDL_CreateWindow("Dota 2", 300, 300, WIN_WIDTH * 3, WIN_HEIGHT * 3, SDL_WINDOW_SHOWN)))
+	if (!(sdl.win = SDL_CreateWindow("Dota 2", 10, 50,
+			WIN_WIDTH * 4, WIN_HEIGHT * 4, SDL_WINDOW_OPENGL)))
 		raise_error(ERR_SDL_WIN);
-	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, SDL_RENDERER_ACCELERATED)))
+	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, 0)))
 		raise_error(ERR_SDL_RENDER);
-	if (!(sdl.texture = SDL_CreateTexture(sdl.rend, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT)))
+	if (!(sdl.texture = SDL_CreateTexture(sdl.rend, SDL_PIXELFORMAT_ARGB8888,
+			SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT)))
 		raise_error(ERR_SDL_TEXTURE_CREATE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	return (sdl);
 }
 
@@ -53,8 +56,11 @@ void		get_player_position(char **map, double *ret_x, double *ret_y)
 void		wolf_init(t_wolf *wolf)
 {
 	get_player_position(wolf->map, &wolf->player.x, &wolf->player.y);
-	printf("player's spawn: x: [%f] | y: [%f]\n", wolf->player.x, wolf->player.y);
 	wolf->player.fov = M_PI / 3; //60 градусов
 	wolf->player.angle = 0;
-	wolf->player.speed = 0.05;
+	wolf->player.ang_speed = 0.05;
+	wolf->player.speed_fwd = 0.3;
+	wolf->player.speed_side = 0.2;
+	wolf->minimap.scale.x = 2;
+	wolf->minimap.scale.y = 4;
 }

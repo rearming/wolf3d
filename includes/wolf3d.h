@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 13:40:27 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:25:24 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char		**fdf_gnl(int fd);
 */
 
 void		render(t_wolf *wolf);
-t_ray raycast(t_wolf *wolf, double angle, int *color);
+t_ray		raycast(t_wolf *wolf, double angle, int *texture_type);
 void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 
@@ -70,7 +70,7 @@ void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 
 int 		get_int_from_rgb(int r, int g, int b);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
-int 		get_wall_color(int x, int y, char **map);
+int 		get_texture_type(int x, int y, char **map);
 int 		cell_is_empty(char cell);
 
 /*
@@ -91,6 +91,7 @@ void		sdl_clean(t_wolf *wolf);
 */
 
 void		key_hook(t_wolf *wolf, SDL_Event event);
+void		mouse_hook(t_wolf *wolf, SDL_Event event);
 
 /*
 **	utils
@@ -103,10 +104,6 @@ void		sdl_exit(t_wolf *wolf);
 **	debug
 */
 
-void		print_bytes(t_stb image);
-void print_bmp(t_bmp bmp, t_sdl sdl);
-void print_texture(t_sdl sdl, int width, int height, int **data,
-				   t_point print_coord);
 void		print_bmp_params(t_bmp bmp);
 
 #endif

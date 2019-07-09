@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 15:06:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 18:39:00 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void		sdl_loop(t_wolf *wolf)
 		{
 			if (event.type == SDL_KEYDOWN)
 				key_hook(wolf, event);
+			if (event.type == SDL_MOUSEMOTION)
+			{
+				mouse_hook(wolf, event);
+			}
 		}
 		if (event.type == SDL_QUIT)
 			break ;

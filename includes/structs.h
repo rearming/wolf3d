@@ -6,12 +6,20 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 14:25:24 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 18:33:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef struct			s_point
+{
+	int					x;
+	int					y;
+	int					z;
+	int					color;
+}						t_point;
 
 typedef struct			s_stb
 {
@@ -56,12 +64,14 @@ typedef struct			s_player
 	double 				y;
 	double 				fov;
 	double 				angle;
-	double 				speed;
+	double 				speed_fwd;
+	double 				speed_side;
+	double 				ang_speed;
 }						t_player;
 
 typedef struct			s_minimap
 {
-	int 				map_size;
+	t_point				scale;
 }						t_minimap;
 
 typedef	struct			s_sprite
@@ -74,12 +84,11 @@ typedef	struct			s_sprite
 
 typedef	struct 			s_textures
 {
-
 	t_sprite 			sva_flag;
 	t_sprite 			rock_wall;
 	t_sprite 			hitler;
 	t_sprite 			red_bricks;
-	t_sprite 			eagle_svaston;
+	t_sprite 			sva_eagle;
 
 }						t_textures;
 
@@ -99,14 +108,6 @@ typedef struct			s_color
 	int 				b;
 	int 				a;
 }						t_color;
-
-typedef struct			s_point
-{
-	int					x;
-	int					y;
-	int					z;
-	int					color;
-}						t_point;
 
 typedef struct			s_line
 {

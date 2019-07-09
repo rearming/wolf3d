@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/09 14:25:24 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 15:50:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,17 @@ void		get_rgb_from_int(int *r, int *g, int *b, int color)
 	*b = color & 0xFF;
 }
 
-int 		get_wall_color(int x, int y, char **map)
+int 		get_texture_type(int x, int y, char **map)
 {
 	if (map[y][x] == '1')
-		return (LIGHT_GREEN);
+		return (ROCK_WALL);
 	if (map[y][x] == '2')
 		return (SVA_EAGLE);
 	if (map[y][x] == '3')
-		return (V_RED);
+		return (RED_BRICKS);
 	if (map[y][x] == '4')
-		return (WHITE);
-	if (map[y][x] == '7')
+		return (SVA_FLAG);
+	if (map[y][x] == '6')
 		return (HITLER);
 	return (BLACK);
 }

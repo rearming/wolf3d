@@ -63,7 +63,7 @@ set(render
 		sources/render/bresenham.c sources/render/minimap.c)
 set(hooks
 		sources/hooks/key_hook.c
-		sources/utils/exit.c)
+		sources/utils/exit.c sources/hooks/mouse_hook.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c
@@ -86,7 +86,6 @@ target_link_libraries(wolf3d
 		"m"
         "ftprintf"
 		"ft"
-        #"-framework OpenGL"
         "SDL2"
 )
 
