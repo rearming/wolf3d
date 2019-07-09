@@ -67,7 +67,7 @@ set(hooks
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c
-		sources/parsing/wolf_gnl.c)
+		sources/parsing/wolf_gnl.c sources/parsing/texture_parser.c)
 
 add_executable(wolf3d
 

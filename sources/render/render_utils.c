@@ -34,7 +34,12 @@ void		sdl_put_pixel(t_point point, t_sdl sdl)
 	SDL_RenderDrawPoint(sdl.rend, point.x, point.y);
 }
 
-void		parse_color(int *r, int *g, int *b, int color)
+int 		get_int_from_rgb(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
+}
+
+void		get_rgb_from_int(int *r, int *g, int *b, int color)
 {
 	*r = (color >> 16) & 0xFF;
 	*g = (color >> 8) & 0xFF;

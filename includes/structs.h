@@ -6,40 +6,19 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 18:54:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 12:52:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct			s_color
-{
-	int 				r;
-	int 				g;
-	int 				b;
-	int 				a;
-}						t_color;
-
-typedef struct			s_minimap
-{
-	int 				map_size;
-}						t_minimap;
-
-typedef struct			s_sdl
-{
-	SDL_Window			*win;
-	SDL_Renderer		*rend;
-	SDL_Texture			*texture;
-}						t_sdl;
-
 typedef struct			s_stb
 {
 	char				*filename;
 	unsigned char		*data;
-	int 				**sprite;
 	int 				width;
-	int 				heigth;
+	int 				height;
 	int 				bpp;
 	long				size;
 }						t_stb;
@@ -57,6 +36,13 @@ typedef struct			s_bmp
 	unsigned char 		*data;
 }						t_bmp;
 
+typedef struct			s_sdl
+{
+	SDL_Window			*win;
+	SDL_Renderer		*rend;
+	SDL_Texture			*texture;
+}						t_sdl;
+
 typedef struct			s_player
 {
 	double 				x;
@@ -66,15 +52,37 @@ typedef struct			s_player
 	double 				speed;
 }						t_player;
 
+typedef struct			s_minimap
+{
+	int 				map_size;
+}						t_minimap;
+
+typedef	struct 			s_textures
+{
+	int 				**sva_flag;
+	int 				**rock_wall;
+	int 				**hitler;
+	int 				**red_bricks;
+	int 				**eagle_svaston;
+
+}						t_textures;
+
 typedef struct			s_wolf
 {
 	t_player			player;
 	t_minimap			minimap;
 	char				**map;
 	t_sdl				sdl;
-	t_bmp				bmp;
-	t_stb				stb;
+	t_textures			textures;
 }						t_wolf;
+
+typedef struct			s_color
+{
+	int 				r;
+	int 				g;
+	int 				b;
+	int 				a;
+}						t_color;
 
 typedef struct			s_point
 {

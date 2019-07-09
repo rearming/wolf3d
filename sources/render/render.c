@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 20:22:51 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:41:18 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,42 +75,6 @@ void		render_columns(t_wolf *wolf)
 	}
 }
 
-int 		get_color_from_bytes(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
-
-int 		**get_sprite(unsigned char *tilemap, int img_width, int bpp, t_sdl sdl)
-{
-	int 	x;
-	int 	y;
-	int 	i;
-	int 	j;
-	int 	**sprite;
-
-	i = 0;
-	y = 0;
-	sprite = (int**)malloc(sizeof(int*) * (64));
-	while (i < 64)
-	{
-		j = 256;
-		x = 0;
-		sprite[y] = (int*)malloc(sizeof(int) * (64));
-		while (j < 320)
-		{
-			sprite[y][x] = get_color_from_bytes(tilemap[j * bpp + i * bpp * img_width],
-					tilemap[(j * bpp + i * bpp * img_width) + 1],
-					tilemap[(j * bpp + i * bpp * img_width) + 2]);
-			//printf("0x%X\t", sprite[y][x]);
-			j++;
-			x++;
-		}
-		y++;
-		i++;
-	}
-	return (sprite);
-}
-
 void		render(t_wolf *wolf)
 {
 
@@ -120,6 +84,12 @@ void		render(t_wolf *wolf)
 
 	render_columns(wolf);
 	draw_minimap(wolf);
+
+	print_texture(wolf->sdl, 64, 64, wolf->textures.sva_flag, (t_point){0,0});
+	print_texture(wolf->sdl, 64, 64, wolf->textures.rock_wall, (t_point){64,0});
+	print_texture(wolf->sdl, 64, 64, wolf->textures.hitler, (t_point){128,0});
+	print_texture(wolf->sdl, 64, 64, wolf->textures.red_bricks, (t_point){192,0});
+	print_texture(wolf->sdl, 64, 64, wolf->textures.eagle_svaston, (t_point){256,0});
 
 	SDL_SetRenderTarget(wolf->sdl.rend, NULL);
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);

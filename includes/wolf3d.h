@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/08 18:54:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:20:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,14 @@ void		wolf_init(t_wolf *wolf);
 */
 
 void		get_image_stbi(t_wolf *wolf, char *filename);
-void		get_bmp_image(t_wolf *wolf, char *filename);
-void		get_image_data(t_wolf *wolf);
+void		get_bmp_image(t_bmp *bmp, const char *filename);
+int get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename);
+
+/*
+**	textures parsing
+*/
+
+t_textures	get_all_textures();
 
 /*
 **	map parsing
@@ -54,16 +60,16 @@ char		**fdf_gnl(int fd);
 */
 
 void		render(t_wolf *wolf);
-void sdl_put_pixel(t_point point, t_sdl sdl);
-void		bresen_line(t_wolf *wolf, t_point start, t_point end);
-void		print_bmp_params(t_wolf *wolf);
-void		parse_color(int *r, int *g, int *b, int color);
 double 		raycast(t_wolf *wolf, double angle, int *color);
+void		sdl_put_pixel(t_point point, t_sdl sdl);
+void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 
 /*
 **	render utils
 */
 
+int 		get_int_from_rgb(int r, int g, int b);
+void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_wall_color(int x, int y, char **map);
 int 		cell_is_empty(char cell);
 
@@ -98,7 +104,9 @@ void		sdl_exit(t_wolf *wolf);
 */
 
 void		print_bytes(t_stb image);
-void		print_bmp(t_wolf *wolf);
-void print_image(t_stb image, t_sdl sdl);
+void print_bmp(t_bmp bmp, t_sdl sdl);
+void print_texture(t_sdl sdl, int width, int height, int **data,
+				   t_point print_coord);
+void		print_bmp_params(t_bmp bmp);
 
 #endif

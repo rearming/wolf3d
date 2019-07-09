@@ -29,4 +29,7 @@
 # define BUFF_SIZE 2000000
 
 # define PLAYER_POS 53
+
+# define BMP_IMG 100
+# define STB_IMG 101
 #endif

@@ -6,13 +6,21 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:21:00 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/08 19:43:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:35:33 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		print_bytes(t_stb image)
+void		print_bmp_params(t_bmp bmp)
+{
+	printf("offset of data: [%i]\n", bmp.offset);
+	printf("bmp file size: [%li]\n", bmp.file_size);
+	printf("bmp bpp: [%i]\n", bmp.bpp);
+	printf("bmp size: [%li]\n", bmp.img_size);
+}
+
+/*void		print_bytes(t_stb image)
 {
 	int 		y;
 	int 		x;
@@ -20,7 +28,7 @@ void		print_bytes(t_stb image)
 
 	count = 0;
 	y = 0;
-	while (y < image.heigth * 4)
+	while (y < image.height * 4)
 	{
 		x = 0;
 		while (x < image.width * 4)
@@ -35,9 +43,9 @@ void		print_bytes(t_stb image)
 		y++;
 	}
 	printf("\n\n number of bytes: [%li]\n", count);
-}
+}*/
 
-void		print_bmp(t_wolf *wolf)
+void 		print_bmp(t_bmp bmp, t_sdl sdl)
 {
 	int 		i;
 	int 		x;
@@ -52,44 +60,43 @@ void		print_bmp(t_wolf *wolf)
 	x = 0;
 	y = 0;
 	a = 255;
-	printf("%d %d\n",wolf->bmp.width, wolf->bmp.height);
-	while (i < wolf->bmp.img_size)
+	while (i < bmp.img_size)
 	{
-		if (wolf->bmp.color_used == 0) // todo if color table needed
+		if (bmp.color_used == 0)
 		{
-			r = wolf->bmp.data[i];
-			g = wolf->bmp.data[i + 1];
-			b = wolf->bmp.data[i + 2];
+			r = bmp.data[i];
+			g = bmp.data[i + 1];
+			b = bmp.data[i + 2];
 		}
 		else
-			parse_color(&r, &g, &b, wolf->bmp.table[wolf->bmp.data[i]]);
-		SDL_SetRenderDrawColor(wolf->sdl.rend, r, g, b, a);
-		if (i % (wolf->bmp.width * wolf->bmp.bpp) == 0 && i)
+			get_rgb_from_int(&r, &g, &b, bmp.table[bmp.data[i]]);
+		SDL_SetRenderDrawColor(sdl.rend, r, g, b, a);
+		if (i % (bmp.width * bmp.bpp) == 0 && i)
 		{
 			x = 0;
 			y++;
 		}
 		x++;
-		i += wolf->bmp.bpp;
+		i += bmp.bpp;
 	}
 }
 
-void		print_image(t_stb image, t_sdl sdl)
+void		print_texture(t_sdl sdl, int width, int height, int **data,
+				   t_point print_coord)
 {
 	int 		i;
 	int 		j;
 
 	i = 0;
-	while (i < image.heigth)
+	while (i < height)
 	{
 		j = 0;
-		while (j < image.width)
+		while (j < width)
 		{
-			sdl_put_pixel((t_point){j, i, 0, image.sprite[i][j]}, sdl);
+			sdl_put_pixel((t_point){j + print_coord.x, i + print_coord.y,
+						   0, data[i][j]}, sdl);
 			j++;
 		}
 		i++;
 	}
-	printf("image.height: [%i] | width: [%i] | bpp: [%i]\n",
-			image.heigth, image.width, image.bpp);
 }
