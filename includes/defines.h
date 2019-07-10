@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 18:35:56 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 19:13:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@
 # define HITLER 104
 # define RED_BRICKS 105
 # define SVA_EAGLE 106
+
+# define VIEW_UP 501
+# define VIEW_DOWN 502
+# define VIEW_RIGHT 503
+# define VIEW_LEFT 504
 
 # define NUMBER_MODE 665
 # define COMPASS_MODE 666

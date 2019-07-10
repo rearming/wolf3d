@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 18:35:56 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 18:49:50 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef	struct			s_ray
 	double 				y;
 	double 				distance;
 	double 				angle;
-	int 				wall_placement;
+	int 				direction;
 }						t_ray;
 
 typedef struct			s_player

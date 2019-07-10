@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 19:02:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 20:29:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,38 @@ t_ray raycast(t_wolf *wolf, double angle)
 		ray.y = wolf->player.y + ray.distance * sin(angle);
 		ray.distance += 0.005;
 	}
-	//printf("final ray.x: [%f] | ray.y: [%f]\n", x, y);
+	//ray.distance *= sin(angle);
 	return (ray);
 }
 
 t_sprite 	get_sprite_by_side(t_textures sprites, t_ray ray)
 {
-	if (ray.wall_placement == VERTICAL)
+	if (ray.direction == VIEW_RIGHT)
+		return (sprites.red_bricks);
+	if (ray.direction == VIEW_LEFT)
+		return (sprites.hitler);
+	if (ray.direction == VIEW_UP)
+		return (sprites.sva_flag);
+	if (ray.direction == VIEW_DOWN)
+		return (sprites.sva_eagle);
+	return (sprites.hitler);
+}
+
+int 		get_view_direction(t_ray ray)
+{
+	if (fabs(ray.x - (int)ray.x) > 0.99 || fabs(ray.x - (int)ray.x) < 0.01)
 	{
 		if (cos(ray.angle) > 0)
-			return (sprites.red_bricks);
+			return (VIEW_RIGHT);
 		else
-			return (sprites.rock_wall);
+			return (VIEW_LEFT);
 	}
 	else
 	{
 		if (sin(ray.angle) < 0)
-			return (sprites.sva_flag);
+			return (VIEW_UP);
 		else
-			return (sprites.sva_eagle);
+			return (VIEW_DOWN);
 	}
 }
 
@@ -70,11 +83,18 @@ t_sprite	get_column_sprite(t_textures sprites, t_ray ray, const char **map, int 
 	return (sprites.rock_wall);
 }
 
-int 		get_wall_placement(t_ray ray)
+double 		correct_fisheye(t_ray ray)
 {
-	if (fabs(ray.x - (int)ray.x) > 0.99 || fabs(ray.x - (int)ray.x) < 0.01)
-		return (VERTICAL);
-	return (HORIZONTAL);
+	if (ray.direction == VIEW_RIGHT)
+		return (cos(ray.angle));
+	if (ray.direction == VIEW_LEFT)
+		return (-cos(ray.angle));
+	/*if (ray.direction == VIEW_UP)
+		return (-sin(ray.angle));
+	if (ray.direction == VIEW_DOWN)
+		return (sin(ray.angle));
+	return (-cos(ray.angle));*/
+	return (1);
 }
 
 void		draw_sprite_column(t_ray ray, t_wolf *wolf, int win_x)
@@ -86,10 +106,12 @@ void		draw_sprite_column(t_ray ray, t_wolf *wolf, int win_x)
 	t_sprite	sprite;
 
 	win_y = 0;
+	ray.direction = get_view_direction(ray); //todo fix kostil - get correct algorithm to get player's view direction
+	//ray.distance *= correct_fisheye(ray); //todo correct fisheye
 	height = (int)((double)WIN_HEIGHT / ray.distance);
 	column_y = (WIN_HEIGHT - height) / 2;
-	ray.wall_placement = get_wall_placement(ray);
-	if (ray.wall_placement == VERTICAL)
+
+	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
 		sprite_index.x = (int)((double)wolf->textures.size * (fabs(ray.y - (int) ray.y)));
 	else
 		sprite_index.x = (int)((double)wolf->textures.size * (fabs(ray.x - (int)ray.x)));
@@ -156,14 +178,6 @@ void		render(t_wolf *wolf)
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
 	draw_minimap(wolf);
-
-	//resize_sprite(wolf->textures.sva_eagle.data, 0.5, 0.5, wolf->textures.sva_eagle.size, wolf->sdl);
-	/*print_texture(wolf->sdl, 64, 64, wolf->textures.sva_flag, (t_point){0,0});
-	print_texture(wolf->sdl, 64, 64, wolf->textures.rock_wall, (t_point){64,0});
-	print_texture(wolf->sdl, 64, 64, wolf->textures.hitler, (t_point){128,0});
-	print_texture(wolf->sdl, 64, 64, wolf->textures.red_bricks, (t_point){192,0});
-	print_texture(wolf->sdl, 64, 64, wolf->textures.sva_eagle, (t_point){256,0});*/
-
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels, WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);

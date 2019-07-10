@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 18:49:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 19:25:08 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_sdl		init_sdl(void)
 		raise_error(ERR_SDL_INIT);
 	if (!(sdl.win = SDL_CreateWindow("Dota 2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			WIN_WIDTH * 2, WIN_HEIGHT * 2, SDL_WINDOW_OPENGL)))
-		//todo add variable and easy change window resize rate (magic number "4" now)
+		//todo add variable and easy change window resize rate (magic number 2/3/4 etc now)
 		raise_error(ERR_SDL_WIN);
 	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, 0)))
 		raise_error(ERR_SDL_RENDER);
@@ -65,8 +65,8 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.fat = 2.5;
 	wolf->minimap.scale.x = 3;
 	wolf->minimap.scale.y = 6;
-	//wolf->render_mode = COMPASS_MODE;
-	wolf->render_mode = NUMBER_MODE;
+	wolf->render_mode = COMPASS_MODE;
+	//wolf->render_mode = NUMBER_MODE;
 	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int) * WIN_HEIGHT * WIN_WIDTH)))
 		raise_error(ERR_MALLOC);
 }
