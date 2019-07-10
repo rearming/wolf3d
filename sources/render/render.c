@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 17:59:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 10:12:46 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void		draw_sprite_column(t_sdl sdl, t_sprite sprite, t_ray ray, int x)
 	y = (WIN_HEIGHT - height) / 2;
 	sprite_index.y = 0;
 	sprite_index.x = (int)((double)sprite.size * (ft_dabs(ray.x - (int)ray.x)));
-	if (!sprite_index.x || sprite_index.x == 63)
+	//printf("sprite_width: [%i]\n", sprite.width);
+	if (!sprite_index.x || sprite_index.x == sprite.width - 1)
 		sprite_index.x = (int)((double)sprite.size * ((ray.y - (int)ray.y)));
 	i = 0;
 	//printf("\nsprite's x: [%i]\n\n", sprite_index.x);

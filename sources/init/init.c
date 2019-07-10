@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 20:12:54 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 08:20:54 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_sdl		init_sdl(void)
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		raise_error(ERR_SDL_INIT);
 	if (!(sdl.win = SDL_CreateWindow("Dota 2", 10, 50,
-			WIN_WIDTH * 4, WIN_HEIGHT * 4, SDL_WINDOW_OPENGL)))
+			WIN_WIDTH * 2, WIN_HEIGHT * 2, SDL_WINDOW_OPENGL)))
+		//todo add variable and easy change window resize rate (magic number "4" now)
 		raise_error(ERR_SDL_WIN);
 	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, 0)))
 		raise_error(ERR_SDL_RENDER);

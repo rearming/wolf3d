@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/08 12:10:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 08:12:41 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char 	**get_map(char *filename)
 	char 	**map;
 
 	fd = open(filename, O_RDONLY);
-	map = fdf_gnl(fd);
+	map = fast_gnl(fd);
 	check_valid(map); //todo add check line length (or connection)
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 14:25:24 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 08:12:42 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_textures	get_all_textures();
 */
 
 char		**get_map(char *filename);
-char		**fdf_gnl(int fd);
+char		**fast_gnl(int fd);
 
 /*
 **	render
