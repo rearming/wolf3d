@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 14:02:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 18:35:56 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef	struct			s_ray
 	double 				x;
 	double 				y;
 	double 				distance;
+	double 				angle;
+	int 				wall_placement;
 }						t_ray;
 
 typedef struct			s_player
@@ -91,16 +93,17 @@ typedef	struct 			s_textures
 	t_sprite 			hitler;
 	t_sprite 			red_bricks;
 	t_sprite 			sva_eagle;
-
+	int 				size;
 }						t_textures;
 
 typedef struct			s_wolf
 {
 	t_player			player;
 	t_minimap			minimap;
-	char				**map;
 	t_sdl				sdl;
 	t_textures			textures;
+	int 				render_mode;
+	char				**map;
 }						t_wolf;
 
 typedef struct			s_color

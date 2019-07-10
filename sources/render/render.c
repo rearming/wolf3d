@@ -6,16 +6,17 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 14:30:41 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 19:02:39 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_ray		raycast(t_wolf *wolf, double angle, int *texture_type)
+t_ray raycast(t_wolf *wolf, double angle)
 {
 	t_ray	ray;
 
+	ray.angle = angle;
 	ray.x = wolf->player.x;
 	ray.y = wolf->player.y;
 	ray.distance = 0;
@@ -27,40 +28,35 @@ t_ray		raycast(t_wolf *wolf, double angle, int *texture_type)
 		ray.y = wolf->player.y + ray.distance * sin(angle);
 		ray.distance += 0.005;
 	}
-	*texture_type = get_texture_type((int)ray.x, (int)ray.y, wolf->map);
 	//printf("final ray.x: [%f] | ray.y: [%f]\n", x, y);
 	return (ray);
 }
 
-void		draw_sprite_column(t_sdl sdl, t_sprite sprite, t_ray ray, int x)
+t_sprite 	get_sprite_by_side(t_textures sprites, t_ray ray)
 {
-	int		y;
-	int 	i;
-	int 	height;
-	t_point	sprite_index;
-
-
-	height = (int)((double)WIN_HEIGHT / ray.distance);
-	y = (WIN_HEIGHT - height) / 2;
-	sprite_index.y = 0;
-	sprite_index.x = (int)((double)sprite.size * (fabs(ray.x - (int)ray.x)));
-	//printf("sprite_width: [%i]\n", sprite.width);
-	if (!sprite_index.x || sprite_index.x == sprite.width - 1)
-		sprite_index.x = (int)((double)sprite.size * (fabs(ray.y - (int)ray.y)));
-	i = 0;
-	//printf("\nsprite's x: [%i]\n\n", sprite_index.x);
-	while (i < height)
+	if (ray.wall_placement == VERTICAL)
 	{
-		sdl_put_pixel((t_point) {x, y, 0, sprite.data[i * sprite.height /
-													  height][sprite_index.x]},
-					  sdl);
-		y++;
-		i++;
+		if (cos(ray.angle) > 0)
+			return (sprites.red_bricks);
+		else
+			return (sprites.rock_wall);
+	}
+	else
+	{
+		if (sin(ray.angle) < 0)
+			return (sprites.sva_flag);
+		else
+			return (sprites.sva_eagle);
 	}
 }
 
-t_sprite	get_map_sprite(int sprite_type, t_textures sprites)
+t_sprite	get_column_sprite(t_textures sprites, t_ray ray, const char **map, int render_mode)
 {
+	int 	sprite_type;
+
+	if (render_mode == COMPASS_MODE)
+		return (get_sprite_by_side(sprites, ray));
+	sprite_type = get_texture_type((int)ray.x, (int)ray.y, map);
 	if (sprite_type == SVA_FLAG)
 		return (sprites.sva_flag);
 	if (sprite_type == ROCK_WALL)
@@ -74,25 +70,59 @@ t_sprite	get_map_sprite(int sprite_type, t_textures sprites)
 	return (sprites.rock_wall);
 }
 
-void		render_columns(t_wolf *wolf)
+int 		get_wall_placement(t_ray ray)
 {
-	int 	i;
-	double 	angle;
-	int 	sprite_type;
-	t_ray	ray;
+	if (fabs(ray.x - (int)ray.x) > 0.99 || fabs(ray.x - (int)ray.x) < 0.01)
+		return (VERTICAL);
+	return (HORIZONTAL);
+}
 
-	i = 0;
-	angle = wolf->player.angle - wolf->player.fov / 2;
-	while (i < WIN_WIDTH)
+void		draw_sprite_column(t_ray ray, t_wolf *wolf, int win_x)
+{
+	int			column_y;
+	int 		win_y;
+	int 		height;
+	t_point		sprite_index;
+	t_sprite	sprite;
+
+	win_y = 0;
+	height = (int)((double)WIN_HEIGHT / ray.distance);
+	column_y = (WIN_HEIGHT - height) / 2;
+	ray.wall_placement = get_wall_placement(ray);
+	if (ray.wall_placement == VERTICAL)
+		sprite_index.x = (int)((double)wolf->textures.size * (fabs(ray.y - (int) ray.y)));
+	else
+		sprite_index.x = (int)((double)wolf->textures.size * (fabs(ray.x - (int)ray.x)));
+	sprite = get_column_sprite(wolf->textures, ray, (const char**)wolf->map, wolf->render_mode);
+	while (win_y < height)
 	{
-		ray = raycast(wolf, angle, &sprite_type);
-		draw_sprite_column(wolf->sdl, get_map_sprite(sprite_type, wolf->textures), ray, i);
-		angle += wolf->player.fov / WIN_WIDTH;
-		i++;
+		sdl_put_pixel((t_point) {win_x, column_y, 0, sprite.data[win_y * sprite.height /
+													  height][sprite_index.x]},
+					  wolf->sdl);
+		column_y++;
+		win_y++;
 	}
 }
 
-void		draw_floor(t_sdl sdl, int floor_color)
+
+void		render_columns(t_wolf *wolf)
+{
+	int 	win_x;
+	t_ray	ray;
+
+	win_x = 0;
+	ray.angle = wolf->player.angle - wolf->player.fov / 2;
+	while (win_x < WIN_WIDTH)
+	{
+		ray = raycast(wolf, ray.angle);
+		//ray.distance *= cos(wolf->player.angle);
+		draw_sprite_column(ray, wolf, win_x);
+		ray.angle += wolf->player.fov / WIN_WIDTH;
+		win_x++;
+	}
+}
+
+void		draw_floor_and_sky(t_sdl sdl, int floor_color)
 {
 	int 	x;
 	int 	y;
@@ -123,7 +153,7 @@ void		draw_floor(t_sdl sdl, int floor_color)
 
 void		render(t_wolf *wolf)
 {
-	draw_floor(wolf->sdl, FLOOR_GREY);
+	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
 	draw_minimap(wolf);
 

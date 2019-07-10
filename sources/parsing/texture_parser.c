@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 13:39:37 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:39:38 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ t_textures	get_all_textures(const char *filename)
 	{
 		textures.sva_flag = get_sprite(stb, (t_point) {256, 0}, 64);
 		textures.rock_wall = get_sprite(stb, (t_point) {128, 0}, 64);
-		//textures.hitler = get_sprite(stb, (t_point){128, 196}, 64);
-		textures.hitler = get_sprite(stb, (t_point){0, 1024}, 128);
+		textures.hitler = get_sprite(stb, (t_point){128, 196}, 64);
+		//textures.hitler = get_sprite(stb, (t_point){0, 1024}, 128);
 		textures.red_bricks = get_sprite(stb, (t_point){128, 320}, 64);
 		textures.sva_eagle = get_sprite(stb, (t_point){320, 64}, 64);
+		textures.size = 64;
 		free(stb.data);
 	}
 	return (textures);

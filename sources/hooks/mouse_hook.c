@@ -14,7 +14,5 @@
 
 void		mouse_hook(t_wolf *wolf, SDL_Event event)
 {
-	//printf("mouse x: [%i]\n", event.motion.x);
-	//printf("mouse rel_x: [%i]\n", event.motion.xrel) ;
 	wolf->player.angle += (double)event.motion.xrel / 1000;
 }

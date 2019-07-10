@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/10 14:20:04 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:30:41 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int 		cell_is_empty(char cell)
 
 void		sdl_put_pixel(t_point point, t_sdl sdl)
 {
-	if (point.x > 0 && point.y > 0 && point.x < WIN_WIDTH && point.y < WIN_HEIGHT)
+	if (point.x >= 0 && point.y >= 0 && point.x < WIN_WIDTH && point.y < WIN_HEIGHT)
 		sdl.pixels[point.x + point.y * WIN_WIDTH] = point.color;
 }
 
@@ -37,7 +37,7 @@ void		get_rgb_from_int(int *r, int *g, int *b, int color)
 	*b = color & 0xFF;
 }
 
-int 		get_texture_type(int x, int y, char **map)
+int 		get_texture_type(int x, int y, const char **map)
 {
 	if (map[y][x] == '1')
 		return (ROCK_WALL);

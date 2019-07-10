@@ -60,7 +60,7 @@ char		**fast_gnl(int fd);
 */
 
 void		render(t_wolf *wolf);
-t_ray		raycast(t_wolf *wolf, double angle, int *texture_type);
+t_ray raycast(t_wolf *wolf, double angle);
 void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 
@@ -70,7 +70,7 @@ void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 
 int 		get_int_from_rgb(int r, int g, int b);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
-int 		get_texture_type(int x, int y, char **map);
+int 		get_texture_type(int x, int y, const char **map);
 int 		cell_is_empty(char cell);
 
 /*
