@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:21:00 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/10 08:12:38 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:56:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void		print_texture(t_sdl sdl, int width, int height, int **data,
 		j = 0;
 		while (j < width)
 		{
-			sdl_put_pixel((t_point){j + print_coord.x, i + print_coord.y,
-						   0, data[i][j]}, sdl);
+			sdl_put_pixel((t_point) {j + print_coord.x, i + print_coord.y,
+									 0, data[i][j]}, sdl);
 			j++;
 		}
 		i++;

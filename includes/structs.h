@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 08:12:38 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:02:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct			s_sdl
 	SDL_Window			*win;
 	SDL_Renderer		*rend;
 	SDL_Texture			*texture;
+	int					*pixels; //todo mb uint32_t?
 }						t_sdl;
 
 typedef	struct			s_ray
@@ -67,6 +68,7 @@ typedef struct			s_player
 	double 				speed_fwd;
 	double 				speed_side;
 	double 				ang_speed;
+	double 				fat;
 }						t_player;
 
 typedef struct			s_minimap

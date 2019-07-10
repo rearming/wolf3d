@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 08:20:54 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:28:34 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ t_sdl		init_sdl(void)
 
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		raise_error(ERR_SDL_INIT);
-	if (!(sdl.win = SDL_CreateWindow("Dota 2", 10, 50,
+	if (!(sdl.win = SDL_CreateWindow("Dota 2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			WIN_WIDTH * 2, WIN_HEIGHT * 2, SDL_WINDOW_OPENGL)))
 		//todo add variable and easy change window resize rate (magic number "4" now)
 		raise_error(ERR_SDL_WIN);
 	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, 0)))
 		raise_error(ERR_SDL_RENDER);
 	if (!(sdl.texture = SDL_CreateTexture(sdl.rend, SDL_PIXELFORMAT_ARGB8888,
-			SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT)))
+			SDL_TEXTUREACCESS_STATIC, WIN_WIDTH, WIN_HEIGHT)))
 		raise_error(ERR_SDL_TEXTURE_CREATE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	return (sdl);
@@ -62,6 +62,9 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.ang_speed = 0.05;
 	wolf->player.speed_fwd = 0.3;
 	wolf->player.speed_side = 0.2;
+	wolf->player.fat = 2.5;
 	wolf->minimap.scale.x = 2;
 	wolf->minimap.scale.y = 4;
+	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int) * WIN_HEIGHT * WIN_WIDTH)))
+		raise_error(ERR_MALLOC);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/09 18:12:18 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:56:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void		map_raycast(t_wolf *wolf)
 			ray.y = wolf->player.y + ray.distance * sin(angle);
 			ray.distance += 0.05;
 			sdl_put_pixel((t_point)
-			{ray.x * wolf->minimap.scale.x, ray.y * wolf->minimap.scale.y, 0, M_TURQOISE}, wolf->sdl);
+								  {ray.x * wolf->minimap.scale.x,
+								   ray.y * wolf->minimap.scale.y, 0,
+								   M_TURQOISE}, wolf->sdl);
 			if (!cell_is_empty(wolf->map[(int)ray.y][(int)ray.x]))
 				break;
 		}
@@ -69,8 +71,10 @@ void		draw_minimap(t_wolf *wolf)
 				sdl_put_pixel((t_point) {x, y, 0, GREY}, wolf->sdl);
 			else
 				sdl_put_pixel((t_point)
-				{x, y, 0, get_texture_type(x / wolf->minimap.scale.x,
-						y / wolf->minimap.scale.y, wolf->map)}, wolf->sdl);
+									  {x, y, 0, get_texture_type(
+											  x / wolf->minimap.scale.x,
+											  y / wolf->minimap.scale.y,
+											  wolf->map)}, wolf->sdl);
 			x++;
 		}
 		y++;

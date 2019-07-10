@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 08:23:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:27:52 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include "wolf3d.h"
 
 # ifdef __APPLE__
-#  define WIN_WIDTH 630 //2550 //630
-#  define WIN_HEIGHT 320 //1300 //320
+#  define WIN_WIDTH 1200
+#  define WIN_HEIGHT 600
+
+//#  define WIN_WIDTH 2550
+//#  define WIN_HEIGHT 1300
+
 # else
 #  define WIN_WIDTH 800
 #  define WIN_HEIGHT 480

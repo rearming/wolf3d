@@ -6,16 +6,11 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 10:12:46 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:30:41 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-double 		ft_dabs(double nbr)
-{
-	return (nbr > 0 ? nbr : -nbr);
-}
 
 t_ray		raycast(t_wolf *wolf, double angle, int *texture_type)
 {
@@ -32,8 +27,8 @@ t_ray		raycast(t_wolf *wolf, double angle, int *texture_type)
 		ray.y = wolf->player.y + ray.distance * sin(angle);
 		ray.distance += 0.005;
 	}
-	*texture_type = get_texture_type((int) ray.x, (int) ray.y, wolf->map);
-	//printf("final x: [%f] | ray.y: [%f]\n", x, y);
+	*texture_type = get_texture_type((int)ray.x, (int)ray.y, wolf->map);
+	//printf("final ray.x: [%f] | ray.y: [%f]\n", x, y);
 	return (ray);
 }
 
@@ -48,15 +43,17 @@ void		draw_sprite_column(t_sdl sdl, t_sprite sprite, t_ray ray, int x)
 	height = (int)((double)WIN_HEIGHT / ray.distance);
 	y = (WIN_HEIGHT - height) / 2;
 	sprite_index.y = 0;
-	sprite_index.x = (int)((double)sprite.size * (ft_dabs(ray.x - (int)ray.x)));
+	sprite_index.x = (int)((double)sprite.size * (fabs(ray.x - (int)ray.x)));
 	//printf("sprite_width: [%i]\n", sprite.width);
 	if (!sprite_index.x || sprite_index.x == sprite.width - 1)
-		sprite_index.x = (int)((double)sprite.size * ((ray.y - (int)ray.y)));
+		sprite_index.x = (int)((double)sprite.size * (fabs(ray.y - (int)ray.y)));
 	i = 0;
 	//printf("\nsprite's x: [%i]\n\n", sprite_index.x);
 	while (i < height)
 	{
-		sdl_put_pixel((t_point) {x, y, 0, sprite.data[i * sprite.height / height][sprite_index.x]}, sdl);
+		sdl_put_pixel((t_point) {x, y, 0, sprite.data[i * sprite.height /
+													  height][sprite_index.x]},
+					  sdl);
 		y++;
 		i++;
 	}
@@ -100,13 +97,24 @@ void		draw_floor(t_sdl sdl, int floor_color)
 	int 	x;
 	int 	y;
 
+	y = 0;
+	while (y < WIN_HEIGHT / 2)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			sdl_put_pixel((t_point) {x, y, 0, BLACK}, sdl);
+			x++;
+		}
+		y++;
+	}
 	y = WIN_HEIGHT / 2;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			sdl_put_pixel((t_point){x, y, 0, floor_color}, sdl);
+			sdl_put_pixel((t_point) {x, y, 0, floor_color}, sdl);
 			x++;
 		}
 		y++;
@@ -115,11 +123,6 @@ void		draw_floor(t_sdl sdl, int floor_color)
 
 void		render(t_wolf *wolf)
 {
-
-	SDL_SetRenderTarget(wolf->sdl.rend, wolf->sdl.texture);
-	SDL_SetRenderDrawColor(wolf->sdl.rend, 0, 0, 0, 0);
-	SDL_RenderClear(wolf->sdl.rend);
-
 	draw_floor(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
 	draw_minimap(wolf);
@@ -131,7 +134,7 @@ void		render(t_wolf *wolf)
 	print_texture(wolf->sdl, 64, 64, wolf->textures.red_bricks, (t_point){192,0});
 	print_texture(wolf->sdl, 64, 64, wolf->textures.sva_eagle, (t_point){256,0});*/
 
-	SDL_SetRenderTarget(wolf->sdl.rend, NULL);
+	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels, WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
 }
