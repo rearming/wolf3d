@@ -15,15 +15,13 @@
 char		**fast_gnl(int fd)
 {
 	t_gnl_fdf	gnl;
-	int 		buff_size;
 
-	buff_size = 2000000;
 	gnl.sum_len = 0;
 	gnl.backup = ft_memalloc(1);
 	gnl.temp_str = NULL;
 	if (fd < 0 || read(fd, gnl.buf, 0) < 0)
 		raise_error(ERR_INV_FILE);
-	while ((gnl.read_res = read(fd, gnl.buf, buff_size)))
+	while ((gnl.read_res = read(fd, gnl.buf, WOLF_BUFF_SIZE)))
 	{
 		gnl.sum_len += gnl.read_res;
 		gnl.buf[gnl.read_res] = '\0';

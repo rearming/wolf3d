@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 14:02:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/11 18:32:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_textures	get_all_textures();
 **	map parsing
 */
 
-char		**get_map(char *filename);
+t_map get_map(char *filename);
 char		**fast_gnl(int fd);
 
 /*
@@ -60,14 +60,16 @@ char		**fast_gnl(int fd);
 */
 
 void		render(t_wolf *wolf);
-t_ray raycast(t_wolf *wolf, double angle);
-void		sdl_put_pixel(t_point point, t_sdl sdl);
-void		bresen_line(t_wolf *wolf, t_point start, t_point end);
+t_ray		raycast(t_wolf *wolf, double angle);
+void		draw_column(t_ray ray, t_wolf *wolf, int win_x);
+
 
 /*
 **	render utils
 */
 
+void		sdl_put_pixel(t_point point, t_sdl sdl);
+void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 int 		get_int_from_rgb(int r, int g, int b);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_texture_type(int x, int y, const char **map);
@@ -78,7 +80,7 @@ int 		cell_is_empty(char cell);
 */
 
 void		draw_minimap(t_wolf *wolf);
-
+void		draw_minimap_fov(t_wolf *wolf);
 /*
 **	SDL utils
 */
@@ -90,8 +92,19 @@ void		sdl_clean(t_wolf *wolf);
 **	hooks
 */
 
-void		key_hook(t_wolf *wolf, SDL_Event event);
-void		mouse_hook(t_wolf *wolf, SDL_Event event);
+void		keydown_hook(t_wolf *wolf, SDL_Event event);
+void		keyup_hook(t_wolf *wolf, SDL_Event event);
+void		mouse_motion_hook(t_wolf *wolf, SDL_Event event);
+void		mouse_down_hook(t_wolf *wolf, SDL_Event event);
+/*
+**	player's moves
+*/
+
+void		move_forward(t_wolf *wolf);
+void		move_back(t_wolf *wolf);
+void		move_right(t_wolf *wolf);
+void		move_left(t_wolf *wolf);
+void		player_run(t_wolf *wolf);
 
 /*
 **	utils

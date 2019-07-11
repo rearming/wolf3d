@@ -3,15 +3,6 @@ project(wolf3d C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(Includes
-        includes/colors.h
-        includes/errors.h
-        includes/fractol.h
-		includes/structs.h
-		includes/wolf3d.h
-		includes/sdb_image.h
-        )
-
 set(libft_includes
         libft/includes)
 
@@ -45,11 +36,11 @@ set(init
 		)
 
 set(debug
-		sources/debug/
 		sources/debug/debug.c)
 
 set(utils
 		sources/utils/error.c
+		sources/utils/exit.c
 		)
 
 set(SDL_utils
@@ -60,14 +51,19 @@ set(SDL_utils
 set(render
 		sources/render/render.c
 		sources/render/render_utils.c
-		sources/render/bresenham.c sources/render/minimap.c)
+		sources/render/bresenham.c
+		sources/render/minimap.c
+		sources/render/texture_render_utils.c)
 set(hooks
 		sources/hooks/key_hook.c
-		sources/utils/exit.c sources/hooks/mouse_hook.c)
+		sources/hooks/mouse_hook.c
+		sources/hooks/player_moves.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c
-		sources/parsing/fast_gnl.c sources/parsing/texture_parser.c)
+		sources/parsing/fast_gnl.c
+		sources/parsing/texture_parser.c
+		)
 
 add_executable(wolf3d
 

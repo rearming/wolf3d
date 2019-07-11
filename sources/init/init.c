@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 19:25:08 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/11 18:03:39 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_sdl		init_sdl(void)
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		raise_error(ERR_SDL_INIT);
 	if (!(sdl.win = SDL_CreateWindow("Dota 2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			WIN_WIDTH * 2, WIN_HEIGHT * 2, SDL_WINDOW_OPENGL)))
+			WIN_WIDTH * 1.5, WIN_HEIGHT * 1.5, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE)))
 		//todo add variable and easy change window resize rate (magic number 2/3/4 etc now)
 		raise_error(ERR_SDL_WIN);
 	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, 0)))
@@ -31,42 +31,24 @@ t_sdl		init_sdl(void)
 	return (sdl);
 }
 
-void		get_player_position(char **map, double *ret_x, double *ret_y)
-{
-	int		x;
-	int 	y;
-
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == PLAYER_POS)
-				break ;
-			x++;
-		}
-		if (map[y][x] == PLAYER_POS)
-			break;
-		y++;
-	}
-	*ret_x = (double)x;
-	*ret_y = (double)y;
-}
-
 void		wolf_init(t_wolf *wolf)
 {
-	get_player_position(wolf->map, &wolf->player.x, &wolf->player.y);
+	if (wolf->map.player_spawn.x == FALSE)
+		raise_error(ERR_NO_PLAYER_SPOT);
+	wolf->player.x = (int)wolf->map.player_spawn.x;
+	wolf->player.y = (int)wolf->map.player_spawn.y;
 	wolf->player.fov = M_PI / 3; //60 градусов
 	wolf->player.angle = 0;
-	wolf->player.ang_speed = 0.05;
-	wolf->player.speed_fwd = 0.3;
-	wolf->player.speed_side = 0.2;
-	wolf->player.fat = 2.5;
+	wolf->player.ang_speed = 0.001;
+	wolf->player.speed_fwd = 0.2;
+	wolf->player.speed_side = 0.1;
+	wolf->player.fat = 4;
 	wolf->minimap.scale.x = 3;
 	wolf->minimap.scale.y = 6;
-	wolf->render_mode = COMPASS_MODE;
-	//wolf->render_mode = NUMBER_MODE;
-	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int) * WIN_HEIGHT * WIN_WIDTH)))
+	//wolf->render_mode = COMPASS_MODE;
+	wolf->render_mode = NUMBER_MODE;
+	wolf->keys_pressed.lshift_was_pressed = FALSE;
+	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int)
+			* WIN_HEIGHT * WIN_WIDTH)))
 		raise_error(ERR_MALLOC);
 }

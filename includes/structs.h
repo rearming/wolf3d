@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 18:49:50 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/11 16:49:25 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,16 @@ typedef struct			s_player
 	double 				fat;
 }						t_player;
 
+typedef struct			s_keys_pressed
+{
+	char				up;
+	char 				down;
+	char 				right;
+	char 				left;
+	char 				lshift;
+	char 				lshift_was_pressed;
+}						t_keys_pressed;
+
 typedef struct			s_minimap
 {
 	t_point				scale;
@@ -96,14 +106,23 @@ typedef	struct 			s_textures
 	int 				size;
 }						t_textures;
 
+typedef struct			s_map
+{
+	char 				**map;
+	int 				height;
+	int 				width;
+	t_point				player_spawn;
+}						t_map;
+
 typedef struct			s_wolf
 {
 	t_player			player;
+	t_keys_pressed		keys_pressed;
 	t_minimap			minimap;
 	t_sdl				sdl;
 	t_textures			textures;
 	int 				render_mode;
-	char				**map;
+	t_map				map;
 }						t_wolf;
 
 typedef struct			s_color
@@ -143,17 +162,16 @@ typedef struct			s_erm
 }						t_erm;
 
 
-# define CL_BUFF_SIZE 10000
+# define WOLF_BUFF_SIZE 2000000
 
 typedef struct			s_gnl_fdf
 {
 	char				*temp_str;
 	char				*backup;
 	char 				**result;
-	char				buf[CL_BUFF_SIZE + 1];
+	char				buf[WOLF_BUFF_SIZE + 1];
 	int					read_res;
 	size_t				sum_len;
-
 }						t_gnl_fdf;
 
 #endif

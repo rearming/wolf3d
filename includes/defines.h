@@ -49,6 +49,7 @@
 # define NUMBER_MODE 665
 # define COMPASS_MODE 666
 
-# define VERTICAL 667
-# define HORIZONTAL 668
+# define MOVING 667
+# define IDLE 668
+
 #endif
