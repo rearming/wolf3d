@@ -164,7 +164,7 @@ typedef struct			s_erm
 
 # define WOLF_BUFF_SIZE 2000000
 
-typedef struct			s_gnl_fdf
+typedef struct			s_fast_gnl
 {
 	char				*temp_str;
 	char				*backup;
@@ -172,6 +172,6 @@ typedef struct			s_gnl_fdf
 	char				buf[WOLF_BUFF_SIZE + 1];
 	int					read_res;
 	size_t				sum_len;
-}						t_gnl_fdf;
+}						t_fast_gnl;
 
 #endif

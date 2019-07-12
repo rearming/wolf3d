@@ -20,7 +20,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.x = wolf->player.x;
 	ray.y = wolf->player.y;
 	ray.distance = 0;
-	while (ray.distance < 50)
+	while (21)
 	{
 		if (!cell_is_empty(wolf->map.map[(int)ray.y][(int)ray.x]))
 			break ;

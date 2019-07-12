@@ -14,7 +14,7 @@
 
 char		**fast_gnl(int fd)
 {
-	t_gnl_fdf	gnl;
+	t_fast_gnl	gnl;
 
 	gnl.sum_len = 0;
 	gnl.backup = ft_memalloc(1);

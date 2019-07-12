@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 17:19:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/11 19:14:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		draw_minimap(t_wolf *wolf)
 				sdl_put_pixel((t_point)
 				{map_xy.x, map_xy.y, 0,
 			get_texture_type(map_xy.x / wolf->minimap.scale.x,map_xy.y / wolf->minimap.scale.y,
-					(const char **)wolf->map.map)}, wolf->sdl);
+					(const char **)wolf->map.map)}, wolf->sdl); //todo fix wall colors on minimap
 			map_xy.x++;
 		}
 		map_xy.y++;

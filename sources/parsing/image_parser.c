@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 18:59:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 13:39:37 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:56:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,16 @@ void		get_bmp_image(t_bmp *bmp, const char *filename)
 		i--;
 }
 
-int			get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename)
+void		get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename)
 {
 	int 	filename_len;
 
+	bmp->data = NULL;
+	stb->data = NULL;
 	filename_len = ft_strlen(filename);
-	if (filename_len > 3 && ft_strequ(&filename[filename_len - 3], ".bmp"))
-	{
+	if (filename_len > 3 && ft_strequ(&filename[filename_len - 4], ".bmp"))
 		get_bmp_image(bmp, filename);
-		return (BMP_IMG);
-	}
-	stb->data =
-			stbi_load(filename, &stb->width, &stb->height, &stb->bpp, 0);
-	return (STB_IMG);
+	else
+		stb->data =
+				stbi_load(filename, &stb->width, &stb->height, &stb->bpp, 0);
 }

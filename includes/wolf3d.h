@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 18:32:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:55:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		wolf_init(t_wolf *wolf);
 
 void		get_image_stbi(t_wolf *wolf, char *filename);
 void		get_bmp_image(t_bmp *bmp, const char *filename);
-int			get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename);
+void get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename);
 
 /*
 **	textures parsing
@@ -74,6 +74,12 @@ int 		get_int_from_rgb(int r, int g, int b);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_texture_type(int x, int y, const char **map);
 int 		cell_is_empty(char cell);
+
+/*
+**	game logic utils
+*/
+
+int 		is_border_block(t_map map, t_point block);
 
 /*
 **	minimap

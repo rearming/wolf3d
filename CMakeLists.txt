@@ -53,7 +53,7 @@ set(render
 		sources/render/render_utils.c
 		sources/render/bresenham.c
 		sources/render/minimap.c
-		sources/render/texture_render_utils.c)
+		sources/render/texture_render_utils.c sources/render/game_logic_utils.c)
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c

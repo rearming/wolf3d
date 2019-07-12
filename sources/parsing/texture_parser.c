@@ -6,23 +6,32 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/10 13:39:38 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:55:54 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static int 	get_color_from_tilemap(t_stb img, int i, int j)
+static int get_color_from_tilemap(t_stb img, t_bmp bmp_img, int j, int i)
 {
+	if (img.data)
+	{
+		return (get_int_from_rgb(
+				img.data[j * img.bpp + i * img.bpp * img.width],
+				img.data[(j * img.bpp +
+						  i * img.bpp * img.width) + 1],
+				img.data[(j * img.bpp +
+						  i * img.bpp * img.width) + 2]));
+	}
 	return (get_int_from_rgb(
-			img.data[j * img.bpp + i * img.bpp * img.width],
-			img.data[(j * img.bpp +
-					  i * img.bpp * img.width) + 1],
-			img.data[(j * img.bpp +
-					  i * img.bpp * img.width) + 2]));
+			bmp_img.data[j * bmp_img.bpp + i * bmp_img.bpp * bmp_img.width],
+			bmp_img.data[(j * bmp_img.bpp +
+					  i * bmp_img.bpp * bmp_img.width) + 1],
+			bmp_img.data[(j * bmp_img.bpp +
+					  i * bmp_img.bpp * bmp_img.width) + 2]));
 }
 
-t_sprite	get_sprite(t_stb img, t_point sprite_pos, int sprite_size)
+t_sprite 	get_sprite(t_stb img, t_bmp bmp_img, int sprite_size, t_point sprite_pos)
 {
 	t_sprite	sprite;
 	int 		i;
@@ -40,7 +49,7 @@ t_sprite	get_sprite(t_stb img, t_point sprite_pos, int sprite_size)
 		while (j < sprite_pos.x + sprite_size)
 		{
 			sprite.data[sprite.height][sprite.width]
-				= get_color_from_tilemap(img, i, j);
+				= get_color_from_tilemap(img, bmp_img, j, i);
 			j++;
 			sprite.width++;
 		}
@@ -55,19 +64,17 @@ t_textures	get_all_textures(const char *filename)
 	t_textures		textures;
 	t_bmp			bmp;
 	t_stb			stb;
-	int 			img_type;
 
-	img_type = get_tilemap_data(&bmp, &stb, filename);
-	if (img_type == STB_IMG)
-	{
-		textures.sva_flag = get_sprite(stb, (t_point) {256, 0}, 64);
-		textures.rock_wall = get_sprite(stb, (t_point) {128, 0}, 64);
-		textures.hitler = get_sprite(stb, (t_point){128, 196}, 64);
-		//textures.hitler = get_sprite(stb, (t_point){0, 1024}, 128);
-		textures.red_bricks = get_sprite(stb, (t_point){128, 320}, 64);
-		textures.sva_eagle = get_sprite(stb, (t_point){320, 64}, 64);
-		textures.size = 64;
+	get_tilemap_data(&bmp, &stb, filename);
+	textures.sva_flag = get_sprite(stb, bmp, 64, (t_point) {256, 0});
+	textures.rock_wall = get_sprite(stb, bmp, 64, (t_point) {128, 0});
+	textures.hitler = get_sprite(stb, bmp, 64, (t_point) {128, 196});
+	textures.red_bricks = get_sprite(stb, bmp, 64, (t_point) {128, 320});
+	textures.sva_eagle = get_sprite(stb, bmp, 64, (t_point) {320, 64});
+	textures.size = 64;
+	if (stb.data)
 		free(stb.data);
-	}
+	else
+		free(bmp.data);
 	return (textures);
 }

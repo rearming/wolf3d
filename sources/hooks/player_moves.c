@@ -14,11 +14,13 @@
 
 void		move_forward(t_wolf *wolf)
 {
-	if (cell_is_empty(wolf->map.map
-	[(int)(wolf->player.y + wolf->player.speed_side
-	* wolf->player.fat * sin(wolf->player.angle))]
-	[(int)(wolf->player.x + wolf->player.speed_side
-	* wolf->player.fat * cos(wolf->player.angle))]))
+	t_point		block;
+
+	block.x = (int)(wolf->player.x + wolf->player.speed_side
+			* wolf->player.fat * cos(wolf->player.angle));
+	block.y = (int)(wolf->player.y + wolf->player.speed_side
+			* wolf->player.fat * sin(wolf->player.angle));
+	if (cell_is_empty(wolf->map.map[block.y][block.x]))
 	{
 		wolf->player.y += wolf->player.speed_fwd
 						  * sin(wolf->player.angle);
@@ -29,11 +31,13 @@ void		move_forward(t_wolf *wolf)
 
 void		move_back(t_wolf *wolf)
 {
-	if (cell_is_empty(wolf->map.map
-	[(int)(wolf->player.y - wolf->player.speed_side
-	* wolf->player.fat * sin(wolf->player.angle))]
-	[(int)(wolf->player.x - wolf->player.speed_side
-	* wolf->player.fat * cos(wolf->player.angle))]))
+	t_point		block;
+
+	block.x = (int)(wolf->player.x - wolf->player.speed_side
+			* wolf->player.fat * cos(wolf->player.angle));
+	block.y = (int)(wolf->player.y - wolf->player.speed_side
+			* wolf->player.fat * sin(wolf->player.angle));
+	if (cell_is_empty(wolf->map.map[block.y][block.x]))
 	{
 		wolf->player.y -= wolf->player.speed_fwd
 						  * sin(wolf->player.angle);
@@ -44,11 +48,13 @@ void		move_back(t_wolf *wolf)
 
 void		move_right(t_wolf *wolf)
 {
-	if (cell_is_empty(wolf->map.map
-	[(int)(wolf->player.y + wolf->player.speed_side
-	* wolf->player.fat * sin(wolf->player.angle + M_PI / 2))]
-	[(int)(wolf->player.x + wolf->player.speed_side
-	* wolf->player.fat * cos(wolf->player.angle + M_PI / 2))]))
+	t_point		block;
+
+	block.x = (int)(wolf->player.x + wolf->player.speed_side
+			* wolf->player.fat * cos(wolf->player.angle + M_PI / 2));
+	block.y = (int)(wolf->player.y + wolf->player.speed_side
+			* wolf->player.fat * sin(wolf->player.angle + M_PI / 2));
+	if (cell_is_empty(wolf->map.map[block.y][block.x]))
 	{
 		wolf->player.y += wolf->player.speed_side
 						  * sin(wolf->player.angle + M_PI / 2);
@@ -59,11 +65,13 @@ void		move_right(t_wolf *wolf)
 
 void		move_left(t_wolf *wolf)
 {
-	if (cell_is_empty(wolf->map.map
-	[(int)(wolf->player.y + wolf->player.speed_side
-	* wolf->player.fat * sin(wolf->player.angle - M_PI / 2))]
-	[(int)(wolf->player.x + wolf->player.speed_side
-	* wolf->player.fat * cos(wolf->player.angle - M_PI / 2))]))
+	t_point		block;
+
+	block.x = (int)(wolf->player.x + wolf->player.speed_side
+			* wolf->player.fat * cos(wolf->player.angle - M_PI / 2));
+	block.y = (int)(wolf->player.y + wolf->player.speed_side
+			* wolf->player.fat * sin(wolf->player.angle - M_PI / 2));
+	if (cell_is_empty(wolf->map.map[block.y][block.x]))
 	{
 		wolf->player.y += wolf->player.speed_side
 						  * sin(wolf->player.angle - M_PI / 2);

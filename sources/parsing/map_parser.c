@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/11 18:06:19 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:04:49 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void		check_cell(t_map *map, int x, int y, int outer)
 			|| map->map[map->height - 1][x] == '5')
 			map->map[map->height - 1][x] = '1';
 		if (map->map[y][x] == '5' && map->player_spawn.x == FALSE
-			&& y && x && y != map->height - 1 && x != map->width - 1)
+		&& !is_border_block(*map, (t_point){x, y}))
 			map->player_spawn = (t_point){x, y, 0, 0};
 	}
 }
 
-void		check_valid(t_map *map) //todo сделать работу с любыми, даже не прямоугольными картами
+void		check_valid(t_map *map)
 {
 	int 	x;
 	int 	y;
