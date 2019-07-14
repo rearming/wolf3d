@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 14:04:51 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/12 14:06:40 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:41:17 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int 		is_border_block(t_map map, t_point block)
 {
 	if (block.y != 0 && block.x != 0
-		&& block.y != map.height - 1 && block.x != map.width - 1)
+		&& block.y < map.height - 1 && block.x < map.width - 1)
 		return (FALSE);
 	return (TRUE);
 }

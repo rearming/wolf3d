@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:26:24 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 14:04:12 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/14 17:22:12 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,13 @@ void		player_run(t_wolf *wolf)
 	if (wolf->keys_pressed.lshift == TRUE
 		&& wolf->keys_pressed.lshift_was_pressed == FALSE)
 	{
-		wolf->player.speed_fwd *= 2;
-		wolf->player.speed_side *= 2;
+		wolf->player.base_speed *= 2;
 		wolf->keys_pressed.lshift_was_pressed = TRUE;
 	}
 	if (wolf->keys_pressed.lshift == FALSE
 		&& wolf->keys_pressed.lshift_was_pressed == TRUE)
 	{
-		wolf->player.speed_fwd /= 2;
-		wolf->player.speed_side /= 2;
+		wolf->player.base_speed /= 2;
 		wolf->keys_pressed.lshift_was_pressed = FALSE;
 	}
 

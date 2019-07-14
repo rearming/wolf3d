@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 16:20:12 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:34:32 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void		player_moving(t_wolf *wolf)
 void		sdl_loop(t_wolf *wolf)
 {
 	SDL_Event		event;
+	uint32_t		tick;
 
 	while (21)
 	{
@@ -44,9 +45,13 @@ void		sdl_loop(t_wolf *wolf)
 		}
 		if (event.type == SDL_QUIT)
 			break ;
-		player_moving(wolf);
-		uint32_t start = SDL_GetTicks(); //todo run depend on render time !
+		tick = SDL_GetTicks();
 		render(wolf);
-		printf("render time: [%i]\n", SDL_GetTicks() - start);
+		tick = SDL_GetTicks() - tick;
+		tick = tick < 150 ? tick : 150;
+		wolf->player.speed_side = wolf->player.base_speed * tick;
+		wolf->player.speed_fwd = wolf->player.base_speed * tick * 2;
+		//printf("render time: [%i]\n", tick);
+		player_moving(wolf);
 	}
 }

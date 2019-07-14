@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 16:03:28 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:14:31 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 //#  define WIN_HEIGHT 1300
 
 # else
-#  define WIN_WIDTH 800
-#  define WIN_HEIGHT 480
+#  define WIN_WIDTH 1980
+#  define WIN_HEIGHT 1020
 # endif
 
 # define TRUE 1
@@ -48,6 +48,8 @@
 
 # define NUMBER_MODE 665
 # define COMPASS_MODE 666
+
+# define MAX_MAP_SIZE 10000
 
 # define MOVING 667
 # define IDLE 668
