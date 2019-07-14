@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/12 14:04:49 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/14 16:12:57 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		convert_map(t_map *raw_map)
 	char 	**map;
 	int 	i;
 
-	if (!(map = (char**)malloc(sizeof(char*) * raw_map->height)))
+	if (!(map = (char**)malloc(sizeof(char*) * (raw_map->height + 1))))
 		raise_error(ERR_MALLOC);
 	map[raw_map->height] = 0;
 	i = 0;

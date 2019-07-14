@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 19:14:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/14 16:03:28 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		draw_minimap_fov(t_wolf *wolf)
 	while (fov)
 	{
 		ray.distance = 0;
-		while (ray.distance < 50)
+		while (21)
 		{
 			ray.x = wolf->player.x + ray.distance * cos(angle);
 			ray.y = wolf->player.y + ray.distance * sin(angle);

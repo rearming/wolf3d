@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 18:32:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/14 16:20:12 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void		sdl_loop(t_wolf *wolf)
 		if (event.type == SDL_QUIT)
 			break ;
 		player_moving(wolf);
+		uint32_t start = SDL_GetTicks(); //todo run depend on render time !
 		render(wolf);
+		printf("render time: [%i]\n", SDL_GetTicks() - start);
 	}
 }

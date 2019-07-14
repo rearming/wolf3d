@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 17:20:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/14 16:14:35 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 t_ray		raycast(t_wolf *wolf, double angle)
 {
 	t_ray	ray;
+	double	deltaX;
+	double	deltaY;
 
+	deltaX = cos(angle);
+	deltaY = sin(angle);
 	ray.angle = angle;
 	ray.x = wolf->player.x;
 	ray.y = wolf->player.y;
@@ -24,8 +28,8 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	{
 		if (!cell_is_empty(wolf->map.map[(int)ray.y][(int)ray.x]))
 			break ;
-		ray.x = wolf->player.x + ray.distance * cos(angle);
-		ray.y = wolf->player.y + ray.distance * sin(angle);
+		ray.x = wolf->player.x + ray.distance * deltaX;
+		ray.y = wolf->player.y + ray.distance * deltaY;
 		ray.distance += 0.005;
 	}
 	return (ray);
@@ -80,8 +84,8 @@ void		render(t_wolf *wolf)
 {
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
-	draw_minimap(wolf);
-	draw_minimap_fov(wolf);
+	//draw_minimap(wolf);
+	//draw_minimap_fov(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
