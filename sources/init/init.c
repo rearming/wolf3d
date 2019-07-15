@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 16:39:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:04:39 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.ang_speed = 0.001;
 	wolf->player.base_speed = 0.003;
 	wolf->player.fat = 4;
-	wolf->minimap.scale.x = 3;
-	wolf->minimap.scale.y = 6;
+	wolf->minimap.scale.x = 5;
+	wolf->minimap.scale.y = 10;
 	wolf->render_mode = COMPASS_MODE;
 	//wolf->render_mode = NUMBER_MODE;
+	wolf->textures.frame = FALSE;
+	wolf->player.weapon_type = GUN;
 	init_keys_states(&wolf->keys_pressed);
 	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int)
 			* WIN_HEIGHT * WIN_WIDTH)))

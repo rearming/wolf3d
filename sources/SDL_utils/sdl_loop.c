@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:11 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:09:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,19 @@ void		player_moving(t_wolf *wolf)
 	player_run(wolf);
 }
 
+int 		get_delta_time(t_wolf *wolf)
+{
+	uint32_t		tick;
+
+	tick = SDL_GetTicks();
+	render(wolf);
+	tick = SDL_GetTicks() - tick;
+	return (tick);
+}
+
 void		sdl_loop(t_wolf *wolf)
 {
 	SDL_Event		event;
-	uint32_t		tick;
 
 	while (21)
 	{
@@ -42,16 +51,16 @@ void		sdl_loop(t_wolf *wolf)
 				mouse_motion_hook(wolf, event);
 			if (event.type == SDL_MOUSEBUTTONDOWN)
 				mouse_down_hook(wolf, event);
+			if (event.type == SDL_MOUSEWHEEL)
+				mouse_wheel_event(wolf, event);
 		}
 		if (event.type == SDL_QUIT)
 			break ;
-		tick = SDL_GetTicks();
-		render(wolf);
-		tick = SDL_GetTicks() - tick;
-		tick = tick < 150 ? tick : 150;
-		wolf->player.speed_side = wolf->player.base_speed * tick;
-		wolf->player.speed_fwd = wolf->player.base_speed * tick * 2;
-		//printf("render time: [%i]\n", tick);
+		wolf->tickrate = get_delta_time(wolf);
+		wolf->player.speed_side = wolf->player.base_speed
+				* (wolf->tickrate < 150 ? wolf->tickrate : 150);
+		wolf->player.speed_fwd = wolf->player.base_speed
+				* (wolf->tickrate < 150 ? wolf->tickrate : 150) * 2;
 		player_moving(wolf);
 	}
 }

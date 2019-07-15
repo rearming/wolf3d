@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 16:36:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:09:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void		draw_column(t_ray ray, t_wolf *wolf, int win_x);
 
 void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
-int 		get_int_from_rgb(int r, int g, int b);
+int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_texture_type(int x, int y, const char **map);
 int 		cell_is_empty(char cell);
@@ -102,6 +102,8 @@ void		keydown_hook(t_wolf *wolf, SDL_Event event);
 void		keyup_hook(t_wolf *wolf, SDL_Event event);
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event event);
 void		mouse_down_hook(t_wolf *wolf, SDL_Event event);
+void 		mouse_wheel_event(t_wolf *wolf, SDL_Event event);
+
 /*
 **	player's moves
 */
@@ -124,8 +126,7 @@ void		sdl_exit(t_wolf *wolf);
 */
 
 void		print_bmp_params(t_bmp bmp);
-void
-print_texture(t_sdl sdl, int width, int height, int **data, t_point print_coord,
-			  int bpp);
+void		print_texture(t_sdl sdl, int width, int height,
+		int **data, t_point print_coord, int bpp);
 
 #endif

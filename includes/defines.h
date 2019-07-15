@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/15 19:47:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@
 
 # define MOVING 667
 # define IDLE 668
+
+# define GUN 1001
+# define KNIFE 1002
+# define DAKKA 1003
 
 #endif

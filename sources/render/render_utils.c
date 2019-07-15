@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:11 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/15 18:21:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void		sdl_put_pixel(t_point point, t_sdl sdl)
 			sdl.pixels[point.x + point.y * WIN_WIDTH] = point.color;
 }
 
-int 		get_int_from_rgb(int r, int g, int b)
+int			get_int_from_rgb(int r, int g, int b, int a)
 {
-	return (r << 16 | g << 8 | b);
+	return (a << 24 | r << 16 | g << 8 | b);
 }
 
 void		get_rgb_from_int(int *r, int *g, int *b, int color)

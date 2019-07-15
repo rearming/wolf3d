@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 17:02:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:47:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,65 @@ void		draw_floor_and_sky(t_sdl sdl, int floor_color)
 	}
 }
 
-void		render_weapon(t_wolf *wolf)
+void		scaled_draw(t_sdl sdl, t_sprite sprite, double scale, t_point print_coord)
 {
+	int 	x;
+	int 	y;
 
+	y = 0;
+	scale = scale < 20 ? scale : 20;
+	while (y < scale * sprite.height)
+	{
+		x = 0;
+		while (x < scale * sprite.width)
+		{
+			if ((sprite.data[(int)(y / scale)][(int)(x / scale)] >> 24) != 0)
+				sdl_put_pixel((t_point){x + print_coord.x, y + print_coord.y, 0,
+							sprite.data[(int)(y / scale)][(int)(x / scale)]}, sdl);
+			x++;
+		}
+		y++;
+	}
+}
+
+void		draw_weapon(t_wolf *wolf)
+{
+	if (wolf->player.weapon_type == GUN)
+	{
+		if (wolf->textures.frame)
+		{
+			wolf->textures.frame += (double) wolf->tickrate / 90;
+			if (wolf->textures.frame >= 6)
+				wolf->textures.frame = FALSE;
+		}
+		scaled_draw(wolf->sdl, wolf->textures.gun[(int)wolf->textures.frame],
+					2,
+					(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2});
+	}
+	if (wolf->player.weapon_type == KNIFE)
+	{
+		if (wolf->textures.frame)
+		{
+			wolf->textures.frame += (double) wolf->tickrate / 100;
+			if (wolf->textures.frame >= 4)
+				wolf->textures.frame = FALSE;
+		}
+		scaled_draw(wolf->sdl, wolf->textures.knife[(int)wolf->textures.frame],
+					4,
+					(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4});
+	}
+	if (wolf->player.weapon_type == DAKKA)
+	{
+		if (wolf->textures.frame)
+		{
+			wolf->textures.frame += (double) wolf->tickrate / 70; //more div tickrate - slower animation
+			if (wolf->textures.frame >= 11)
+				wolf->textures.frame = FALSE;
+		}
+		scaled_draw(wolf->sdl, wolf->textures.dakka[(int)(wolf->textures.frame)],
+					4,
+					(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4});
+	}
 }
 
 void		render(t_wolf *wolf)
@@ -91,10 +147,7 @@ void		render(t_wolf *wolf)
 	render_columns(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
-	print_texture(wolf->sdl, wolf->textures.pistol[0].width,
-				  wolf->textures.pistol[0].height,
-				  wolf->textures.pistol[0].data,
-				  (t_point) {WIN_WIDTH / 2, WIN_HEIGHT - 300}, 0);
+	draw_weapon(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
