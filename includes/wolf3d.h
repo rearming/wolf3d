@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 16:03:28 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:36:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,8 @@ void		sdl_exit(t_wolf *wolf);
 */
 
 void		print_bmp_params(t_bmp bmp);
+void
+print_texture(t_sdl sdl, int width, int height, int **data, t_point print_coord,
+			  int bpp);
 
 #endif

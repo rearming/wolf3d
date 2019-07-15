@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 18:15:07 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:39:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.fat = 4;
 	wolf->minimap.scale.x = 3;
 	wolf->minimap.scale.y = 6;
-	//wolf->render_mode = COMPASS_MODE;
-	wolf->render_mode = NUMBER_MODE;
+	wolf->render_mode = COMPASS_MODE;
+	//wolf->render_mode = NUMBER_MODE;
 	init_keys_states(&wolf->keys_pressed);
 	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int)
 			* WIN_HEIGHT * WIN_WIDTH)))

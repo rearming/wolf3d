@@ -85,9 +85,9 @@ void		draw_column(t_ray ray, t_wolf *wolf, int win_x)
 	ray.distance *= cos(ray.angle - wolf->player.angle);
 	height = (int)((double)WIN_HEIGHT / ray.distance);
 	column_y = (WIN_HEIGHT - height) / 2;
-	sprite_index.x = get_sprite_index(ray, wolf->textures.size);
 	sprite = get_column_sprite(wolf->textures, ray,
 							   (const char**)wolf->map.map, wolf->render_mode);
+	sprite_index.x = get_sprite_index(ray, sprite.size);
 	while (win_y < height)
 	{
 		sdl_put_pixel((t_point) {win_x, column_y, 0, sprite.data

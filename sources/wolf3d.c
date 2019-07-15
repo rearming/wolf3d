@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:42:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 16:03:28 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:24:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int 		main(int argc, char **argv)
 	wolf.sdl = init_sdl();
 	wolf.map = get_map(argv[1]);
 	wolf_init(&wolf);
-	wolf.textures = get_all_textures((const char *)argv[2]);
+	wolf.textures = get_all_textures((const char **)argv, argc - 3);
 	render(&wolf);
 	sdl_loop(&wolf);
 	return (0);

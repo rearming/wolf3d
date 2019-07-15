@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 18:34:32 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/15 17:02:13 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,21 @@ void		draw_floor_and_sky(t_sdl sdl, int floor_color)
 	}
 }
 
+void		render_weapon(t_wolf *wolf)
+{
+
+}
+
 void		render(t_wolf *wolf)
 {
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
+	print_texture(wolf->sdl, wolf->textures.pistol[0].width,
+				  wolf->textures.pistol[0].height,
+				  wolf->textures.pistol[0].data,
+				  (t_point) {WIN_WIDTH / 2, WIN_HEIGHT - 300}, 0);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);

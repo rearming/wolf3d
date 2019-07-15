@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/14 16:56:55 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/15 15:01:28 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef	struct			s_sprite
 	int 				size;
 	int 				width;
 	int 				height;
+	int 				bpp;
 }						t_sprite;
 
 typedef	struct 			s_textures
@@ -104,7 +105,7 @@ typedef	struct 			s_textures
 	t_sprite 			hitler;
 	t_sprite 			red_bricks;
 	t_sprite 			sva_eagle;
-	int 				size;
+	t_sprite			pistol[6];
 }						t_textures;
 
 typedef struct			s_map

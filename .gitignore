@@ -5,7 +5,5 @@
 .DS_Store
 temp
 *.dSYM
-*.a
 *.o
 wolf3d
-/SDL2/
