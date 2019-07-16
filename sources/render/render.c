@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 20:47:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 13:36:18 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,17 +101,17 @@ void		scaled_draw(t_sdl sdl, t_sprite sprite, double scale, t_point print_coord)
 	}
 }
 
-void		draw_weapon(t_wolf *wolf)
+void		draw_weapon(t_wolf *wolf) //todo fix terrible function
 {
 	if (wolf->player.weapon_type == GUN)
 	{
 		if (wolf->textures.frame)
 		{
-			wolf->textures.frame += (double) wolf->tickrate / 90;
-			if (wolf->textures.frame >= 6)
+			wolf->textures.frame += (double) wolf->tickrate / wolf->textures.weapon[0].frequency;
+			if (wolf->textures.frame >= wolf->textures.weapon[0].frames)
 				wolf->textures.frame = FALSE;
 		}
-		scaled_draw(wolf->sdl, wolf->textures.gun[(int)wolf->textures.frame],
+		scaled_draw(wolf->sdl, wolf->textures.weapon[0].sprite[(int)wolf->textures.frame],
 					2,
 					(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2});
 	}
@@ -119,11 +119,11 @@ void		draw_weapon(t_wolf *wolf)
 	{
 		if (wolf->textures.frame)
 		{
-			wolf->textures.frame += (double) wolf->tickrate / 100;
+			wolf->textures.frame += (double) wolf->tickrate / wolf->textures.weapon[1].frequency;
 			if (wolf->textures.frame >= 4)
 				wolf->textures.frame = FALSE;
 		}
-		scaled_draw(wolf->sdl, wolf->textures.knife[(int)wolf->textures.frame],
+		scaled_draw(wolf->sdl, wolf->textures.weapon[1].sprite[(int)wolf->textures.frame],
 					4,
 					(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4});
 	}
@@ -131,11 +131,11 @@ void		draw_weapon(t_wolf *wolf)
 	{
 		if (wolf->textures.frame)
 		{
-			wolf->textures.frame += (double) wolf->tickrate / 70; //more div tickrate - slower animation
+			wolf->textures.frame += (double) wolf->tickrate / wolf->textures.weapon[2].frequency;
 			if (wolf->textures.frame >= 11)
 				wolf->textures.frame = FALSE;
 		}
-		scaled_draw(wolf->sdl, wolf->textures.dakka[(int)(wolf->textures.frame)],
+		scaled_draw(wolf->sdl, wolf->textures.weapon[2].sprite[(int)(wolf->textures.frame)],
 					4,
 					(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4});
 	}

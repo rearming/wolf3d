@@ -6,13 +6,13 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 18:59:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 18:00:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 12:56:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int			get_bmp_title(t_bmp *bmp, FILE *file)
+int			get_bmp_title(t_img *bmp, FILE *file)
 {
 	char 	buff[4];
 
@@ -25,7 +25,7 @@ int			get_bmp_title(t_bmp *bmp, FILE *file)
 	return (14);
 }
 
-void		get_bmp_image(t_bmp *bmp, const char *filename)
+void		get_bmp_image(t_img *bmp, const char *filename)
 {
 	int 			i;
 	int 			offset;
@@ -41,23 +41,21 @@ void		get_bmp_image(t_bmp *bmp, const char *filename)
 	bmp->width = *((int*)(bmp->data + 18 - offset));
 	bmp->height = *((int*)(bmp->data + 22 - offset));
 	bmp->bpp = *((int*)(bmp->data + 28 - offset)) / 8;
-	bmp->color_used = *((int*)(bmp->data + 46 - offset));
 	bmp->img_size = *((int*)(bmp->data + 34 - offset));
 	i = bmp->img_size - 2;
 	while (fread(&bmp->data[i], sizeof(char), 1, file))
 		i--;
 }
 
-void		get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename)
+void get_tilemap_data(t_img *img, const char *filename)
 {
 	int 	filename_len;
 
-	bmp->data = NULL;
-	stb->data = NULL;
+	img->data = NULL;
 	filename_len = ft_strlen(filename);
 	if (filename_len > 3 && ft_strequ(&filename[filename_len - 4], ".bmp"))
-		get_bmp_image(bmp, filename);
+		get_bmp_image(img, filename);
 	else
-		stb->data =
-				stbi_load(filename, &stb->width, &stb->height, &stb->bpp, 0);
+		img->data =
+				stbi_load(filename, &img->width, &img->height, &img->bpp, 0);
 }

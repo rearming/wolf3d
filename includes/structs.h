@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 20:28:52 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 12:54:21 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,7 @@ typedef struct			s_point
 	int					color;
 }						t_point;
 
-typedef struct			s_stb
-{
-	char				*filename;
-	unsigned char		*data;
-	int 				width;
-	int 				height;
-	int 				bpp;
-	long				size;
-}						t_stb;
-
-typedef struct			s_bmp
+typedef struct			s_img
 {
 	int 				width;
 	int 				height;
@@ -39,10 +29,8 @@ typedef struct			s_bmp
 	long 				file_size;
 	long 				img_size;
 	int 				offset;
-	int 				color_used;
-	int					*table;
 	unsigned char 		*data;
-}						t_bmp;
+}						t_img;
 
 typedef struct			s_sdl
 {
@@ -85,6 +73,15 @@ typedef	struct			s_sprite
 	int 				bpp;
 }						t_sprite;
 
+typedef struct			s_weapon
+{
+	int 				type;
+	t_sprite			*sprite;
+	t_point				placement;
+	int 				frames;
+	int 				frequency;
+}						t_weapon;
+
 typedef	struct 			s_textures
 {
 	t_sprite 			sva_flag;
@@ -92,9 +89,7 @@ typedef	struct 			s_textures
 	t_sprite 			hitler;
 	t_sprite 			red_bricks;
 	t_sprite 			sva_eagle;
-	t_sprite			gun[6];
-	t_sprite			knife[5];
-	t_sprite			dakka[13];
+	t_weapon			weapon[WEAPONS_NUM];
 	double 				frame;
 }						t_textures;
 

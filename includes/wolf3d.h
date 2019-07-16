@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 20:09:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 12:56:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include <stdlib.h>
 # include <SDL.h>
 
+# include "defines.h"
 # include "sdb_image.h"
 # include "libft.h"
 # include "structs.h"
 # include "colors.h"
 # include "key_codes.h"
 # include "errors.h"
-# include "defines.h"
 
 /*
 **	init
@@ -39,8 +39,8 @@ void		wolf_init(t_wolf *wolf);
 */
 
 void		get_image_stbi(t_wolf *wolf, char *filename);
-void		get_bmp_image(t_bmp *bmp, const char *filename);
-void get_tilemap_data(t_bmp *bmp, t_stb *stb, const char *filename);
+void		get_bmp_image(t_img *bmp, const char *filename);
+void get_tilemap_data(t_img *img, const char *filename);
 
 /*
 **	textures parsing
@@ -125,7 +125,7 @@ void		sdl_exit(t_wolf *wolf);
 **	debug
 */
 
-void		print_bmp_params(t_bmp bmp);
+void		print_bmp_params(t_img bmp);
 void		print_texture(t_sdl sdl, int width, int height,
 		int **data, t_point print_coord, int bpp);
 

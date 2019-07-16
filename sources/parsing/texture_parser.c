@@ -6,44 +6,32 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 20:29:24 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 13:32:32 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static int get_color_from_tilemap(t_stb stb_img, t_bmp bmp_img, int j, int i)
+static int		get_color_from_tilemap(t_img img, int j, int i)
 {
-	if (stb_img.data)
-	{
-		return (get_int_from_rgb
-		(stb_img.data[j * stb_img.bpp + i * stb_img.bpp * stb_img.width],
-				stb_img.data[(j * stb_img.bpp +
-				i * stb_img.bpp * stb_img.width) + 1],
-				stb_img.data[(j * stb_img.bpp +
-				i * stb_img.bpp * stb_img.width) + 2],
-				stb_img.bpp > 3 ? stb_img.data
-				[j * stb_img.bpp + i * stb_img.bpp * stb_img.width]: 255));
-	}
 	return (get_int_from_rgb(
-			bmp_img.data[j * bmp_img.bpp + i * bmp_img.bpp * bmp_img.width],
-			bmp_img.data[(j * bmp_img.bpp +
-			i * bmp_img.bpp * bmp_img.width) + 1],
-			bmp_img.data[(j * bmp_img.bpp +
-			i * bmp_img.bpp * bmp_img.width) + 2],
-			bmp_img.bpp > 3 ? bmp_img.data
-			[j * bmp_img.bpp + i * bmp_img.bpp * bmp_img.width] : 255));
+			img.data[j * img.bpp + i * img.bpp * img.width],
+			img.data[(j * img.bpp +
+			i * img.bpp * img.width) + 1],
+			img.data[(j * img.bpp +
+			i * img.bpp * img.width) + 2],
+			img.bpp > 3 ? img.data
+			[j * img.bpp + i * img.bpp * img.width] : 255));
 }
 
-t_sprite 	get_sprite(t_stb stb_img, t_bmp bmp_img,
-		int sprite_size, t_point sprite_pos)
+t_sprite		get_sprite(t_img img, int sprite_size, t_point sprite_pos)
 {
 	t_sprite	sprite;
 	int 		i;
 	int 		j;
 
 	i = sprite_pos.y;
-	sprite.bpp = stb_img.data ? stb_img.bpp : bmp_img.bpp;
+	sprite.bpp = img.bpp;
 	sprite.size = sprite_size;
 	sprite.height = 0;
 	sprite.data = (int**)malloc(sizeof(int*) * (sprite_size));
@@ -55,7 +43,7 @@ t_sprite 	get_sprite(t_stb stb_img, t_bmp bmp_img,
 		while (j < sprite_pos.x + sprite_size)
 		{
 			sprite.data[sprite.height][sprite.width]
-				= get_color_from_tilemap(stb_img, bmp_img, j, i);
+				= get_color_from_tilemap(img, j, i);
 			j++;
 			sprite.width++;
 		}
@@ -65,40 +53,40 @@ t_sprite 	get_sprite(t_stb stb_img, t_bmp bmp_img,
 	return (sprite);
 }
 
-void		free_img_data(t_stb *stb_img, t_bmp *bmp_img)
+void			get_weapon(const char **files, int start, t_weapon *weapon, int size)
 {
-	if (stb_img->data)
-		free(stb_img->data);
-	if (stb_img->data)
-		free(bmp_img->data);
-}
-
-t_textures get_all_textures(const char **files, int files_num)
-{
-	t_textures		textures;
-	t_bmp			bmp_img;
-	t_stb			stb_img;
+	t_img			img;
 	int 			i;
 
-	get_tilemap_data(&bmp_img, &stb_img, files[2]);
-	textures.sva_flag = get_sprite(stb_img, bmp_img, 64, (t_point) {256, 0});
-	textures.rock_wall = get_sprite(stb_img, bmp_img, 64, (t_point) {128, 0});
-	textures.hitler = get_sprite(stb_img, bmp_img, 64, (t_point) {128, 196});
-	textures.red_bricks = get_sprite(stb_img, bmp_img, 64, (t_point) {128, 320});
-	textures.sva_eagle = get_sprite(stb_img, bmp_img, 64, (t_point) {320, 64});
-	free_img_data(&stb_img, &bmp_img);
 	i = 0;
-	while (i < files_num)
+	if (!(weapon->sprite = (t_sprite*)malloc(sizeof(t_sprite) * weapon->frames)))
+		raise_error(ERR_MALLOC);
+	while (i < weapon->frames)
 	{
-		get_tilemap_data(&bmp_img, &stb_img, files[i + 3]);
-		if (i < 6)
-			textures.gun[i] = get_sprite(stb_img, bmp_img, 256, (t_point) {0, 0});
-		else if (i < 11)
-			textures.knife[i - 6] = get_sprite(stb_img, bmp_img, 192, (t_point){0, 0});
-		else if (i < 23)
-			textures.dakka[i - 11] = get_sprite(stb_img, bmp_img, 192, (t_point){0, 0});
-		free_img_data(&stb_img, &bmp_img);
+		get_tilemap_data(&img, files[i + start]);
+		weapon->sprite[i] = get_sprite(img, size, (t_point) {0, 0});
+		free(img.data);
 		i++;
 	}
+}
+
+t_textures		get_all_textures(const char **files, int files_num)
+{
+	t_textures		textures;
+	t_img			img;
+
+	get_tilemap_data(&img, files[2]);
+	textures.sva_flag = get_sprite(img, 64, (t_point) {256, 0});
+	textures.rock_wall = get_sprite(img, 64, (t_point) {128, 0});
+	textures.hitler = get_sprite(img, 64, (t_point) {128, 196});
+	textures.red_bricks = get_sprite(img, 64, (t_point) {128, 320});
+	textures.sva_eagle = get_sprite(img, 64, (t_point) {320, 64});
+	free(img.data);
+	textures.weapon[0] = (t_weapon){GUN, 0, (t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 90};
+	textures.weapon[1] = (t_weapon){KNIFE, 0, (t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 100};
+	textures.weapon[2] = (t_weapon){GUN, 0, (t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 70};
+	get_weapon(files, 3, &textures.weapon[0], 256);
+	get_weapon(files, 3 + 6, &textures.weapon[1], 192);
+	get_weapon(files, 3 + 6 + 5, &textures.weapon[2], 192);
 	return (textures);
 }
