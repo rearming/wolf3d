@@ -82,17 +82,17 @@ void		move_left(t_wolf *wolf)
 
 void		player_run(t_wolf *wolf)
 {
-	if (wolf->keys_pressed.lshift == TRUE
-		&& wolf->keys_pressed.lshift_was_pressed == FALSE)
+	if (wolf->actions.lshift == TRUE
+		&& wolf->actions.lshift_was_pressed == FALSE)
 	{
 		wolf->player.base_speed *= 2;
-		wolf->keys_pressed.lshift_was_pressed = TRUE;
+		wolf->actions.lshift_was_pressed = TRUE;
 	}
-	if (wolf->keys_pressed.lshift == FALSE
-		&& wolf->keys_pressed.lshift_was_pressed == TRUE)
+	if (wolf->actions.lshift == FALSE
+		&& wolf->actions.lshift_was_pressed == TRUE)
 	{
 		wolf->player.base_speed /= 2;
-		wolf->keys_pressed.lshift_was_pressed = FALSE;
+		wolf->actions.lshift_was_pressed = FALSE;
 	}
 
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/11 14:28:21 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:30:19 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_sprite 	get_sprite_by_side(t_textures sprites, t_ray ray)
 		return (sprites.sva_eagle);
 	return (sprites.hitler);
 }
-
 
 t_sprite	get_column_sprite(t_textures sprites, t_ray ray,
 							  const char **map, int render_mode)
@@ -81,7 +80,6 @@ void		draw_column(t_ray ray, t_wolf *wolf, int win_x)
 	t_sprite	sprite;
 
 	win_y = 0;
-	ray.direction = get_view_direction(ray);
 	ray.distance *= cos(ray.angle - wolf->player.angle);
 	height = (int)((double)WIN_HEIGHT / ray.distance);
 	column_y = (WIN_HEIGHT - height) / 2;

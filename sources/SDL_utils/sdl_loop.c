@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 20:09:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:14:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void		player_moving(t_wolf *wolf)
 {
-	if (wolf->keys_pressed.up)
+	if (wolf->actions.up)
 		move_forward(wolf);
-	if (wolf->keys_pressed.down)
+	if (wolf->actions.down)
 		move_back(wolf);
-	if (wolf->keys_pressed.right)
+	if (wolf->actions.right)
 		move_right(wolf);
-	if (wolf->keys_pressed.left)
+	if (wolf->actions.left)
 		move_left(wolf);
 	player_run(wolf);
 }
@@ -43,6 +43,8 @@ void		sdl_loop(t_wolf *wolf)
 	{
 		while (SDL_PollEvent(&event))
 		{
+			if (event.type == SDL_WINDOWEVENT_EXPOSED)
+				SDL_SetRelativeMouseMode(SDL_TRUE);
 			if (event.type == SDL_KEYDOWN)
 				keydown_hook(wolf, event);
 			if (event.type == SDL_KEYUP)
@@ -51,6 +53,8 @@ void		sdl_loop(t_wolf *wolf)
 				mouse_motion_hook(wolf, event);
 			if (event.type == SDL_MOUSEBUTTONDOWN)
 				mouse_down_hook(wolf, event);
+			if (event.type == SDL_MOUSEBUTTONUP)
+				mouse_up_hook(wolf, event);
 			if (event.type == SDL_MOUSEWHEEL)
 				mouse_wheel_event(wolf, event);
 		}
@@ -62,5 +66,6 @@ void		sdl_loop(t_wolf *wolf)
 		wolf->player.speed_fwd = wolf->player.base_speed
 				* (wolf->tickrate < 150 ? wolf->tickrate : 150) * 2;
 		player_moving(wolf);
+		mouse_actions(wolf);
 	}
 }

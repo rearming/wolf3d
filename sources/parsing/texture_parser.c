@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 13:32:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:48:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int		get_color_from_tilemap(t_img img, int j, int i)
 t_sprite		get_sprite(t_img img, int sprite_size, t_point sprite_pos)
 {
 	t_sprite	sprite;
-	int 		i;
-	int 		j;
+	int			i;
+	int			j;
 
 	i = sprite_pos.y;
 	sprite.bpp = img.bpp;
@@ -42,8 +42,8 @@ t_sprite		get_sprite(t_img img, int sprite_size, t_point sprite_pos)
 		sprite.data[sprite.height] = (int*)malloc(sizeof(int) * (sprite_size));
 		while (j < sprite_pos.x + sprite_size)
 		{
-			sprite.data[sprite.height][sprite.width]
-				= get_color_from_tilemap(img, j, i);
+			sprite.data[sprite.height][sprite.width] =
+					get_color_from_tilemap(img, j, i);
 			j++;
 			sprite.width++;
 		}
@@ -53,13 +53,15 @@ t_sprite		get_sprite(t_img img, int sprite_size, t_point sprite_pos)
 	return (sprite);
 }
 
-void			get_weapon(const char **files, int start, t_weapon *weapon, int size)
+int			get_weapon(const char **files, int start,
+			   t_weapon *weapon, int size)
 {
 	t_img			img;
-	int 			i;
+	int				i;
 
 	i = 0;
-	if (!(weapon->sprite = (t_sprite*)malloc(sizeof(t_sprite) * weapon->frames)))
+	if (!(weapon->sprite =
+			(t_sprite*)malloc(sizeof(t_sprite) * weapon->frames)))
 		raise_error(ERR_MALLOC);
 	while (i < weapon->frames)
 	{
@@ -68,6 +70,27 @@ void			get_weapon(const char **files, int start, t_weapon *weapon, int size)
 		free(img.data);
 		i++;
 	}
+	return (weapon->frames);
+}
+
+void			get_all_weapons(const char **files, t_weapon *weapons)
+{
+	int		file_num;
+
+	file_num = 3;
+	weapons[0] = (t_weapon){GUN, 0,
+				(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 90, 2};
+	weapons[1] = (t_weapon){KNIFE, 0,
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 100, 4};
+	weapons[2] = (t_weapon){DAKKA, 0,
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 70, 4};
+	weapons[3] = (t_weapon){PICKAXE, 0,
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 1, 70, 4};
+	file_num += get_weapon(files, file_num, &weapons[0], 256);
+	file_num += get_weapon(files, file_num, &weapons[1], 192);
+	file_num += get_weapon(files, file_num, &weapons[2], 192);
+	printf("filenum: [%i], name: [%s]\n", file_num, files[file_num]);
+	file_num += get_weapon(files, file_num, &weapons[3], 200);
 }
 
 t_textures		get_all_textures(const char **files, int files_num)
@@ -76,17 +99,18 @@ t_textures		get_all_textures(const char **files, int files_num)
 	t_img			img;
 
 	get_tilemap_data(&img, files[2]);
-	textures.sva_flag = get_sprite(img, 64, (t_point) {256, 0});
+	/*textures.sva_flag = get_sprite(img, 64, (t_point) {256, 0});
 	textures.rock_wall = get_sprite(img, 64, (t_point) {128, 0});
 	textures.hitler = get_sprite(img, 64, (t_point) {128, 196});
 	textures.red_bricks = get_sprite(img, 64, (t_point) {128, 320});
-	textures.sva_eagle = get_sprite(img, 64, (t_point) {320, 64});
+	textures.sva_eagle = get_sprite(img, 64, (t_point) {320, 64});*/
+
+	textures.sva_flag = get_sprite(img, 16, (t_point) {32, 48});
+	textures.rock_wall = get_sprite(img, 16, (t_point) {112, 112});
+	textures.hitler = get_sprite(img, 16, (t_point) {0, 16});
+	textures.red_bricks = get_sprite(img, 16, (t_point) {48, 32});
+	textures.sva_eagle = get_sprite(img, 16, (t_point) {192, 48});
 	free(img.data);
-	textures.weapon[0] = (t_weapon){GUN, 0, (t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 90};
-	textures.weapon[1] = (t_weapon){KNIFE, 0, (t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 100};
-	textures.weapon[2] = (t_weapon){GUN, 0, (t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 70};
-	get_weapon(files, 3, &textures.weapon[0], 256);
-	get_weapon(files, 3 + 6, &textures.weapon[1], 192);
-	get_weapon(files, 3 + 6 + 5, &textures.weapon[2], 192);
+	get_all_weapons(files, textures.weapons);
 	return (textures);
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 12:54:21 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 16:55:32 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef	struct			s_ray
 	int 				direction;
 }						t_ray;
 
-typedef struct			s_keys_pressed
+typedef struct			s_actions
 {
 	char				up;
 	char 				down;
@@ -57,7 +57,9 @@ typedef struct			s_keys_pressed
 	char 				left;
 	char 				lshift;
 	char 				lshift_was_pressed;
-}						t_keys_pressed;
+	char 				mouse_left;
+	char 				mouse_right;
+}						t_actions;
 
 typedef struct			s_minimap
 {
@@ -80,6 +82,7 @@ typedef struct			s_weapon
 	t_point				placement;
 	int 				frames;
 	int 				frequency;
+	double				scale;
 }						t_weapon;
 
 typedef	struct 			s_textures
@@ -89,7 +92,7 @@ typedef	struct 			s_textures
 	t_sprite 			hitler;
 	t_sprite 			red_bricks;
 	t_sprite 			sva_eagle;
-	t_weapon			weapon[WEAPONS_NUM];
+	t_weapon			weapons[WEAPONS_NUM];
 	double 				frame;
 }						t_textures;
 
@@ -118,12 +121,13 @@ typedef struct			s_player
 typedef struct			s_wolf
 {
 	t_player			player;
-	t_keys_pressed		keys_pressed;
+	t_actions			actions;
 	t_minimap			minimap;
 	t_sdl				sdl;
 	t_textures			textures;
 	int 				render_mode;
 	int 				tickrate;
+	int 				no_mouse;
 	t_map				map;
 }						t_wolf;
 

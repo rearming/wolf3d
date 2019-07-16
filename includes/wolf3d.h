@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 12:56:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:15:25 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		wolf_init(t_wolf *wolf);
 
 void		get_image_stbi(t_wolf *wolf, char *filename);
 void		get_bmp_image(t_img *bmp, const char *filename);
-void get_tilemap_data(t_img *img, const char *filename);
+void		get_tilemap_data(t_img *img, const char *filename);
 
 /*
 **	textures parsing
@@ -52,7 +52,7 @@ t_textures	get_all_textures();
 **	map parsing
 */
 
-t_map get_map(char *filename);
+t_map		get_map(char *filename);
 char		**fast_gnl(int fd);
 
 /*
@@ -62,7 +62,6 @@ char		**fast_gnl(int fd);
 void		render(t_wolf *wolf);
 t_ray		raycast(t_wolf *wolf, double angle);
 void		draw_column(t_ray ray, t_wolf *wolf, int win_x);
-
 
 /*
 **	render utils
@@ -74,6 +73,7 @@ int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_texture_type(int x, int y, const char **map);
 int 		cell_is_empty(char cell);
+int 		get_view_direction(t_ray ray);
 
 /*
 **	game logic utils
@@ -103,6 +103,8 @@ void		keyup_hook(t_wolf *wolf, SDL_Event event);
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event event);
 void		mouse_down_hook(t_wolf *wolf, SDL_Event event);
 void 		mouse_wheel_event(t_wolf *wolf, SDL_Event event);
+void		mouse_up_hook(t_wolf *wolf, SDL_Event event);
+void		mouse_actions(t_wolf *wolf);
 
 /*
 **	player's moves

@@ -52,10 +52,11 @@
 # define MOVING 667
 # define IDLE 668
 
-# define GUN 1001
-# define KNIFE 1002
-# define DAKKA 1003
+# define GUN 0
+# define KNIFE 1
+# define DAKKA 2
+# define PICKAXE 3
 
-# define WEAPONS_NUM 3
+# define WEAPONS_NUM 4
 
 #endif
