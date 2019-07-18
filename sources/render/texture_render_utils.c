@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 19:47:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 19:51:04 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 t_sprite 	fix_dir_bug(t_wolf *wolf, t_ray *ray)
 {
-	if (!cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x + 0.1)])
-		&& !cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x - 0.1)]))
+	if (ray->direction == VIEW_RIGHT)
+	{
+		if (!cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x - 0.1)]))
+		{
+			if (sin(ray->angle) < 0)
+				return (wolf->textures.sva_flag);
+			else
+				return (wolf->textures.wood);
+		}
+		return (wolf->textures.red_bricks);
+	}
+	if (!cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x + 0.1)]))
 	{
 		if (sin(ray->angle) < 0)
 			return (wolf->textures.sva_flag);
 		else
 			return (wolf->textures.wood);
 	}
-	if (ray->direction == VIEW_RIGHT)
-	{
-		/*if (!cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x - 0.1)]))
-			return (wolf->textures.sva_flag);*/
-		return (wolf->textures.red_bricks);
-	}
-
 	return (wolf->textures.hitler);
 }
 
@@ -64,7 +67,7 @@ t_sprite	get_column_sprite(t_ray *ray, const char **map,
 	return (wolf->textures.rock_wall);
 }
 
-int				get_sprite_index(t_ray ray, int texture_size, t_wolf *wolf)
+int			get_sprite_index(t_ray ray, int texture_size, t_wolf *wolf)
 {
 	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
 		return((int)((double)texture_size * (fabs(ray.y - (int)ray.y))));
