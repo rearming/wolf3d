@@ -51,7 +51,10 @@ void		draw_minimap(t_wolf *wolf)
 		map_xy.x = 0;
 		while (map_xy.x < wolf->map.width * wolf->minimap.scale.x)
 		{
-			if (cell_is_empty(wolf->map.map[map_xy.y / wolf->minimap.scale.y]
+			if ((wolf->map.map[map_xy.y / wolf->minimap.scale.y]
+			[map_xy.x / wolf->minimap.scale.x]) == '9')
+				sdl_put_pixel((t_point) {map_xy.x, map_xy.y, 0, RED}, wolf->sdl);
+			else if (cell_is_empty(wolf->map.map[map_xy.y / wolf->minimap.scale.y]
 			[map_xy.x / wolf->minimap.scale.x]))
 				sdl_put_pixel((t_point) {map_xy.x, map_xy.y, 0, GREY}, wolf->sdl);
 			else

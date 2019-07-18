@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 20:26:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 22:18:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.distance = 0;
 	while (21)
 	{
-		ray.item = get_item_type(wolf->map.map[(int)ray.y][(int)ray.x], &ray);
 		if (!cell_is_empty(wolf->map.map[(int)ray.y][(int)ray.x]))
 			break ;
 		ray.x = wolf->player.x + ray.distance * delta_x;
@@ -37,19 +36,20 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	return (ray);
 }
 
+
 void		render_columns(t_wolf *wolf)
 {
 	int		win_x;
 	t_ray	ray;
 
-	win_x = WIN_WIDTH;
+	win_x = 0;
 	ray.angle = wolf->player.angle - wolf->player.fov / 2;
-	while (win_x)
+	while (win_x < WIN_WIDTH)
 	{
 		ray = raycast(wolf, ray.angle);
 		draw_column(ray, wolf, win_x);
 		ray.angle += wolf->player.fov / WIN_WIDTH;
-		win_x--;
+		win_x++;
 	}
 }
 
@@ -121,6 +121,37 @@ void		draw_weapon(t_wolf *wolf)
 				wolf->textures.weapons[wolf->player.weapon_type].placement);
 }
 
+
+void 		draw_item(t_wolf *wolf)
+{
+	t_point		item;
+	t_point		res;
+	double 		atan_item;
+	double 		player;
+
+	item = wolf->map.items[0];
+
+	res.x = item.x - (int)wolf->player.x;
+	res.y = item.y - (int)wolf->player.y;
+	atan_item = atan2(res.y, res.x);
+	//player = atan2(wolf->player.x, wolf->player.y);
+	if (atan_item <= wolf->player.angle + wolf->player.fov / 2 && atan_item >= wolf->player.angle - wolf->player.fov / 2)
+	{
+		printf("%f\n", atan_item);
+		printf("visiable!\n");
+		printf("max: [%f] | min: [%f]\n", wolf->player.angle + wolf->player.fov / 2, wolf->player.angle - wolf->player.fov / 2);
+	}
+	else
+	{
+		printf("NOT\n");
+		printf("max: [%f] | min: [%f]\n", wolf->player.angle + wolf->player.fov / 2, wolf->player.angle - wolf->player.fov / 2);
+		printf("item: [%f]\n", atan_item);
+	//	printf("player: [%f]\n", new_angle);
+	}
+
+	//printf("item's x: [%i] | y: [%i]\n", item.x, item.y);
+}
+
 void		render(t_wolf *wolf)
 {
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
@@ -128,6 +159,7 @@ void		render(t_wolf *wolf)
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_weapon(wolf);
+	draw_item(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 17:15:25 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 20:26:36 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_texture_type(int x, int y, const char **map);
 int 		cell_is_empty(char cell);
 int 		get_view_direction(t_ray ray);
-t_item 		get_item_type(char cell, t_ray *ray);
 
 /*
 **	game logic utils

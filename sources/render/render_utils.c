@@ -6,29 +6,11 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/18 20:28:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 20:29:03 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-t_item 		get_item_type(char cell, t_ray *ray)
-{
-	t_item		item;
-
-	item.distance = ray->distance;
-	item.x = (int)ray->x;
-	item.y = (int)ray->y;
-	if (cell == '7')
-		item.type = GUN;
-	else if (cell == '8')
-		item.type = DAKKA;
-	else if (cell == '9')
-		item.type = PICKAXE;
-	else
-		return ((t_item){0, 0, 0, NO_ITEM});
-	return (item);
-}
 
 int 		cell_is_empty(char cell)
 {

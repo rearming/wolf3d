@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:26:24 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:11 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 20:04:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		move_back(t_wolf *wolf)
 	}
 }
 
-void		move_left(t_wolf *wolf)
+void		move_right(t_wolf *wolf)
 {
 	t_point		block;
 
@@ -63,7 +63,7 @@ void		move_left(t_wolf *wolf)
 	}
 }
 
-void		move_right(t_wolf *wolf)
+void		move_left(t_wolf *wolf)
 {
 	t_point		block;
 

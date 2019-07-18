@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 20:26:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 21:17:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ typedef struct			s_sdl
 	int					*pixels;
 }						t_sdl;
 
-typedef struct			s_item
-{
-	double 				distance;
-	int 				x;
-	int 				y;
-	int 				type;
-}						t_item;
-
 typedef	struct			s_ray
 {
 	double 				x;
@@ -55,7 +47,6 @@ typedef	struct			s_ray
 	double 				distance;
 	double 				angle;
 	int 				direction;
-	t_item				item;
 }						t_ray;
 
 typedef struct			s_actions
@@ -112,6 +103,8 @@ typedef struct			s_map
 	int 				height;
 	int 				width;
 	t_point				player_spawn;
+	t_point				*items;
+	int 				items_nbr;
 }						t_map;
 
 typedef struct			s_player
