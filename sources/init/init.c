@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 17:39:31 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 17:32:31 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ t_sdl		init_sdl(void)
 	return (sdl);
 }
 
-void		init_keys_states(t_actions *keys_pressed)
+void		init_actions(t_actions *actions)
 {
-	keys_pressed->down = FALSE;
-	keys_pressed->up = FALSE;
-	keys_pressed->left = FALSE;
-	keys_pressed->right = FALSE;
-	keys_pressed->lshift = FALSE;
-	keys_pressed->lshift_was_pressed = FALSE;
+	actions->down = FALSE;
+	actions->up = FALSE;
+	actions->left = FALSE;
+	actions->right = FALSE;
+	actions->lshift = FALSE;
+	actions->lshift_was_pressed = FALSE;
+	actions->mouse_right = FALSE;
+	actions->mouse_left = FALSE;
 }
 
 void		wolf_init(t_wolf *wolf)
@@ -46,7 +48,7 @@ void		wolf_init(t_wolf *wolf)
 		raise_error(ERR_NO_PLAYER_SPOT);
 	wolf->player.x = (int)wolf->map.player_spawn.x;
 	wolf->player.y = (int)wolf->map.player_spawn.y;
-	wolf->player.fov = M_PI / 2; //60 градусов
+	wolf->player.fov = M_PI / 2; // pi / 3 = 60 градусов, pi / 2 = 90
 	wolf->player.angle = 0;
 	wolf->player.ang_speed = 0.001;
 	wolf->player.base_speed = 0.003;
@@ -57,7 +59,7 @@ void		wolf_init(t_wolf *wolf)
 	//wolf->render_mode = NUMBER_MODE;
 	wolf->textures.frame = 0;
 	wolf->player.weapon_type = PICKAXE;
-	init_keys_states(&wolf->actions);
+	init_actions(&wolf->actions);
 	wolf->no_mouse = TRUE;
 	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int)
 			* WIN_HEIGHT * WIN_WIDTH)))

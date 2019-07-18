@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 16:55:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/16 17:13:49 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef	struct 			s_textures
 	t_sprite 			hitler;
 	t_sprite 			red_bricks;
 	t_sprite 			sva_eagle;
+	t_sprite			wood;
 	t_weapon			weapons[WEAPONS_NUM];
 	double 				frame;
 }						t_textures;

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 18:43:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:24:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ void		place_block(t_wolf *wolf)
 	t_ray		ray;
 
 	ray = raycast(wolf, wolf->player.angle);
-	printf("player's coords: x: [%.3f] | y: [%.3f]\n", wolf->player.x, wolf->player.y);
-	printf("ray hits: x: [%.3f] | y: [%.3f] | distance: [%.3f]\n", ray.x, ray.y, ray.distance);
+/*	printf("player's coords: x: [%.3f] | y: [%.3f]\n", wolf->player.x, wolf->player.y);
+	printf("ray hits: x: [%.3f] | y: [%.3f] | distance: [%.3f]\n", ray.x, ray.y, ray.distance);*/
 	if (ray.distance > 4 || ray.distance < 2)
 		return ;
 	if (ray.direction == VIEW_RIGHT)
 		wolf->map.map[(int)ray.y][(int)ray.x - 1] = '1';
 	if (ray.direction == VIEW_LEFT)
-		wolf->map.map[(int)ray.y][(int)ray.x + 1] = '1';
+		wolf->map.map[(int)ray.y][(int)ray.x + 1] = '2';
 	if (ray.direction == VIEW_DOWN)
-		wolf->map.map[(int)ray.y - 1][(int)ray.x] = '1';
+		wolf->map.map[(int)ray.y - 1][(int)ray.x] = '3';
 	if (ray.direction == VIEW_UP)
-		wolf->map.map[(int)ray.y + 1][(int)ray.x] = '1';
+		wolf->map.map[(int)ray.y + 1][(int)ray.x] = '4';
 }
 
 void		mouse_actions(t_wolf *wolf)
@@ -75,7 +75,7 @@ void		mouse_down_hook(t_wolf *wolf, SDL_Event event)
 		place_block(wolf);
 		wolf->actions.mouse_right = TRUE;
 	}
-	//todo add sound like in minecraft
+	//todo add sound like in minecraft0
 }
 
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event event)
