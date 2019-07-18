@@ -74,6 +74,7 @@ void		get_rgb_from_int(int *r, int *g, int *b, int color);
 int 		get_texture_type(int x, int y, const char **map);
 int 		cell_is_empty(char cell);
 int 		get_view_direction(t_ray ray);
+t_item 		get_item_type(char cell, t_ray *ray);
 
 /*
 **	game logic utils

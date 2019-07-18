@@ -12,9 +12,28 @@
 
 #include "wolf3d.h"
 
+t_item 		get_item_type(char cell, t_ray *ray)
+{
+	t_item		item;
+
+	item.distance = ray->distance;
+	item.x = (int)ray->x;
+	item.y = (int)ray->y;
+	if (cell == '7')
+		item.type = GUN;
+	else if (cell == '8')
+		item.type = DAKKA;
+	else if (cell == '9')
+		item.type = PICKAXE;
+	else
+		return ((t_item){0, 0, 0, 0});
+	return (item);
+}
+
 int 		cell_is_empty(char cell)
 {
-	if (cell != '0' && cell != PLAYER_POS && cell != ' ')
+	if (cell != '0' && cell != PLAYER_POS && cell != ' '
+		&& cell != '7' && cell != '8' && cell != '9')
 		return (0);
 	return (1);
 }
