@@ -52,6 +52,8 @@
 # define MOVING 667
 # define IDLE 668
 
+# define NO_ITEM -1
+
 # define GUN 0
 # define KNIFE 1
 # define DAKKA 2
