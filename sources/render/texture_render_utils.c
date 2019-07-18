@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 19:51:04 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 19:51:53 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,7 @@ void		draw_column(t_ray ray, t_wolf *wolf, int win_x)
 	height = (int)((double)WIN_HEIGHT / ray.distance);
 	column_y = (WIN_HEIGHT - height) / 2;
 	sprite = get_column_sprite(&ray,
-							   (const char **) wolf->map.map, wolf->render_mode,
-							   wolf);
+		(const char **)wolf->map.map, wolf->render_mode, wolf);
 	sprite_index.x = get_sprite_index(ray, sprite.size, wolf);
 	while (win_y < height)
 	{

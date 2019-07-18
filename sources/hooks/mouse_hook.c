@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 16:24:09 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 20:05:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void		place_block(t_wolf *wolf)
 	t_ray		ray;
 
 	ray = raycast(wolf, wolf->player.angle);
-/*	printf("player's coords: x: [%.3f] | y: [%.3f]\n", wolf->player.x, wolf->player.y);
-	printf("ray hits: x: [%.3f] | y: [%.3f] | distance: [%.3f]\n", ray.x, ray.y, ray.distance);*/
 	if (ray.distance > 4 || ray.distance < 2)
 		return ;
 	if (ray.direction == VIEW_RIGHT)
@@ -54,8 +52,6 @@ void		mouse_actions(t_wolf *wolf)
 		break_block(wolf);
 	if (wolf->actions.mouse_left == FALSE && wolf->player.weapon_type == DAKKA)
 		wolf->textures.frame = 0;
-	/*if (wolf->actions.mouse_right) // todo add deltaTime?
-		place_block(wolf);*/
 }
 
 void		mouse_up_hook(t_wolf *wolf, SDL_Event event)
@@ -75,12 +71,12 @@ void		mouse_down_hook(t_wolf *wolf, SDL_Event event)
 		place_block(wolf);
 		wolf->actions.mouse_right = TRUE;
 	}
-	//todo add sound like in minecraft0
+	//todo add sound like in minecraft
 }
 
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event event)
 {
-	wolf->player.angle += (double)event.motion.xrel * wolf->player.ang_speed;
+	wolf->player.angle -= (double)event.motion.xrel * wolf->player.ang_speed;
 	if (wolf->no_mouse)
 	{
 		SDL_SetRelativeMouseMode(SDL_TRUE);

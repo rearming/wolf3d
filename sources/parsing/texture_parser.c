@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 19:24:09 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 19:57:34 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,19 @@ t_textures		get_all_textures(const char **files, int files_num)
 	t_img			img;
 
 	get_tilemap_data(&img, files[2]);
-	/*textures.sva_flag = get_sprite(img, 64, (t_point) {256, 0});
+	textures.sva_flag = get_sprite(img, 64, (t_point) {256, 0});
 	textures.rock_wall = get_sprite(img, 64, (t_point) {128, 0});
 	textures.hitler = get_sprite(img, 64, (t_point) {128, 196});
 	textures.red_bricks = get_sprite(img, 64, (t_point) {128, 320});
-	textures.sva_eagle = get_sprite(img, 64, (t_point) {320, 64});*/
+	textures.sva_eagle = get_sprite(img, 64, (t_point) {320, 64});
+	textures.wood = get_sprite(img, 64, (t_point){0, 576});
 
-	textures.sva_flag = get_sprite(img, 16, (t_point) {32, 48});
+	/*textures.sva_flag = get_sprite(img, 16, (t_point) {32, 48});
 	textures.rock_wall = get_sprite(img, 16, (t_point) {112, 112});
 	textures.hitler = get_sprite(img, 16, (t_point) {32, 0});
 	textures.red_bricks = get_sprite(img, 16, (t_point) {48, 32});
 	textures.sva_eagle = get_sprite(img, 16, (t_point) {192, 48});
-	textures.wood = get_sprite(img, 16, (t_point) {64, 0});
+	textures.wood = get_sprite(img, 16, (t_point) {64, 0});*/
 
 	free(img.data);
 	get_all_weapons(files, textures.weapons);

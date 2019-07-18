@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 19:06:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:37:31 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void		render_columns(t_wolf *wolf)
 	int		win_x;
 	t_ray	ray;
 
-	win_x = 0;
+	win_x = WIN_WIDTH;
 	ray.angle = wolf->player.angle - wolf->player.fov / 2;
-	while (win_x < WIN_WIDTH)
+	while (win_x)
 	{
 		ray = raycast(wolf, ray.angle);
 		draw_column(ray, wolf, win_x);
 		ray.angle += wolf->player.fov / WIN_WIDTH;
-		win_x++;
+		win_x--;
 	}
 }
 

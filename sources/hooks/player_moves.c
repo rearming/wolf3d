@@ -46,7 +46,7 @@ void		move_back(t_wolf *wolf)
 	}
 }
 
-void		move_right(t_wolf *wolf)
+void		move_left(t_wolf *wolf)
 {
 	t_point		block;
 
@@ -63,7 +63,7 @@ void		move_right(t_wolf *wolf)
 	}
 }
 
-void		move_left(t_wolf *wolf)
+void		move_right(t_wolf *wolf)
 {
 	t_point		block;
 
