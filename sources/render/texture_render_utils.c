@@ -6,68 +6,63 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 19:51:53 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 20:20:30 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_sprite 	fix_dir_bug(t_wolf *wolf, t_ray *ray)
+t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 {
 	if (ray->direction == VIEW_RIGHT)
 	{
-		if (!cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x - 0.1)]))
+		if (!cell_is_empty(map.int_map[(int)(ray->y)][(int)(ray->x - 0.1)]))
 		{
 			if (sin(ray->angle) < 0)
-				return (wolf->textures.sva_flag);
+				return (textures.sprites[textures.texture_mode][SVA_FLAG]);
 			else
-				return (wolf->textures.wood);
+				return (textures.sprites[textures.texture_mode][WOOD]);
 		}
-		return (wolf->textures.red_bricks);
+		return (textures.sprites[textures.texture_mode][RED_BRICKS]);
 	}
-	if (!cell_is_empty(wolf->map.map[(int)(ray->y)][(int)(ray->x + 0.1)]))
+	if (!cell_is_empty(map.int_map[(int)(ray->y)][(int)(ray->x + 0.1)]))
 	{
 		if (sin(ray->angle) < 0)
-			return (wolf->textures.sva_flag);
+			return (textures.sprites[textures.texture_mode][SVA_FLAG]);
 		else
-			return (wolf->textures.wood);
+			return (textures.sprites[textures.texture_mode][WOOD]);
 	}
-	return (wolf->textures.hitler);
+	return (textures.sprites[textures.texture_mode][HITLER]);
 }
 
-t_sprite	get_sprite_by_side(t_ray *ray, t_wolf *wolf)
+t_sprite	get_sprite_by_side(t_ray *ray, t_textures textures, t_map map)
 {
 	if (ray->direction == VIEW_RIGHT || ray->direction == VIEW_LEFT)
-		return (fix_dir_bug(wolf, ray));
+		return (fix_dir_bug(ray, textures, map));
 	if (ray->direction == VIEW_UP)
-		return (wolf->textures.sva_flag);
+		return (textures.sprites[textures.texture_mode][SVA_FLAG]);
 	if (ray->direction == VIEW_DOWN)
-		return (wolf->textures.wood);
-	return (wolf->textures.hitler);
+		return (textures.sprites[textures.texture_mode][WOOD]);
+	return (textures.sprites[textures.texture_mode][HITLER]);
 }
 
-t_sprite	get_column_sprite(t_ray *ray, const char **map,
-		int render_mode, t_wolf *wolf)
+//todo сделать чек некрасивых текстур (можно тоже по таблице) / из конфиг файла
+
+t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 {
-	int 	sprite_type;
+	int 	texture_id;
 
-	if (render_mode == COMPASS_MODE)
-		return (get_sprite_by_side(ray, wolf));
-	sprite_type = get_texture_type((int)ray->x, (int)ray->y, map);
-	if (sprite_type == SVA_FLAG)
-		return (wolf->textures.sva_flag);
-	if (sprite_type == ROCK_WALL)
-		return (wolf->textures.rock_wall);
-	if (sprite_type == HITLER)
-		return (wolf->textures.hitler);
-	if (sprite_type == RED_BRICKS)
-		return (wolf->textures.red_bricks);
-	if (sprite_type == SVA_EAGLE)
-		return (wolf->textures.sva_eagle);
-	return (wolf->textures.rock_wall);
+	if (textures.render_mode == COMPASS_MODE)
+		return (get_sprite_by_side(ray, textures, map));
+	texture_id = map.int_map[(int)ray->y][(int)ray->x];
+	if (textures.render_mode == WOLF3D && texture_id >= WOLF_SPRITES)
+		texture_id = 1;
+	if (textures.render_mode == MINECRAFT && texture_id >= MINE_SPRITES)
+		texture_id = 1;
+	return (textures.sprites[textures.texture_mode][texture_id]);
 }
 
-int			get_sprite_index(t_ray ray, int texture_size, t_wolf *wolf)
+int			get_sprite_x_index(t_ray ray, int texture_size)
 {
 	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
 		return((int)((double)texture_size * (fabs(ray.y - (int)ray.y))));
@@ -104,9 +99,8 @@ void		draw_column(t_ray ray, t_wolf *wolf, int win_x)
 	ray.distance *= cos(ray.angle - wolf->player.angle);
 	height = (int)((double)WIN_HEIGHT / ray.distance);
 	column_y = (WIN_HEIGHT - height) / 2;
-	sprite = get_column_sprite(&ray,
-		(const char **)wolf->map.map, wolf->render_mode, wolf);
-	sprite_index.x = get_sprite_index(ray, sprite.size, wolf);
+	sprite = get_column_sprite(&ray, wolf->map, wolf->textures);
+	sprite_index.x = get_sprite_x_index(ray, sprite.size);
 	while (win_y < height)
 	{
 		sdl_put_pixel((t_point) {win_x, column_y, 0, sprite.data

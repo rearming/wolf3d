@@ -33,7 +33,7 @@ set(main
 
 set(init
 		sources/init/init.c
-		)
+		sources/init/parse_params.c)
 
 set(debug
 		sources/debug/debug.c)
@@ -55,6 +55,9 @@ set(render
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
 		sources/render/game_logic_utils.c)
+
+set(game_logic
+		sources/game_logic/)
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
@@ -64,7 +67,7 @@ set(parsing
 		sources/parsing/map_parser.c
 		sources/parsing/fast_gnl.c
 		sources/parsing/texture_parser.c
-		)
+		sources/game_logic/parse_items.c sources/parsing/parsing_utils.c)
 
 add_executable(wolf3d
 

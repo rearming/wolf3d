@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 21:49:12 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 20:17:13 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,58 +42,6 @@ void		init_actions(t_actions *actions)
 	actions->mouse_left = FALSE;
 }
 
-
-int 		count_items(t_map map)
-{
-	int 		items_nbr;
-	int		 	y;
-	int		 	x;
-
-	y = 0;
-	items_nbr = 0;
-	while (y < map.height)
-	{
-		x = 0;
-		while (x < map.width)
-		{
-			if (map.map[y][x] == '9')
-				items_nbr++;
-			x++;
-		}
-		y++;
-	}
-	return (items_nbr);
-}
-
-t_point		*find_items(t_wolf *wolf)
-{
-	t_point		*items;
-	int		 	y;
-	int		 	x;
-	int 		i;
-
-	i = 0;
-	y = 0;
-	wolf->map.items_nbr = count_items(wolf->map);
-	if (!(items = (t_point*)malloc(sizeof(t_point) * wolf->map.items_nbr)))
-		raise_error(ERR_MALLOC);
-	while (y < wolf->map.height)
-	{
-		x = 0;
-		while (x < wolf->map.width)
-		{
-			if (wolf->map.map[y][x] == '9')
-			{
-				items[i] = (t_point){x, y, 0, PICKAXE};
-				i++;
-			}
-			x++;
-		}
-		y++;
-	}
-	return (items);
-}
-
 void		wolf_init(t_wolf *wolf)
 {
 	if (wolf->map.player_spawn.x == FALSE)
@@ -105,10 +53,15 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.ang_speed = 0.001;
 	wolf->player.base_speed = 0.003;
 	wolf->player.fat = 4;
-	wolf->minimap.scale.x = 10;
-	wolf->minimap.scale.y = 10;
-	wolf->render_mode = COMPASS_MODE;
-	wolf->render_mode = NUMBER_MODE;
+	wolf->minimap.scale.x = 200 / wolf->map.width;
+	wolf->minimap.scale.y = 200 / wolf->map.height;
+
+	//todo get this info from args
+	//wolf->textures.render_mode = COMPASS_MODE;
+	wolf->textures.render_mode = NUMBER_MODE;
+	//wolf->textures.texture_mode = MINECRAFT;
+	wolf->textures.texture_mode = WOLF3D;
+
 	wolf->textures.frame = 0;
 	wolf->player.weapon_type = PICKAXE;
 	init_actions(&wolf->actions);

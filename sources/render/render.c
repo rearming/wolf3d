@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 22:18:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:10:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.distance = 0;
 	while (21)
 	{
-		if (!cell_is_empty(wolf->map.map[(int)ray.y][(int)ray.x]))
+		if (!cell_is_empty(wolf->map.int_map[(int)ray.y][(int)ray.x]))
 			break ;
 		ray.x = wolf->player.x + ray.distance * delta_x;
 		ray.y = wolf->player.y + ray.distance * delta_y;
@@ -159,7 +159,7 @@ void		render(t_wolf *wolf)
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_weapon(wolf);
-	draw_item(wolf);
+	//draw_item(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);

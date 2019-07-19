@@ -6,16 +6,15 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/18 20:29:03 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 16:06:12 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int 		cell_is_empty(char cell)
+int 		cell_is_empty(int cell)
 {
-	if (cell != '0' && cell != PLAYER_POS && cell != ' '
-		&& cell != '7' && cell != '8' && cell != '9')
+	if (cell != 0 && cell != PLAYER_POS)
 		return (0);
 	return (1);
 }
@@ -37,19 +36,4 @@ void		get_rgb_from_int(int *r, int *g, int *b, int color)
 	*r = (color >> 16) & 0xFF;
 	*g = (color >> 8) & 0xFF;
 	*b = color & 0xFF;
-}
-
-int 		get_texture_type(int x, int y, const char **map)
-{
-	if (map[y][x] == '1')
-		return (ROCK_WALL);
-	if (map[y][x] == '2')
-		return (SVA_EAGLE);
-	if (map[y][x] == '3')
-		return (RED_BRICKS);
-	if (map[y][x] == '4')
-		return (SVA_FLAG);
-	if (map[y][x] == '6')
-		return (HITLER);
-	return (BLACK);
 }

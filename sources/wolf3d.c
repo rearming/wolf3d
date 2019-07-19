@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:42:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 16:51:27 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 15:26:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int 		main(int argc, char **argv)
 	if (argc < 2)
 		raise_error(ERR_INV_ARGS);
 	wolf.sdl = init_sdl();
-	wolf.map = get_map(argv[1]);
-	wolf_init(&wolf);
+	wolf.map = get_map(argv[1]); //todo do args check (if smth not exist -> exit(INVALID_ARGS))
 	wolf.textures = get_all_textures((const char **)argv, argc - 3);
+	wolf_init(&wolf);
 	render(&wolf);
 	sdl_loop(&wolf);
 	return (0);

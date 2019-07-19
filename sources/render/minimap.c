@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 17:37:09 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:08:32 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		draw_minimap_fov(t_wolf *wolf)
 			sdl_put_pixel((t_point)
 				{ray.x * wolf->minimap.scale.x,
 	 ray.y * wolf->minimap.scale.y, 0, M_TURQOISE}, wolf->sdl);
-			if (!cell_is_empty(wolf->map.map[(int)ray.y][(int)ray.x]))
+			if (!cell_is_empty(wolf->map.int_map[(int)ray.y][(int)ray.x]))
 				break;
 		}
 		angle += wolf->player.fov / base_ang;
@@ -51,17 +51,15 @@ void		draw_minimap(t_wolf *wolf)
 		map_xy.x = 0;
 		while (map_xy.x < wolf->map.width * wolf->minimap.scale.x)
 		{
-			if ((wolf->map.map[map_xy.y / wolf->minimap.scale.y]
+			if ((wolf->map.int_map[map_xy.y / wolf->minimap.scale.y]
 			[map_xy.x / wolf->minimap.scale.x]) == '9')
 				sdl_put_pixel((t_point) {map_xy.x, map_xy.y, 0, RED}, wolf->sdl);
-			else if (cell_is_empty(wolf->map.map[map_xy.y / wolf->minimap.scale.y]
+			else if (cell_is_empty(wolf->map.int_map[map_xy.y / wolf->minimap.scale.y]
 			[map_xy.x / wolf->minimap.scale.x]))
 				sdl_put_pixel((t_point) {map_xy.x, map_xy.y, 0, GREY}, wolf->sdl);
 			else
 				sdl_put_pixel((t_point)
-				{map_xy.x, map_xy.y, 0,
-			get_texture_type(map_xy.x / wolf->minimap.scale.x,map_xy.y / wolf->minimap.scale.y,
-					(const char **)wolf->map.map)}, wolf->sdl); //todo fix wall colors on minimap
+				{map_xy.x, map_xy.y, 0, BLUE}, wolf->sdl); //todo fix wall colors on minimap
 			map_xy.x++;
 		}
 		map_xy.y++;

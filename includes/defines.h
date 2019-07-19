@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 13:02:31 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 19:37:09 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@
 # define TRUE 1
 # define FALSE 0
 
-# define PLAYER_POS 53
+# define PLAYER_POS -1
+# define ITEM -2
 
 # define BMP_IMG 100
 # define STB_IMG 101
 
-# define SVA_FLAG 102
-# define ROCK_WALL 103
-# define HITLER 104
-# define RED_BRICKS 105
-# define SVA_EAGLE 106
+# define SVA_FLAG 5
+# define ROCK_WALL 1
+# define HITLER 96
+# define RED_BRICKS 72
+# define SVA_EAGLE 11
+# define WOOD 22
 
 # define VIEW_UP 501
 # define VIEW_DOWN 502
@@ -52,7 +54,17 @@
 # define MOVING 667
 # define IDLE 668
 
-# define NO_ITEM -1
+# define WOLF_SPRITES 110
+# define MINE_SPRITES 256
+
+# define WOLF3D 0
+# define MINECRAFT 1
+# define MINECRAFT_ART 2
+
+# define TILEMAPS 3
+# define MINE_PICTS 8
+
+# define START_OF_WEAPONS 5
 
 # define GUN 0
 # define KNIFE 1

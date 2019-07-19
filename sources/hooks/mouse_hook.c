@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 20:07:49 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 19:46:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void		break_block(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle));
 	block.y = (int)(wolf->player.y + wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle));
-	if (!cell_is_empty(wolf->map.map[block.y][block.x])
+	if (!cell_is_empty(wolf->map.int_map[block.y][block.x])
 		&& !is_border_block(wolf->map, block))
-		wolf->map.map[block.y][block.x] = '0';
+		wolf->map.int_map[block.y][block.x] = 0;
 }
 
 void		place_block(t_wolf *wolf)
@@ -33,13 +33,13 @@ void		place_block(t_wolf *wolf)
 	if (ray.distance > 4 || ray.distance < 2)
 		return ;
 	if (ray.direction == VIEW_RIGHT)
-		wolf->map.map[(int)ray.y][(int)ray.x - 1] = '1';
+		wolf->map.int_map[(int)ray.y][(int)ray.x - 1] = 1;
 	if (ray.direction == VIEW_LEFT)
-		wolf->map.map[(int)ray.y][(int)ray.x + 1] = '2';
+		wolf->map.int_map[(int)ray.y][(int)ray.x + 1] = 2;
 	if (ray.direction == VIEW_DOWN)
-		wolf->map.map[(int)ray.y - 1][(int)ray.x] = '3';
+		wolf->map.int_map[(int)ray.y - 1][(int)ray.x] = 3;
 	if (ray.direction == VIEW_UP)
-		wolf->map.map[(int)ray.y + 1][(int)ray.x] = '4';
+		wolf->map.int_map[(int)ray.y + 1][(int)ray.x] = 4;
 }
 
 void		mouse_actions(t_wolf *wolf)

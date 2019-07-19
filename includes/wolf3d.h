@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 20:26:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/19 19:42:56 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,25 @@ t_sdl		init_sdl(void);
 void		wolf_init(t_wolf *wolf);
 
 /*
+**	map parsing
+*/
+
+t_map		get_map(char *filename);
+char		**fast_gnl(int fd);
+int 		count_items(t_map map);
+t_point		*find_items(t_wolf *wolf);
+
+/*
+**	parsing utils
+*/
+
+void 		check_player_spot(t_map *map, t_point spot);
+void		check_cell(t_map *map, int x, int y);
+void		check_valid(t_map *map);
+int 		get_map_height(const char **char_map);
+void		convert_spaces(char **map);
+
+/*
 **	image parsing
 */
 
@@ -48,12 +67,6 @@ void		get_tilemap_data(t_img *img, const char *filename);
 
 t_textures	get_all_textures();
 
-/*
-**	map parsing
-*/
-
-t_map		get_map(char *filename);
-char		**fast_gnl(int fd);
 
 /*
 **	render
@@ -71,8 +84,7 @@ void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
-int 		get_texture_type(int x, int y, const char **map);
-int 		cell_is_empty(char cell);
+int 		cell_is_empty(int cell);
 int 		get_view_direction(t_ray ray);
 
 /*

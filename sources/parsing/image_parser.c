@@ -47,7 +47,7 @@ void		get_bmp_image(t_img *bmp, const char *filename)
 		i--;
 }
 
-void get_tilemap_data(t_img *img, const char *filename)
+void		get_tilemap_data(t_img *img, const char *filename)
 {
 	int 	filename_len;
 
