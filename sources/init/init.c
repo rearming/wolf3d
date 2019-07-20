@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 18:52:19 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:53:36 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.fov = M_PI / 2; // pi / 3 = 60 градусов, pi / 2 = 90
 	wolf->player.angle = 0;
 	wolf->player.ang_speed = 0.001;
-	wolf->player.base_speed = 0.003;
+	wolf->player.speed_fwd = 0.3;
+	wolf->player.speed_side = 0.15;
 	wolf->player.fat = 3;
 
 	wolf->minimap.fov_scale = 10;

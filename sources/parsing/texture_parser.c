@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 17:42:04 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 20:00:03 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ t_sprite		*get_minecraft_art(const char *filename)
 
 int 			get_player_head(const char **files, t_anim *head, int last_file)
 {
-	head->scale = 0.3;
+	head->scale = 0.2;
 	head->frames = 4;
 	head->frequency = 300;
 	return (get_animation(files, last_file, head, 190));
@@ -166,6 +166,6 @@ t_textures		get_all_textures(const char **files, int files_num)
 	textures.sprites[MINECRAFT] = get_all_sprites(files[3], 16, MINE_SPRITES);
 	textures.sprites[MINECRAFT_ART] = get_minecraft_art(files[4]);
 	last_file += get_all_weapons(files, textures.weapons);
-	last_file = get_player_head(files, &textures.head, last_file);
+	last_file += get_player_head(files, &textures.head, last_file);
 	return (textures);
 }

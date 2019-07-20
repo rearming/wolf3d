@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 18:45:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:20:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.x = wolf->player.x;
 	ray.y = wolf->player.y;
 	ray.distance = 0;
-	while (21)
+	while ((int)ray.y < wolf->map.height && (int)ray.x < wolf->map.width)
 	{
 		if (!cell_is_empty(wolf->map, (t_point){(int)ray.x, (int)ray.y}))
 			break ;
@@ -52,7 +52,7 @@ void		render_columns(t_wolf *wolf)
 	}
 }
 
-void		draw_floor_and_sky(t_sdl sdl, int floor_color) //todo make floor and
+void		draw_floor_and_sky(t_sdl sdl, int floor_color) //todo make floor and celling
 {
 	int		x;
 	int		y;
@@ -149,12 +149,14 @@ void 		draw_item(t_wolf *wolf)
 
 void		render(t_wolf *wolf)
 {
-	printf("tickrate: [%i]\n",wolf->tickrate);
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
+	printf("finished floor and sky!\n");
 	render_columns(wolf);
+	printf("finished columns!\n");
 	//draw_minimap(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
+	printf("finished minimap!\n");
 	draw_animated(&wolf->textures.w_frame, wolf->tickrate, wolf->sdl,
 			wolf->textures.weapons[(int) wolf->player.weapon_type]);
 	//draw_item(wolf);
@@ -162,4 +164,5 @@ void		render(t_wolf *wolf)
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
+	printf("render finished!\n");
 }

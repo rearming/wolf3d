@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/16 17:14:45 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:51:28 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void		player_moving(t_wolf *wolf)
 	player_run(wolf);
 }
 
-int 		get_delta_time(t_wolf *wolf)
+int 		get_tickrate(t_wolf *wolf)
 {
 	uint32_t		tick;
 
@@ -38,7 +38,9 @@ int 		get_delta_time(t_wolf *wolf)
 void		sdl_loop(t_wolf *wolf)
 {
 	SDL_Event		event;
+	double 			ticks;
 
+	ticks = 0;
 	while (21)
 	{
 		while (SDL_PollEvent(&event))
@@ -60,12 +62,13 @@ void		sdl_loop(t_wolf *wolf)
 		}
 		if (event.type == SDL_QUIT)
 			break ;
-		wolf->tickrate = get_delta_time(wolf);
-		wolf->player.speed_side = wolf->player.base_speed
-				* (wolf->tickrate < 150 ? wolf->tickrate : 150);
-		wolf->player.speed_fwd = wolf->player.base_speed
-				* (wolf->tickrate < 150 ? wolf->tickrate : 150) * 2;
-		player_moving(wolf);
+		wolf->tickrate = get_tickrate(wolf);
+		ticks += wolf->tickrate;
+		if (ticks >= POS_UPDATE)
+		{
+			player_moving(wolf);
+			ticks = 0;
+		}
 		mouse_actions(wolf);
 	}
 }

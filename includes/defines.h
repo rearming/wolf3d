@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 16:29:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:02:05 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@
 # define PICKAXE 3
 
 # define WEAPONS_NUM 4
+
+# define POS_UPDATE 50
 
 #endif

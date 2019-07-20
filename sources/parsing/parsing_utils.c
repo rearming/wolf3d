@@ -30,7 +30,8 @@ void		check_player_spot(t_map *map, t_point spot)
 		}
 		y++;
 	}
-	map->player_spawn = (t_point){x, y, 0, 0};
+	map->player_spawn = (t_point){x - 1, y - 1, 0, 0};
+	map->int_map[y - 1][x - 1] = 0;
 }
 
 void		check_cell(t_map *map, int x, int y)

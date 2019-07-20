@@ -20,7 +20,7 @@ int 		main(int argc, char **argv)
 	if (argc < 2)
 		raise_error(ERR_INV_ARGS);
 	wolf.sdl = init_sdl();
-	wolf.map = get_map(argv[1]); //todo do args check (if smth not exist -> exit(INVALID_ARGS))
+	wolf.map = get_map(argv[1]); //todo do args validation (for ex. if smth not exist -> exit(INVALID_ARGS))
 	wolf.textures = get_all_textures((const char **)argv, argc - 3);
 	wolf_init(&wolf);
 	render(&wolf);

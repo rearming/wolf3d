@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 18:47:59 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:18:40 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 
 	if (textures.render_mode == COMPASS_MODE)
 		return (get_sprite_by_side(ray, textures, map));
-	texture_id = map.int_map[(int)ray->y][(int)ray->x];
+	if ((int)ray->y < map.height && (int)ray->x < map.width)
+		texture_id = map.int_map[(int)ray->y][(int)ray->x];
 	if (textures.render_mode == WOLF3D && texture_id >= WOLF_SPRITES)
 		texture_id = 1;
 	if (textures.render_mode == MINECRAFT && texture_id >= MINE_SPRITES)
@@ -102,6 +103,8 @@ void		draw_column(t_ray ray, t_wolf *wolf, int win_x)
 	win_y = 0;
 	ray.distance *= cos(ray.angle - wolf->player.angle);
 	height = (int)((double)WIN_HEIGHT / ray.distance);
+	if (height > WIN_HEIGHT * 2)
+		height = WIN_HEIGHT * 2;
 	column_y = (WIN_HEIGHT - height) / 2;
 	sprite = get_column_sprite(&ray, wolf->map, wolf->textures);
 	sprite_index.x = get_sprite_x_index(ray, sprite.size);
