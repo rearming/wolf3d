@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:26:24 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/18 20:04:45 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:45:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		move_forward(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle));
 	block.y = (int)(wolf->player.y + wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle));
-	if (cell_is_empty(wolf->map.int_map[block.y][block.x]))
+	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y += wolf->player.speed_fwd
 						  * sin(wolf->player.angle);
@@ -37,7 +37,7 @@ void		move_back(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle));
 	block.y = (int)(wolf->player.y - wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle));
-	if (cell_is_empty(wolf->map.int_map[block.y][block.x]))
+	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y -= wolf->player.speed_fwd
 						  * sin(wolf->player.angle);
@@ -54,7 +54,7 @@ void		move_right(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle + M_PI / 2));
 	block.y = (int)(wolf->player.y + wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle + M_PI / 2));
-	if (cell_is_empty(wolf->map.int_map[block.y][block.x]))
+	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y += wolf->player.speed_side
 						  * sin(wolf->player.angle + M_PI / 2);
@@ -71,7 +71,7 @@ void		move_left(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle - M_PI / 2));
 	block.y = (int)(wolf->player.y + wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle - M_PI / 2));
-	if (cell_is_empty(wolf->map.int_map[block.y][block.x]))
+	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y += wolf->player.speed_side
 						  * sin(wolf->player.angle - M_PI / 2);

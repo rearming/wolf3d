@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 16:13:55 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:42:04 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ t_sprite		get_sprite(t_img img, int sprite_size, t_point sprite_pos)
 	sprite.data = (int**)malloc(sizeof(int*) * (sprite_size));
 	while (i < sprite_pos.y + sprite_size)
 	{
-		j = sprite_pos.x + sprite_size - 1;
+		j = sprite_pos.x;
 		sprite.width = 0;
 		sprite.data[sprite.height] = (int*)malloc(sizeof(int) * (sprite_size));
-		while (j >= sprite_pos.x)
+		while (j < sprite_pos.x + sprite_size)
 		{
 			sprite.data[sprite.height][sprite.width] =
 					get_color_from_tilemap(img, j, i);
-			j--;
+			j++;
 			sprite.width++;
 		}
 		sprite.height++;
@@ -53,8 +53,8 @@ t_sprite		get_sprite(t_img img, int sprite_size, t_point sprite_pos)
 	return (sprite);
 }
 
-int				get_weapon(const char **files, int start,
-			   t_weapon *weapon, int size)
+int				get_animation(const char **files, int start,
+								 t_anim *weapon, int size)
 {
 	t_img			img;
 	int				i;
@@ -73,24 +73,25 @@ int				get_weapon(const char **files, int start,
 	return (weapon->frames);
 }
 
-void			get_all_weapons(const char **files, t_weapon *weapons)
+int				get_all_weapons(const char **files, t_anim *weapons)
 {
-	int		file_num;
+	int		last_file;
 
-	file_num = START_OF_WEAPONS;
-	weapons[0] = (t_weapon){GUN, 0,
+	last_file = START_OF_WEAPONS;
+	weapons[0] = (t_anim){GUN, 0,
 				(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 90, 2};
-	weapons[1] = (t_weapon){KNIFE, 0,
+	weapons[1] = (t_anim){KNIFE, 0,
 				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 100, 4};
-	weapons[2] = (t_weapon){DAKKA, 0,
+	weapons[2] = (t_anim){DAKKA, 0,
 				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 70, 4};
-	weapons[3] = (t_weapon){PICKAXE, 0,
+	weapons[3] = (t_anim){PICKAXE, 0,
 				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 1, 70, 4};
-	file_num += get_weapon(files, file_num, &weapons[0], 256);
-	file_num += get_weapon(files, file_num, &weapons[1], 192);
-	file_num += get_weapon(files, file_num, &weapons[2], 192);
-	printf("filenum: [%i], name: [%s]\n", file_num, files[file_num]);
-	file_num += get_weapon(files, file_num, &weapons[3], 200);
+	last_file += get_animation(files, last_file, &weapons[0], 256);
+	last_file += get_animation(files, last_file, &weapons[1], 192);
+	last_file += get_animation(files, last_file, &weapons[2], 192);
+	printf("filenum: [%i], name: [%s]\n", last_file, files[last_file]);
+	last_file += get_animation(files, last_file, &weapons[3], 200);
+	return (last_file);
 }
 
 t_sprite		*get_all_sprites(const char *filename,
@@ -128,7 +129,7 @@ t_sprite		*get_minecraft_art(const char *filename)
 	t_img		img;
 	t_sprite	*pictures;
 
-	if (!(pictures = (t_sprite*)malloc(sizeof(t_sprite) * MINE_PICTS)))
+	if (!(pictures = (t_sprite*)malloc(sizeof(t_sprite) * 8)))
 		raise_error(ERR_MALLOC);
 	get_tilemap_data(&img, filename);
 	pictures[0] = get_sprite(img, 32, (t_point){0, 128});
@@ -144,16 +145,27 @@ t_sprite		*get_minecraft_art(const char *filename)
 	return (pictures);
 }
 
+int 			get_player_head(const char **files, t_anim *head, int last_file)
+{
+	head->scale = 0.3;
+	head->frames = 4;
+	head->frequency = 300;
+	return (get_animation(files, last_file, head, 190));
+}
+
 t_textures		get_all_textures(const char **files, int files_num)
 {
 	t_textures		textures;
 	t_img			img;
+	int 			last_file;
 
+	last_file = 0;
 	if (!(textures.sprites = (t_sprite**)malloc(sizeof(t_sprite*) * TILEMAPS)))
 		raise_error(ERR_MALLOC);
 	textures.sprites[WOLF3D] = get_all_sprites(files[2], 64, WOLF_SPRITES);
 	textures.sprites[MINECRAFT] = get_all_sprites(files[3], 16, MINE_SPRITES);
 	textures.sprites[MINECRAFT_ART] = get_minecraft_art(files[4]);
-	get_all_weapons(files, textures.weapons);
+	last_file += get_all_weapons(files, textures.weapons);
+	last_file = get_player_head(files, &textures.head, last_file);
 	return (textures);
 }

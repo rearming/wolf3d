@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 20:17:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:52:19 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,13 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.angle = 0;
 	wolf->player.ang_speed = 0.001;
 	wolf->player.base_speed = 0.003;
-	wolf->player.fat = 4;
-	wolf->minimap.scale.x = 200 / wolf->map.width;
-	wolf->minimap.scale.y = 200 / wolf->map.height;
+	wolf->player.fat = 3;
+
+	wolf->minimap.fov_scale = 10;
+	wolf->minimap.scale.x = 300;
+	wolf->minimap.scale.y = 300;
+	wolf->minimap.size.x = 30;
+	wolf->minimap.size.y = 30;
 
 	//todo get this info from args
 	//wolf->textures.render_mode = COMPASS_MODE;
@@ -62,7 +66,8 @@ void		wolf_init(t_wolf *wolf)
 	//wolf->textures.texture_mode = MINECRAFT;
 	wolf->textures.texture_mode = WOLF3D;
 
-	wolf->textures.frame = 0;
+	wolf->textures.frame = 1;
+	wolf->textures.w_frame = 0;
 	wolf->player.weapon_type = PICKAXE;
 	init_actions(&wolf->actions);
 	wolf->no_mouse = TRUE;

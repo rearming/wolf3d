@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 19:42:56 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:58:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void		get_tilemap_data(t_img *img, const char *filename);
 
 t_textures	get_all_textures();
 
-
 /*
 **	render
 */
@@ -75,6 +74,10 @@ t_textures	get_all_textures();
 void		render(t_wolf *wolf);
 t_ray		raycast(t_wolf *wolf, double angle);
 void		draw_column(t_ray ray, t_wolf *wolf, int win_x);
+void		scaled_draw(t_sdl sdl, t_sprite sprite,
+					double scale, t_point print_coord);
+void		draw_animated(double *frame, int tickrate,
+						  t_sdl sdl, t_anim anim_sprite);
 
 /*
 **	render utils
@@ -84,7 +87,7 @@ void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
-int 		cell_is_empty(int cell);
+int cell_is_empty(t_map map, t_point pos);
 int 		get_view_direction(t_ray ray);
 
 /*
@@ -99,6 +102,8 @@ int 		is_border_block(t_map map, t_point block);
 
 void		draw_minimap(t_wolf *wolf);
 void		draw_minimap_fov(t_wolf *wolf);
+void		new_draw_minimap(t_wolf *wolf);
+
 /*
 **	SDL utils
 */

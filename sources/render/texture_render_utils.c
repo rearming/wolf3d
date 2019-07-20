@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 20:20:30 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:47:59 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 {
 	if (ray->direction == VIEW_RIGHT)
 	{
-		if (!cell_is_empty(map.int_map[(int)(ray->y)][(int)(ray->x - 0.1)]))
+		if (!cell_is_empty(map, (t_point){(int)(ray->y), (int)(ray->x - 0.1)}))
 		{
 			if (sin(ray->angle) < 0)
 				return (textures.sprites[textures.texture_mode][SVA_FLAG]);
@@ -25,7 +25,7 @@ t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 		}
 		return (textures.sprites[textures.texture_mode][RED_BRICKS]);
 	}
-	if (!cell_is_empty(map.int_map[(int)(ray->y)][(int)(ray->x + 0.1)]))
+	if (!cell_is_empty(map, (t_point){(int)(ray->y), (int)(ray->x + 0.1)}))
 	{
 		if (sin(ray->angle) < 0)
 			return (textures.sprites[textures.texture_mode][SVA_FLAG]);
@@ -59,14 +59,18 @@ t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 		texture_id = 1;
 	if (textures.render_mode == MINECRAFT && texture_id >= MINE_SPRITES)
 		texture_id = 1;
-	return (textures.sprites[textures.texture_mode][texture_id]);
+	return (textures.sprites[textures.texture_mode][texture_id > 0 ? texture_id : 1]);
 }
 
 int			get_sprite_x_index(t_ray ray, int texture_size)
 {
-	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
-		return((int)((double)texture_size * (fabs(ray.y - (int)ray.y))));
-	return ((int)((double)texture_size * (fabs(ray.x - (int)ray.x))));
+	if (ray.direction == VIEW_RIGHT)
+		return((int)(texture_size * (fabs((int)ray.y - ray.y))));
+	if (ray.direction == VIEW_LEFT)
+		return((int)(texture_size - (texture_size * (ray.y - (int)ray.y))));
+	if (ray.direction == VIEW_DOWN)
+		return ((int)(texture_size - (texture_size * (ray.x - (int)ray.x))));
+	return ((int)(texture_size * (fabs((int)ray.x - ray.x))));
 }
 
 int 		get_view_direction(t_ray ray)

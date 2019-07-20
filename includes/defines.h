@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 19:37:09 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:29:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@
 # define MINECRAFT_ART 2
 
 # define TILEMAPS 3
-# define MINE_PICTS 8
 
 # define START_OF_WEAPONS 5
 

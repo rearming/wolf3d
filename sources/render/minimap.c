@@ -6,62 +6,98 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 17:08:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:54:08 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		draw_minimap_fov(t_wolf *wolf)
+static int		is_outside_map(t_ray ray, t_wolf *wolf)
 {
-	t_ray		ray;
-	double 		angle;
-	int 		fov;
-	int 		base_ang;
+	return (!(((wolf->minimap.scale.x / 2) + (ray.x * wolf->minimap.fov_scale
+	- wolf->player.x * wolf->minimap.fov_scale) < wolf->minimap.scale.x)
+			&& (((wolf->minimap.scale.y / 2) + (ray.y * wolf->minimap.fov_scale
+			- wolf->player.y * wolf->minimap.fov_scale)
+			< wolf->minimap.scale.y))));
+}
+
+static t_point	set_head_position(t_wolf *wolf)
+{
+	return ((t_point){wolf->minimap.scale.x / 2 -
+	wolf->textures.head.sprite->size * (wolf->textures.head.scale / 2),
+	wolf->minimap.scale.y / 2 - wolf->textures.head.sprite->size
+	* (wolf->textures.head.scale / 2)});
+}
+
+static t_point	scale_fov_drawing(t_ray ray, t_wolf *wolf)
+{
+	return ((t_point){(wolf->minimap.scale.x / 2) +
+	(ray.x * wolf->minimap.fov_scale -
+	wolf->player.x * wolf->minimap.fov_scale),
+				(wolf->minimap.scale.y / 2) +
+				(ray.y * wolf->minimap.fov_scale
+				- wolf->player.y * wolf->minimap.fov_scale), 0, M_TURQOISE});
+}
+
+static void		raycast_draw(t_wolf *wolf, t_dpoint delta)
+{
+	t_ray	ray;
+
+	ray.distance = 0;
+	while (21)
+	{
+		ray.x = wolf->player.x + ray.distance * delta.x;
+		ray.y = wolf->player.y + ray.distance * delta.y;
+		ray.distance += 0.05;
+		if (!is_outside_map(ray, wolf))
+			sdl_put_pixel(scale_fov_drawing(ray, wolf), wolf->sdl);
+		if (!cell_is_empty(wolf->map, (t_point){(int)ray.x, (int)ray.y}))
+			break ;
+	}
+}
+
+void			draw_minimap_fov(t_wolf *wolf)
+{
+	double		angle;
+	int			fov;
+	int			base_ang;
 
 	angle = wolf->player.angle - wolf->player.fov / 2;
 	fov = 180 / M_PI * wolf->player.fov;
 	base_ang = fov;
 	while (fov)
 	{
-		ray.distance = 0;
-		while (21)
-		{
-			ray.x = wolf->player.x + ray.distance * cos(angle);
-			ray.y = wolf->player.y + ray.distance * sin(angle);
-			ray.distance += 0.05;
-			sdl_put_pixel((t_point)
-				{ray.x * wolf->minimap.scale.x,
-	 ray.y * wolf->minimap.scale.y, 0, M_TURQOISE}, wolf->sdl);
-			if (!cell_is_empty(wolf->map.int_map[(int)ray.y][(int)ray.x]))
-				break;
-		}
+		raycast_draw(wolf, (t_dpoint){cos(angle), sin(angle)});
 		angle += wolf->player.fov / base_ang;
 		fov--;
 	}
+	wolf->textures.frame = wolf->textures.frame == 0 ? 1 : wolf->textures.frame;
+	wolf->textures.head.placement = set_head_position(wolf);
+	draw_animated(&wolf->textures.frame, wolf->tickrate,
+			wolf->sdl, wolf->textures.head);
 }
 
-void		draw_minimap(t_wolf *wolf)
+void			draw_minimap(t_wolf *wolf)
 {
-	t_point		map_xy;
+	t_point		iter;
+	t_dpoint	map;
 
-	map_xy.y = 0;
-	while (map_xy.y < wolf->map.height * wolf->minimap.scale.y)
+	iter.y = 0;
+	map.y = wolf->player.y - (double)wolf->minimap.size.y / 2;
+	while (iter.y < wolf->minimap.scale.y)
 	{
-		map_xy.x = 0;
-		while (map_xy.x < wolf->map.width * wolf->minimap.scale.x)
+		iter.x = 0;
+		map.x = wolf->player.x - (double)wolf->minimap.size.x / 2;
+		while (iter.x < wolf->minimap.scale.x)
 		{
-			if ((wolf->map.int_map[map_xy.y / wolf->minimap.scale.y]
-			[map_xy.x / wolf->minimap.scale.x]) == '9')
-				sdl_put_pixel((t_point) {map_xy.x, map_xy.y, 0, RED}, wolf->sdl);
-			else if (cell_is_empty(wolf->map.int_map[map_xy.y / wolf->minimap.scale.y]
-			[map_xy.x / wolf->minimap.scale.x]))
-				sdl_put_pixel((t_point) {map_xy.x, map_xy.y, 0, GREY}, wolf->sdl);
-			else
-				sdl_put_pixel((t_point)
-				{map_xy.x, map_xy.y, 0, BLUE}, wolf->sdl); //todo fix wall colors on minimap
-			map_xy.x++;
+			if (cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
+				sdl_put_pixel((t_point){iter.x, iter.y, 0, GREY}, wolf->sdl);
+			if (!cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
+				sdl_put_pixel((t_point){iter.x, iter.y, 0, BLACK}, wolf->sdl);
+			iter.x++;
+			map.x += (double)wolf->minimap.size.x / wolf->minimap.scale.x;
 		}
-		map_xy.y++;
+		iter.y++;
+		map.y += (double)wolf->minimap.size.y / wolf->minimap.scale.y;
 	}
 }

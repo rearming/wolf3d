@@ -57,7 +57,7 @@ set(render
 		sources/render/game_logic_utils.c)
 
 set(game_logic
-		sources/game_logic/)
+		sources/game_logic/parse_items.c)
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
@@ -67,7 +67,7 @@ set(parsing
 		sources/parsing/map_parser.c
 		sources/parsing/fast_gnl.c
 		sources/parsing/texture_parser.c
-		sources/game_logic/parse_items.c sources/parsing/parsing_utils.c)
+		sources/parsing/parsing_utils.c)
 
 add_executable(wolf3d
 
@@ -79,6 +79,7 @@ add_executable(wolf3d
 		${hooks}
 		${parsing}
 		${debug}
+		${game_logic}
         )
 
 target_link_libraries(wolf3d

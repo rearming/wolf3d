@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/19 20:47:36 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 12:41:11 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void		get_int_map(t_map *map)
 {
 	int 	x;
 	int 	y;
+	int 	is_ended;
 
+	is_ended = FALSE;
 	split_map(map);
 	y = 0;
 	if (!(map->int_map = (int**)malloc(sizeof(int*) * map->height)))
@@ -49,12 +51,16 @@ void		get_int_map(t_map *map)
 			raise_error(ERR_MALLOC);
 		while (x < map->width)
 		{
-			if (map->raw_map[y][x])
+			if (map->raw_map[y][x] && !is_ended)
 				map->int_map[y][x] = ft_atoi(map->raw_map[y][x]);
 			else
-				map->int_map[y][x] = 1;
+			{
+				is_ended = TRUE;
+				map->int_map[y][x] = 0;
+			}
 			x++;
 		}
+		is_ended = FALSE;
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 19:46:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:50:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		break_block(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle));
 	block.y = (int)(wolf->player.y + wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle));
-	if (!cell_is_empty(wolf->map.int_map[block.y][block.x])
+	if (!cell_is_empty(wolf->map, block)
 		&& !is_border_block(wolf->map, block))
 		wolf->map.int_map[block.y][block.x] = 0;
 }
@@ -45,13 +45,13 @@ void		place_block(t_wolf *wolf)
 void		mouse_actions(t_wolf *wolf)
 {
 	if (wolf->actions.mouse_left
-		&& (wolf->textures.frame > 4 || wolf->textures.frame == 0)
+		&& (wolf->textures.w_frame > 4 || wolf->textures.w_frame == 0)
 		&& wolf->player.weapon_type != PICKAXE)
-			wolf->textures.frame = 1;
+			wolf->textures.w_frame = 1;
 	if (wolf->actions.mouse_left && wolf->player.weapon_type == PICKAXE)
 		break_block(wolf);
 	if (wolf->actions.mouse_left == FALSE && wolf->player.weapon_type == DAKKA)
-		wolf->textures.frame = 0;
+		wolf->textures.w_frame = 0;
 }
 
 void		mouse_up_hook(t_wolf *wolf, SDL_Event event)

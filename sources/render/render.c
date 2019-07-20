@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 17:10:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:45:36 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.distance = 0;
 	while (21)
 	{
-		if (!cell_is_empty(wolf->map.int_map[(int)ray.y][(int)ray.x]))
+		if (!cell_is_empty(wolf->map, (t_point){(int)ray.x, (int)ray.y}))
 			break ;
 		ray.x = wolf->player.x + ray.distance * delta_x;
 		ray.y = wolf->player.y + ray.distance * delta_y;
@@ -35,7 +35,6 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.direction = get_view_direction(ray);
 	return (ray);
 }
-
 
 void		render_columns(t_wolf *wolf)
 {
@@ -105,20 +104,17 @@ void		scaled_draw(t_sdl sdl, t_sprite sprite,
 	}
 }
 
-void		draw_weapon(t_wolf *wolf)
+void		draw_animated(double *frame, int tickrate,
+						  t_sdl sdl, t_anim anim_sprite)
 {
-	if (wolf->textures.frame)
+	if (*frame)
 	{
-		wolf->textures.frame += (double)wolf->tickrate
-				/ wolf->textures.weapons[wolf->player.weapon_type].frequency;
-		if (wolf->textures.frame >=
-			wolf->textures.weapons[wolf->player.weapon_type].frames)
-			wolf->textures.frame = FALSE;
+		*frame += (double)tickrate / anim_sprite.frequency;
+		if (*frame >= anim_sprite.frames)
+			*frame = FALSE;
 	}
-	scaled_draw(wolf->sdl, wolf->textures.
-	weapons[wolf->player.weapon_type].sprite[(int)wolf->textures.frame],
-				wolf->textures.weapons[wolf->player.weapon_type].scale,
-				wolf->textures.weapons[wolf->player.weapon_type].placement);
+	scaled_draw(sdl, anim_sprite.sprite[(int)*frame], anim_sprite.scale,
+			anim_sprite.placement);
 }
 
 
@@ -148,17 +144,19 @@ void 		draw_item(t_wolf *wolf)
 		printf("item: [%f]\n", atan_item);
 	//	printf("player: [%f]\n", new_angle);
 	}
-
 	//printf("item's x: [%i] | y: [%i]\n", item.x, item.y);
 }
 
 void		render(t_wolf *wolf)
 {
+	printf("tickrate: [%i]\n",wolf->tickrate);
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
+	//draw_minimap(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
-	draw_weapon(wolf);
+	draw_animated(&wolf->textures.w_frame, wolf->tickrate, wolf->sdl,
+			wolf->textures.weapons[(int) wolf->player.weapon_type]);
 	//draw_item(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));

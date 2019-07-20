@@ -6,12 +6,18 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 19:54:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:08:21 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
+typedef	struct			s_dpoint
+{
+	double 				x;
+	double 				y;
+}						t_dpoint;
 
 typedef struct			s_point
 {
@@ -63,7 +69,9 @@ typedef struct			s_actions
 
 typedef struct			s_minimap
 {
+	double				fov_scale;
 	t_point				scale;
+	t_point				size;
 }						t_minimap;
 
 typedef	struct			s_sprite
@@ -75,7 +83,7 @@ typedef	struct			s_sprite
 	int 				bpp;
 }						t_sprite;
 
-typedef struct			s_weapon
+typedef struct			s_anim
 {
 	int 				type;
 	t_sprite			*sprite;
@@ -83,17 +91,19 @@ typedef struct			s_weapon
 	int 				frames;
 	int 				frequency;
 	double				scale;
-}						t_weapon;
+}						t_anim;
 
 typedef	struct 			s_textures
 {
 	//110 (без оранжевой штуки внизу) тайлов в вульфе
 	//256 (c фиолетовой хренью) тайлов в майнкрафте
 	t_sprite**			sprites;
-	int 				texture_mode;
-	int 				render_mode;
-	t_weapon			weapons[WEAPONS_NUM];
-	double 				frame;
+	int					texture_mode;
+	int					render_mode;
+	t_anim				weapons[WEAPONS_NUM];
+	t_anim				head;
+	double				w_frame;
+	double				frame;
 }						t_textures;
 
 typedef struct			s_map
@@ -129,8 +139,6 @@ typedef struct			s_wolf
 	t_minimap			minimap;
 	t_sdl				sdl;
 	t_textures			textures;
-	int 				render_mode;
-	int 				texture_mode;
 	int 				tickrate;
 	int 				no_mouse;
 	t_map				map;

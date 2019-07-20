@@ -6,16 +6,19 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/19 16:06:12 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:45:26 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int 		cell_is_empty(int cell)
+int			cell_is_empty(t_map map, t_point pos)
 {
-	if (cell != 0 && cell != PLAYER_POS)
-		return (0);
+	if (pos.x >= map.width || pos.x < 0 || pos.y >= map.height || pos.y < 0)
+		return (1);
+	if (map.int_map[pos.y][pos.x] != 0
+		&& map.int_map[pos.y][pos.x] != PLAYER_POS)
+			return (0);
 	return (1);
 }
 
