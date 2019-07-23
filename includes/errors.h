@@ -6,13 +6,15 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 19:11:02 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:19:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
 
+# define ERR_INV_CONFIG_SIZE 100
+# define ERR_INV_IMAGE 101
 # define ERR_NO_PLAYER_SPOT 102
 # define ERR_INV_MAP_SYMBOL 103
 # define ERR_INV_FILE 104

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 16:58:48 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:47:34 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <SDL.h>
-
+# include <sDL_TTf
 # include "defines.h"
 # include "sdb_image.h"
 # include "libft.h"
@@ -33,6 +33,12 @@
 
 t_sdl		init_sdl(void);
 void		wolf_init(t_wolf *wolf);
+
+/*
+**	params parsing
+*/
+
+char **parse_params(char **argv, int argc);
 
 /*
 **	map parsing
@@ -65,7 +71,7 @@ void		get_tilemap_data(t_img *img, const char *filename);
 **	textures parsing
 */
 
-t_textures	get_all_textures();
+t_textures get_all_textures(const char **files);
 
 /*
 **	render
@@ -87,7 +93,7 @@ void		sdl_put_pixel(t_point point, t_sdl sdl);
 void		bresen_line(t_wolf *wolf, t_point start, t_point end);
 int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(int *r, int *g, int *b, int color);
-int cell_is_empty(t_map map, t_point pos);
+int			cell_is_empty(t_map map, t_point pos);
 int 		get_view_direction(t_ray ray);
 
 /*
@@ -102,7 +108,6 @@ int 		is_border_block(t_map map, t_point block);
 
 void		draw_minimap(t_wolf *wolf);
 void		draw_minimap_fov(t_wolf *wolf);
-void		new_draw_minimap(t_wolf *wolf);
 
 /*
 **	SDL utils
@@ -132,6 +137,14 @@ void		move_back(t_wolf *wolf);
 void		move_right(t_wolf *wolf);
 void		move_left(t_wolf *wolf);
 void		player_run(t_wolf *wolf);
+
+/*
+**	player's actions
+*/
+
+void		break_block(t_wolf *wolf);
+void		place_block(t_wolf *wolf);
+void		change_angle(double *angle, double value);
 
 /*
 **	utils

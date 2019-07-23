@@ -6,41 +6,11 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/21 10:37:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:47:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void		break_block(t_wolf *wolf)
-{
-	t_point		block;
-
-	block.x = (int)(wolf->player.x + wolf->player.speed_side
-			* wolf->player.fat * cos(wolf->player.angle));
-	block.y = (int)(wolf->player.y + wolf->player.speed_side
-			* wolf->player.fat * sin(wolf->player.angle));
-	if (!cell_is_empty(wolf->map, block)
-		&& !is_border_block(wolf->map, block))
-		wolf->map.int_map[block.y][block.x] = 0;
-}
-
-void		place_block(t_wolf *wolf)
-{
-	t_ray		ray;
-
-	ray = raycast(wolf, wolf->player.angle);
-	if (ray.distance > 4 || ray.distance < 2)
-		return ;
-	if (ray.direction == VIEW_RIGHT)
-		wolf->map.int_map[(int)ray.y][(int)ray.x - 1] = 1;
-	if (ray.direction == VIEW_LEFT)
-		wolf->map.int_map[(int)ray.y][(int)ray.x + 1] = 2;
-	if (ray.direction == VIEW_DOWN)
-		wolf->map.int_map[(int)ray.y - 1][(int)ray.x] = 3;
-	if (ray.direction == VIEW_UP)
-		wolf->map.int_map[(int)ray.y + 1][(int)ray.x] = 4;
-}
 
 void		mouse_actions(t_wolf *wolf)
 {
@@ -76,7 +46,7 @@ void		mouse_down_hook(t_wolf *wolf, SDL_Event event)
 
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event event)
 {
-	wolf->player.angle += (double)event.motion.xrel * wolf->player.ang_speed;
+	change_angle(&wolf->player.angle, event.motion.xrel * wolf->player.ang_speed);
 	if (wolf->no_mouse)
 	{
 		SDL_SetRelativeMouseMode(SDL_TRUE);

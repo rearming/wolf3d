@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 18:59:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/21 10:37:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:19:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void		get_bmp_image(t_img *bmp, const char *filename)
 	int 			offset;
 	FILE			*file;
 
-	file = fopen(filename, "rb");
+	if (!(file = fopen(filename, "rb")))
+		raise_error(ERR_INV_IMAGE);
 	offset = get_bmp_title(bmp, file);
 	bmp->data = (unsigned char *)malloc(bmp->file_size);
 	i = 0;
@@ -55,7 +56,7 @@ void		get_tilemap_data(t_img *img, const char *filename)
 	filename_len = ft_strlen(filename);
 	if (filename_len > 3 && ft_strequ(&filename[filename_len - 4], ".bmp"))
 		get_bmp_image(img, filename);
-	else
-		img->data =
-				stbi_load(filename, &img->width, &img->height, &img->bpp, 0);
+	if (!(img->data =
+				stbi_load(filename, &img->width, &img->height, &img->bpp, 0)))
+		raise_error(ERR_INV_IMAGE);
 }

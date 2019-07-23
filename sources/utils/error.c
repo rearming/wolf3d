@@ -6,18 +6,29 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:16:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/21 10:37:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/23 18:36:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
+static void	raise_error2(int err_code)
+{
+	if (err_code == ERR_BIG_MAP)
+		ft_printf("Map is too big - size of valid maps can't be more than"
+				  " %i x %i chars.\n", MAX_MAP_SIZE, MAX_MAP_SIZE);
+	if (err_code == ERR_INV_IMAGE)
+		ft_printf("Image or texture file is invalid for some reason!\n");
+	if (err_code == ERR_INV_CONFIG_SIZE)
+		ft_printf("Invalid config file, expected %i strings\n", CONFIG_SIZE);
+}
+
 void 		raise_error(int err_code)
 {
 	ft_printf("\nError!\n");
 	if (err_code == ERR_INV_ARGS)
-		ft_printf("Expected two args: 1 for map (text file)"
-			" and second for tilemap!\n");
+		ft_printf("Expected two args: first for map (text file)"
+			" and second for \"wolf_config.wolf\" file\n");
 	if (err_code == ERR_NO_PLAYER_SPOT)
 		ft_printf("Player's spawn point ('5') must exist"
 			" and be inside the map, surrounded by empty cells!\n");
@@ -35,8 +46,6 @@ void 		raise_error(int err_code)
 		ft_printf("SDL_Create_Renderer failed.\n");
 	if (err_code == ERR_SDL_TEXTURE_CREATE)
 		ft_printf("SDL_Create_Texture failed.\n");
-	if (err_code == ERR_BIG_MAP)
-		ft_printf("Map is too big - size of valid maps can't be more than"
-			" %i x %i chars.\n", MAX_MAP_SIZE, MAX_MAP_SIZE);
+	raise_error2(err_code);
 	exit(err_code);
 }

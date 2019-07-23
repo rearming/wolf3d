@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 19:48:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:08:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct			s_actions
 	char 				down;
 	char 				right;
 	char 				left;
+	char 				arr_left;
+	char 				arr_right;
 	char 				lshift;
 	char 				lshift_was_pressed;
 	char 				mouse_left;

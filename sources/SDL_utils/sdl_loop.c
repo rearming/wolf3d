@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/21 10:41:17 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/23 19:46:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void		player_moving(t_wolf *wolf)
 		move_right(wolf);
 	if (wolf->actions.left)
 		move_left(wolf);
+	if (wolf->actions.arr_left)
+		change_angle(&wolf->player.angle, -0.05);
+	if (wolf->actions.arr_right)
+		change_angle(&wolf->player.angle, 0.05);
 	player_run(wolf);
 }
 

@@ -61,7 +61,7 @@ set(game_logic
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
-		sources/hooks/player_moves.c)
+		sources/hooks/player_moves.c sources/hooks/player_actions.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c

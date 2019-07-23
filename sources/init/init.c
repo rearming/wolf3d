@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/21 10:37:34 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:33:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void		init_actions(t_actions *actions)
 	actions->up = FALSE;
 	actions->left = FALSE;
 	actions->right = FALSE;
+	actions->arr_right = FALSE;
+	actions->arr_left = FALSE;
 	actions->lshift = FALSE;
 	actions->lshift_was_pressed = FALSE;
 	actions->mouse_right = FALSE;
@@ -69,7 +71,7 @@ void		wolf_init(t_wolf *wolf)
 
 	wolf->textures.frame = 1;
 	wolf->textures.w_frame = 0;
-	wolf->player.weapon_type = PICKAXE;
+	wolf->player.weapon_type = GUN;
 	init_actions(&wolf->actions);
 	wolf->no_mouse = TRUE;
 	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int)

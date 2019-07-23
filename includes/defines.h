@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/20 17:02:05 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/23 17:05:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define MOVING 667
 # define IDLE 668
 
-# define WOLF_SPRITES 110
+# define WOLF_SPRITES 114
 # define MINE_SPRITES 256
 
 # define WOLF3D 0
@@ -63,7 +63,7 @@
 
 # define TILEMAPS 3
 
-# define START_OF_WEAPONS 5
+# define CONFIG_SIZE 29
 
 # define GUN 0
 # define KNIFE 1
