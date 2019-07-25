@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 16:08:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:28:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,16 @@ typedef struct			s_sdl
 	SDL_Window			*win;
 	SDL_Renderer		*rend;
 	SDL_Texture			*texture;
+	SDL_Texture			*text;
+	int					*text_pixels;
 	int					*pixels;
 }						t_sdl;
+
+typedef	struct			s_ttf
+{
+	TTF_Font			*font;
+	SDL_Surface			*surface;
+}						t_ttf;
 
 typedef	struct			s_ray
 {
@@ -134,25 +142,33 @@ typedef struct			s_player
 	int 				weapon_type;
 }						t_player;
 
+typedef struct			s_erm
+{
+	t_point				pos;
+	double				scale;
+	int 				text_color;
+	int 				line_color;
+	char 				prepare;
+	char				opened;
+	char				buff[TERM_CMD_SIZE];
+	char				prev_cmd[TERM_MEM_SIZE][TERM_CMD_SIZE];
+	int					i;
+	int					cmd_i;
+}						t_erm;
+
 typedef struct			s_wolf
 {
 	t_player			player;
 	t_actions			actions;
 	t_minimap			minimap;
 	t_sdl				sdl;
+	t_ttf				ttf;
 	t_textures			textures;
 	int 				tickrate;
 	int 				no_mouse;
 	t_map				map;
+	t_erm				term;
 }						t_wolf;
-
-typedef struct			s_color
-{
-	int 				r;
-	int 				g;
-	int 				b;
-	int 				a;
-}						t_color;
 
 typedef struct			s_line
 {
@@ -164,24 +180,6 @@ typedef struct			s_line
 	int					error;
 	int					ystep;
 }						t_line;
-
-typedef struct			s_command
-{
-	int					status;
-	int					action;
-	int					frac_type;
-	int					jump_area;
-}						t_command;
-
-typedef struct			s_erm
-{
-	char				buff[100];
-	char				prev_cmd[10][100];
-	int					i;
-	int					cmd_i;
-	t_command			cmd;
-}						t_erm;
-
 
 # define WOLF_BUFF_SIZE 2000000
 

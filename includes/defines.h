@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 17:05:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:00:07 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 #  define WIN_WIDTH 1980
 #  define WIN_HEIGHT 1020
 
-# define SCALE_WIDTH 1.328
-# define SCALE_HEIGHT 1.274
+#  define SCALE_WIDTH 1.328
+#  define SCALE_HEIGHT 1.274
 
 # else
 #  define WIN_WIDTH 1980
@@ -63,7 +63,7 @@
 
 # define TILEMAPS 3
 
-# define CONFIG_SIZE 29
+# define CONFIG_SIZE 30
 
 # define GUN 0
 # define KNIFE 1
@@ -72,6 +72,12 @@
 
 # define WEAPONS_NUM 4
 
-# define POS_UPDATE 50
+# define POS_UPDATE 30
+
+# define TERM_MEM_SIZE 10
+# define TERM_CMD_SIZE 100
+
+# define DELETE "Backspace"
+# define SPACE "Space"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 19:46:58 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 18:39:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		sdl_loop(t_wolf *wolf)
 			break ;
 		wolf->tickrate = get_tickrate(wolf);
 		ticks += wolf->tickrate;
-		if (ticks >= 30)
+		if (ticks >= POS_UPDATE)
 		{
 			player_moving(wolf);
 			ticks = 0;

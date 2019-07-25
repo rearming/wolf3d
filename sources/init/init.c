@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 16:33:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:59:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,26 @@ t_sdl		init_sdl(void)
 			WIN_WIDTH * SCALE_WIDTH, WIN_HEIGHT * SCALE_HEIGHT,
 			SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE)))
 		raise_error(ERR_SDL_WIN);
-	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, 0)))
+	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, SDL_RENDERER_SOFTWARE)))
 		raise_error(ERR_SDL_RENDER);
 	if (!(sdl.texture = SDL_CreateTexture(sdl.rend, SDL_PIXELFORMAT_ARGB8888,
 			SDL_TEXTUREACCESS_STATIC, WIN_WIDTH, WIN_HEIGHT)))
 		raise_error(ERR_SDL_TEXTURE_CREATE);
 	return (sdl);
+}
+
+t_ttf		init_ttf(char *font_file)
+{
+	t_ttf	ttf;
+	int		ret;
+
+	ttf.font = NULL;
+	ret = TTF_Init();
+	if (ret == TTF_ERROR)
+		raise_error(ERR_SDL_TTF_INIT);
+	if (!(ttf.font = TTF_OpenFont(font_file, 150)))
+		raise_error(ERR_SDL_TTF_OPENFONT);
+	return (ttf);
 }
 
 void		init_actions(t_actions *actions)
@@ -42,6 +56,30 @@ void		init_actions(t_actions *actions)
 	actions->lshift_was_pressed = FALSE;
 	actions->mouse_right = FALSE;
 	actions->mouse_left = FALSE;
+}
+
+t_erm 		term_init(void)
+{
+	t_erm		term;
+
+	term.prepare = FALSE;
+	term.opened = FALSE;
+	term.cmd_i = 0;
+	while (term.cmd_i < TERM_MEM_SIZE)
+	{
+		ft_bzero(term.prev_cmd[term.cmd_i], TERM_CMD_SIZE);
+		term.cmd_i++;
+	}
+	ft_bzero(term.buff, TERM_CMD_SIZE);
+	term.buff[0] = ':';
+	term.buff[1] = ' ';
+	term.cmd_i = 0;
+	term.i = 2;
+	term.pos = (t_point){200, WIN_HEIGHT - 200};
+	term.text_color = LIGHT_GREY;
+	term.line_color = LIGHT_GREY;
+	term.scale = 0.3;
+	return (term);
 }
 
 void		wolf_init(t_wolf *wolf)
@@ -78,4 +116,5 @@ void		wolf_init(t_wolf *wolf)
 			* WIN_HEIGHT * WIN_WIDTH)))
 		raise_error(ERR_MALLOC);
 	wolf->map.items = find_items(wolf);
+	wolf->term = term_init();
 }

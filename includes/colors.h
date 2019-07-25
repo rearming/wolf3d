@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:56:35 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:39:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
-# define RED 0xFF0000
+# define RED 0x00FF0000
 # define V_RED 0xCB1A43
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
@@ -27,5 +27,6 @@
 # define GREY 0xA7ADBA
 # define M_TURQOISE 0x4682B4
 # define FLOOR_GREY 0x3B3B3B
+# define LIGHT_GREY 0xC6E3E4
 
 #endif

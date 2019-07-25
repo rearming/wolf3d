@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:16:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 18:36:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void	raise_error2(int err_code)
 		ft_printf("Image or texture file is invalid for some reason!\n");
 	if (err_code == ERR_INV_CONFIG_SIZE)
 		ft_printf("Invalid config file, expected %i strings\n", CONFIG_SIZE);
+	if (err_code == ERR_SDL_INIT)
+		ft_printf("SDL ttf error: %s\n", "TTF_Init failed.");
+	if (err_code == ERR_SDL_TTF_OPENFONT)
+		ft_printf("SDL ttf error: %s\n", "can't open font file.");
+	if (err_code == ERR_SDL_TTF_RENDERTEXT)
+		ft_printf("SDL ttf error: %s\n", "TTF_RenderText failed.");
 }
 
 void 		raise_error(int err_code)

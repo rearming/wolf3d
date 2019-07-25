@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/23 16:08:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int			get_int_from_rgb(int r, int g, int b, int a)
 	return (a << 24 | r << 16 | g << 8 | b);
 }
 
-void		get_rgb_from_int(int *r, int *g, int *b, int color)
+void		get_rgb_from_int(unsigned char *r, unsigned char *g,
+							 unsigned char *b, int color)
 {
 	*r = (color >> 16) & 0xFF;
 	*g = (color >> 8) & 0xFF;

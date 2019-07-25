@@ -10,21 +10,21 @@ set(ft_printf_includes
         libft/ft_printf/includes)
 
 set(sdl_includes
-		./SDL2/include)
+		SDL2_libs/SDL2/include/
+		SDL2_libs/SDL_ttf/include/)
 
 include_directories(includes
-
+		${sdl_includes}
         ${Includes}
         ${libft_includes}
         ${ft_printf_includes}
-		${sdl_includes}
         )
 
 link_directories(
-
-        ./libft/
-        ./libft/ft_printf/
-		./SDL2/lib/
+        libft/
+        libft/ft_printf/
+		SDL2_libs/SDL2/lib/
+		SDL2_libs/SDL_ttf/lib/
 )
 
 set(main
@@ -54,14 +54,16 @@ set(render
 		sources/render/bresenham.c
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
-		sources/render/game_logic_utils.c)
+		sources/render/game_logic_utils.c
+		sources/render/terminal_render.c)
 
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
-		sources/hooks/player_moves.c sources/hooks/player_actions.c)
+		sources/hooks/player_moves.c
+		sources/hooks/player_actions.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c
@@ -84,10 +86,11 @@ add_executable(wolf3d
 
 target_link_libraries(wolf3d
 
+		"SDL2"
 		"m"
         "ftprintf"
 		"ft"
-        "SDL2"
+		"SDL2_ttf"
 )
 
 

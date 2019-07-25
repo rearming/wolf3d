@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 16:08:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 21:11:38 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ void		render(t_wolf *wolf)
 	draw_animated(&wolf->textures.w_frame, wolf->tickrate, wolf->sdl,
 			wolf->textures.weapons[(int) wolf->player.weapon_type]);
 	//draw_item(wolf);
+	if (wolf->term.opened)
+		draw_terminal(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 			WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);

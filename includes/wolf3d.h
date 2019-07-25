@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/23 18:47:34 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 21:04:49 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <SDL.h>
-# include <sDL_TTf
+# include <SDL2/SDL_ttf.h>
+# include "../SDL2_libs/SDL2/src/video/SDL_pixels_c.h"
+
 # include "defines.h"
 # include "sdb_image.h"
 # include "libft.h"
 # include "structs.h"
 # include "colors.h"
-# include "key_codes.h"
 # include "errors.h"
 
 /*
@@ -32,6 +33,7 @@
 */
 
 t_sdl		init_sdl(void);
+t_ttf		init_ttf(char *font_file);
 void		wolf_init(t_wolf *wolf);
 
 /*
@@ -90,11 +92,18 @@ void		draw_animated(double *frame, int tickrate,
 */
 
 void		sdl_put_pixel(t_point point, t_sdl sdl);
-void		bresen_line(t_wolf *wolf, t_point start, t_point end);
+void bresen_line(t_sdl sdl, t_point start, t_point end, int color);
 int			get_int_from_rgb(int r, int g, int b, int a);
-void		get_rgb_from_int(int *r, int *g, int *b, int color);
+void		get_rgb_from_int(unsigned char *r, unsigned char *g,
+							 unsigned char *b, int color);
 int			cell_is_empty(t_map map, t_point pos);
 int 		get_view_direction(t_ray ray);
+
+/*
+**	terminal render
+*/
+
+void		draw_terminal(t_wolf *wolf);
 
 /*
 **	game logic utils

@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/10 13:43:12 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/23 16:08:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ void		line_init(t_line *line, t_point *start, t_point *end)
 	line->ystep = (start->y < end->y) ? 1 : -1;
 }
 
-void		bresen_line(t_wolf *wolf, t_point start, t_point end)
+void		bresen_line(t_sdl sdl, t_point start, t_point end, int color)
 {
 	t_line	line;
 
 	line.steep = ft_abs(end.y - start.y) > ft_abs(end.x - start.x);
 	prepare_coords(&start, &end, line.steep);
 	line_init(&line, &start, &end);
-	line.point.color = start.color;
+	line.point.color = color;
 	while (start.x <= end.x)
 	{
 		line.point.x = line.steep ? start.y : start.x;
 		line.point.y = line.steep ? start.x : start.y;
-		sdl_put_pixel(line.point, wolf->sdl);
+		sdl_put_pixel(line.point, sdl);
 		line.error -= line.delta.y;
 		if (line.error < 0)
 		{
