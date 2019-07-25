@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 16:59:45 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:31:00 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_ttf		init_ttf(char *font_file)
 	ret = TTF_Init();
 	if (ret == TTF_ERROR)
 		raise_error(ERR_SDL_TTF_INIT);
-	if (!(ttf.font = TTF_OpenFont(font_file, 150)))
+	if (!(ttf.font = TTF_OpenFont(font_file, 500)))
 		raise_error(ERR_SDL_TTF_OPENFONT);
 	return (ttf);
 }
@@ -75,10 +75,10 @@ t_erm 		term_init(void)
 	term.buff[1] = ' ';
 	term.cmd_i = 0;
 	term.i = 2;
-	term.pos = (t_point){200, WIN_HEIGHT - 200};
+	term.pos = (t_point){200, WIN_HEIGHT - 170};
 	term.text_color = LIGHT_GREY;
 	term.line_color = LIGHT_GREY;
-	term.scale = 0.3;
+	term.scale = 0.06;
 	return (term);
 }
 

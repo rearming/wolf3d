@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:48:07 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static void		raycast_draw(t_wolf *wolf, t_dpoint delta)
 	t_ray	ray;
 
 	ray.distance = 0;
-	while (21)
+	while (ray.distance < 15)
 	{
 		ray.x = wolf->player.x + ray.distance * delta.x;
 		ray.y = wolf->player.y + ray.distance * delta.y;
-		ray.distance += 0.05;
+		ray.distance += 0.1;
 		if (!is_outside_map(ray, wolf))
 			sdl_put_pixel(scale_fov_drawing(ray, wolf), wolf->sdl);
-		if (!cell_is_empty(wolf->map, (t_point){(int)ray.x, (int)ray.y}))
+		if (wolf->map.int_map[(int)ray.y][(int)ray.x] != 0)
 			break ;
 	}
 }

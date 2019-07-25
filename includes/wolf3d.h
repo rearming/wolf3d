@@ -6,20 +6,20 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 21:04:49 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:09:57 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_3D_H
 # define WOLF_3D_H
 
+# include "../SDL2_libs/SDL2/src/video/SDL_pixels_c.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <SDL.h>
 # include <SDL2/SDL_ttf.h>
-# include "../SDL2_libs/SDL2/src/video/SDL_pixels_c.h"
 
 # include "defines.h"
 # include "sdb_image.h"

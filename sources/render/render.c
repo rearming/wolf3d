@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 21:11:38 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/25 22:40:57 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.distance = 0;
 	while ((int)ray.y < wolf->map.height && (int)ray.x < wolf->map.width)
 	{
-		if (!cell_is_empty(wolf->map, (t_point){(int)ray.x, (int)ray.y}))
+		if (wolf->map.int_map[(int)ray.y][(int)ray.x] != 0)
 			break ;
 		ray.x = wolf->player.x + ray.distance * delta_x;
 		ray.y = wolf->player.y + ray.distance * delta_y;

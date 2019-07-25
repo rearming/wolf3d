@@ -16,8 +16,8 @@ int			cell_is_empty(t_map map, t_point pos)
 {
 	if (pos.x >= map.width || pos.x < 0 || pos.y >= map.height || pos.y < 0)
 		return (1);
-	if (map.int_map[pos.y][pos.x] != 0
-		&& map.int_map[pos.y][pos.x] != PLAYER_POS)
+	if (map.int_map[pos.y][pos.x] != 0)
+	//	&& map.int_map[pos.y][pos.x] != PLAYER_POS)
 			return (0);
 	return (1);
 }
