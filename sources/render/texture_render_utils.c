@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 15:28:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 15:47:13 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 {
 	if (ray->direction == VIEW_RIGHT)
 	{
-		if (!cell_is_empty(map, (t_point){(int)(ray->y), (int)(ray->x - 0.1)}))
+		if (map.int_map[(int)(ray->y)][(int)(ray->x - 0.1)])
 		{
 			if (sin(ray->angle) < 0)
 				return (textures.sprites[textures.texture_mode][SVA_FLAG]);
@@ -25,9 +25,9 @@ t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 		}
 		return (textures.sprites[textures.texture_mode][RED_BRICKS]);
 	}
-	if (!cell_is_empty(map, (t_point){(int)(ray->y), (int)(ray->x + 0.1)}))
+	if (map.int_map[(int)(ray->y)][(int)(ray->x + 0.1)])
 	{
-		if (cos(ray->angle) < 0)
+		if (sin(ray->angle) < 0)
 			return (textures.sprites[textures.texture_mode][SVA_FLAG]);
 		else
 			return (textures.sprites[textures.texture_mode][WOOD]);
@@ -52,41 +52,35 @@ t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 {
 	int 	texture_id;
 
-	texture_id = 1;
 	if (textures.render_mode == COMPASS_MODE)
 		return (get_sprite_by_side(ray, textures, map));
-	if ((int)ray->y < map.height && (int)ray->x < map.width)
-		texture_id = map.int_map[(int)ray->y][(int)ray->x];
+	texture_id = map.int_map[(int)ray->y][(int)ray->x];
 	if (textures.render_mode == WOLF3D && texture_id >= WOLF_SPRITES)
 		texture_id = 1;
 	if (textures.render_mode == MINECRAFT && texture_id >= MINE_SPRITES)
 		texture_id = 1;
-	return (textures.sprites[textures.texture_mode][texture_id > 0 ? texture_id : 1]);
+	return (textures.sprites[textures.texture_mode][texture_id]);
 }
 
-int			get_sprite_x_index(t_ray *ray, int texture_size)
+int			get_sprite_x_index(t_ray ray, int texture_size)
 {
-	if (ray->direction == VIEW_RIGHT)
-		return((int)(texture_size * (fabs((int)ray->y - ray->y))));
-	if (ray->direction == VIEW_LEFT)
-		return((int)(texture_size - (texture_size * (ray->y - (int)ray->y))));
-	if (ray->direction == VIEW_DOWN)
-		return ((int)(texture_size - (texture_size * (ray->x - (int)ray->x))));
-	return ((int)(texture_size * (fabs((int)ray->x - ray->x))));
+	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
+		return((int)((double)texture_size * (fabs(ray.y - (int)ray.y))));
+	return ((int)((double)texture_size * (fabs(ray.x - (int)ray.x))));
 }
 
-int 		get_view_direction(t_ray *ray)
+int 		get_view_direction(t_ray ray)
 {
-	if (((ray->x - (int)ray->x) > 0.99 || (ray->x - (int)ray->x) < 0.01))
+	if ((fabs(ray.x - (int)ray.x) > 0.99 || fabs(ray.x - (int)ray.x) < 0.01))
 	{
-		if (cos(ray->angle) > 0)
+		if (cos(ray.angle) > 0)
 			return (VIEW_RIGHT);
 		else
 			return (VIEW_LEFT);
 	}
 	else
 	{
-		if (sin(ray->angle) < 0)
+		if (sin(ray.angle) < 0)
 			return (VIEW_UP);
 		else
 			return (VIEW_DOWN);
@@ -108,7 +102,7 @@ void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 		height = WIN_HEIGHT * 2;
 	column_y = (WIN_HEIGHT - height) / 2;
 	sprite = get_column_sprite(ray, wolf->map, wolf->textures);
-	sprite_index.x = get_sprite_x_index(ray, sprite.size);
+	sprite_index.x = get_sprite_x_index(*ray, sprite.size);
 	while (win_y < height)
 	{
 		if (win_x + column_y * WIN_WIDTH > 0)

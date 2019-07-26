@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:42:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:54:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(unsigned char *r, unsigned char *g,
 							 unsigned char *b, int color);
 int			cell_is_empty(t_map map, t_point pos);
-int 		get_view_direction(t_ray *ray);
+int 		get_view_direction(t_ray ray);
 
 /*
 **	terminal render

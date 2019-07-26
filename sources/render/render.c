@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 12:07:12 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:04:12 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 		ray.y = wolf->player.y + ray.distance * delta_y;
 		ray.distance += 0.01;
 	}
-	ray.direction = get_view_direction(&ray);
+	ray.direction = get_view_direction(ray);
 	return (ray);
 }
 
