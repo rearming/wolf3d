@@ -71,7 +71,7 @@ set(parsing
 		sources/parsing/parsing_utils.c)
 set(terminal
 		sources/terminal/init_terminal.c
-		sources/terminal/terminal_render.c sources/terminal/term_command_parser.c)
+		sources/terminal/terminal_render.c sources/terminal/term_command_parser.c sources/terminal/term_processing.c)
 
 add_executable(wolf3d
 

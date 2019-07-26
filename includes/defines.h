@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:43:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 16:38:33 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@
 # define PLAYER_POS -1
 # define ITEM -2
 
-# define SVA_FLAG 5
-# define HITLER 96
-# define RED_BRICKS 72
-# define WOOD 22
+# define NORTH 5
+# define WEST 96
+# define EAST 72
+# define SOUTH 22
 
 # define VIEW_UP 501
 # define VIEW_DOWN 502
 # define VIEW_RIGHT 503
 # define VIEW_LEFT 504
 
-# define NUMBER_MODE 665
+# define INDEX_MODE 665
 # define COMPASS_MODE 666
 
 # define MAX_MAP_SIZE 10000

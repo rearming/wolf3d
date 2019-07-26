@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:54:55 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 15:47:13 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,9 @@ void		change_angle(double *angle, double value);
 
 void			get_term_input(t_wolf *wolf, SDL_Keysym key);
 int				check_term(t_wolf *wolf, SDL_Keysym key);
-void parse_command(t_wolf *wolf, t_erm *term);
+void			parse_command(t_wolf *wolf, t_erm *term);
+
+void			process_full_command(t_wolf *wolf, t_erm *term);
 
 /*
 **	utils

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 15:47:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 16:38:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 		if (map.int_map[(int)(ray->y)][(int)(ray->x - 0.1)])
 		{
 			if (sin(ray->angle) < 0)
-				return (textures.sprites[textures.texture_mode][SVA_FLAG]);
+				return (textures.sprites[textures.texture_mode][NORTH]);
 			else
-				return (textures.sprites[textures.texture_mode][WOOD]);
+				return (textures.sprites[textures.texture_mode][SOUTH]);
 		}
-		return (textures.sprites[textures.texture_mode][RED_BRICKS]);
+		return (textures.sprites[textures.texture_mode][EAST]);
 	}
 	if (map.int_map[(int)(ray->y)][(int)(ray->x + 0.1)])
 	{
 		if (sin(ray->angle) < 0)
-			return (textures.sprites[textures.texture_mode][SVA_FLAG]);
+			return (textures.sprites[textures.texture_mode][NORTH]);
 		else
-			return (textures.sprites[textures.texture_mode][WOOD]);
+			return (textures.sprites[textures.texture_mode][SOUTH]);
 	}
-	return (textures.sprites[textures.texture_mode][HITLER]);
+	return (textures.sprites[textures.texture_mode][WEST]);
 }
 
 t_sprite	get_sprite_by_side(t_ray *ray, t_textures textures, t_map map)
@@ -40,10 +40,10 @@ t_sprite	get_sprite_by_side(t_ray *ray, t_textures textures, t_map map)
 	if (ray->direction == VIEW_RIGHT || ray->direction == VIEW_LEFT)
 		return (fix_dir_bug(ray, textures, map));
 	if (ray->direction == VIEW_UP)
-		return (textures.sprites[textures.texture_mode][SVA_FLAG]);
+		return (textures.sprites[textures.texture_mode][NORTH]);
 	if (ray->direction == VIEW_DOWN)
-		return (textures.sprites[textures.texture_mode][WOOD]);
-	return (textures.sprites[textures.texture_mode][HITLER]);
+		return (textures.sprites[textures.texture_mode][SOUTH]);
+	return (textures.sprites[textures.texture_mode][WEST]);
 }
 
 //todo сделать чек некрасивых текстур (можно тоже по таблице) / из конфиг файла
@@ -52,26 +52,28 @@ t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 {
 	int 	texture_id;
 
+	texture_id = 1;
 	if (textures.render_mode == COMPASS_MODE)
 		return (get_sprite_by_side(ray, textures, map));
-	texture_id = map.int_map[(int)ray->y][(int)ray->x];
+	if ((int)ray->y < map.height && (int)ray->x < map.width)
+		texture_id = map.int_map[(int)ray->y][(int)ray->x];
 	if (textures.render_mode == WOLF3D && texture_id >= WOLF_SPRITES)
 		texture_id = 1;
 	if (textures.render_mode == MINECRAFT && texture_id >= MINE_SPRITES)
 		texture_id = 1;
-	return (textures.sprites[textures.texture_mode][texture_id]);
+	return (textures.sprites[textures.texture_mode][texture_id > 0 ? texture_id : 1]);
 }
 
 int			get_sprite_x_index(t_ray ray, int texture_size)
 {
 	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
-		return((int)((double)texture_size * (fabs(ray.y - (int)ray.y))));
-	return ((int)((double)texture_size * (fabs(ray.x - (int)ray.x))));
+		return((int)((double)texture_size * ((ray.y - (int)ray.y))));
+	return ((int)((double)texture_size * ((ray.x - (int)ray.x))));
 }
 
 int 		get_view_direction(t_ray ray)
 {
-	if ((fabs(ray.x - (int)ray.x) > 0.99 || fabs(ray.x - (int)ray.x) < 0.01))
+	if (((ray.x - (int)ray.x) > 0.99 || (ray.x - (int)ray.x) < 0.01))
 	{
 		if (cos(ray.angle) > 0)
 			return (VIEW_RIGHT);

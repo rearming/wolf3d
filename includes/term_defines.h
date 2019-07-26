@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:43:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:43:27 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:54:55 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@
 
 # define ALL 100
 # define BLOCK 101
+# define MODE
 
 #endif

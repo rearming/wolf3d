@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 15:34:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 15:48:15 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void		wolf_init(t_wolf *wolf)
 
 	//todo get this info from args
 	wolf->textures.render_mode = COMPASS_MODE;
-	//wolf->textures.render_mode = NUMBER_MODE;
+	//wolf->textures.render_mode = INDEX_MODE;
 	wolf->textures.texture_mode = MINECRAFT;
 	wolf->textures.texture_mode = WOLF3D;
 
