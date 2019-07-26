@@ -91,8 +91,8 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.fov = M_PI / 2; // pi / 3 = 60 градусов, pi / 2 = 90
 	wolf->player.angle = 0;
 	wolf->player.ang_speed = 0.001;
-	wolf->player.speed_fwd = 0.3;
-	wolf->player.speed_side = 0.15;
+	wolf->player.speed_fwd = 0.2;
+	wolf->player.speed_side = wolf->player.speed_fwd / 2;
 	wolf->player.fat = 3;
 
 	wolf->minimap.fov_scale = 10;

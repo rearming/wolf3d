@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 22:40:57 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 12:07:12 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 		ray.y = wolf->player.y + ray.distance * delta_y;
 		ray.distance += 0.01;
 	}
-	ray.direction = get_view_direction(ray);
+	ray.direction = get_view_direction(&ray);
 	return (ray);
 }
 
@@ -46,7 +46,7 @@ void		render_columns(t_wolf *wolf)
 	while (win_x < WIN_WIDTH)
 	{
 		ray = raycast(wolf, ray.angle);
-		draw_column(ray, wolf, win_x);
+		draw_column(&ray, wolf, win_x);
 		ray.angle += wolf->player.fov / WIN_WIDTH;
 		win_x++;
 	}
@@ -54,29 +54,21 @@ void		render_columns(t_wolf *wolf)
 
 void		draw_floor_and_sky(t_sdl sdl, int floor_color) //todo make floor and celling
 {
-	int		x;
-	int		y;
+	long	y;
+	long	half_screen;
 
 	y = 0;
-	while (y < WIN_HEIGHT / 2)
+	half_screen = WIN_HEIGHT / 2 * WIN_WIDTH;
+	while (y < half_screen)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			sdl_put_pixel((t_point) {x, y, 0, BLACK}, sdl);
-			x++;
-		}
+		sdl.pixels[y] = BLACK;
 		y++;
 	}
-	y = WIN_HEIGHT / 2;
-	while (y < WIN_HEIGHT)
+	y = half_screen;
+	half_screen *= 2;
+	while (y < half_screen)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
-		{
-			sdl_put_pixel((t_point) {x, y, 0, floor_color}, sdl);
-			x++;
-		}
+		sdl.pixels[y] = floor_color;
 		y++;
 	}
 }

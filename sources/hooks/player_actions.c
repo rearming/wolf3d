@@ -29,6 +29,8 @@ void		place_block(t_wolf *wolf)
 {
 	t_ray		ray;
 
+	if (wolf->player.weapon_type != PICKAXE)
+		return ;
 	ray = raycast(wolf, wolf->player.angle);
 	if (ray.distance > 4 || ray.distance < 2)
 		return ;
