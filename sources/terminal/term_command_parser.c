@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:17:08 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 16:53:05 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 17:37:57 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,16 @@ void		parse_command_content(t_erm *term)
 {
 	if (term->cmd_i != 2)
 		return ;
-	if (ft_strequ(term->command[2], "minecraft"))
+	else if (ft_strequ(term->command[2], "minecraft"))
 		term->parsed_command[2] = MINECRAFT;
-	if (ft_strequ(term->command[2], "wolf"))
+	else if (ft_strequ(term->command[2], "wolf"))
 		term->parsed_command[2] = WOLF3D;
-	if (ft_strequ(term->command[2], "compass"))
+	else if (ft_strequ(term->command[2], "compass"))
 		term->parsed_command[2] = COMPASS_MODE;
-	if (ft_strequ(term->command[2], "index"))
+	else if (ft_strequ(term->command[2], "index"))
 		term->parsed_command[2] = INDEX_MODE;
-
+	else
+		term->parsed_command[2] = ft_atoi(term->command[2]);
 }
 
 void	parse_command(t_wolf *wolf, t_erm *term)

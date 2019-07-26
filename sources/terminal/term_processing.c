@@ -6,26 +6,46 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 16:10:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 16:26:29 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 17:51:44 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	change_single_block(t_wolf *wolf, t_erm *term)
+void	change_block_index(t_wolf *wolf, t_erm *term)
 {
 	t_ray	ray;
 
 	ray = raycast(wolf, wolf->player.angle);
-	wolf->map.int_map[(int)ray.y][(int)ray.x] == term->parsed_command[]
+	if (term->parsed_command[2] > 0)
+		wolf->map.int_map[(int)ray.y][(int)ray.x] = term->parsed_command[2];
+}
+
+void	change_all_blocks(t_wolf *wolf, t_erm *term)
+{
+	int		y;
+	int		x;
+
+	y = 0;
+	while (y < wolf->map.height)
+	{
+		x = 0;
+		while (x < wolf->map.width)
+		{
+			if (term->parsed_command[2] > 0 && wolf->map.int_map[y][x] > 0)
+				wolf->map.int_map[y][x] = term->parsed_command[2];
+			x++;
+		}
+		y++;
+	}
 }
 
 void	process_set_command(t_wolf *wolf, t_erm *term)
 {
 	if (term->parsed_command[1] == BLOCK)
-	{
-		change_single_block(wolf, term);
-	}
+		change_block_index(wolf, term);
+	if (term->parsed_command[1] == ALL)
+		change_all_blocks(wolf, term);
 }
 
 void	process_render_command(t_wolf *wolf, t_erm *term)

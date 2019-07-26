@@ -104,7 +104,7 @@ void		wolf_init(t_wolf *wolf)
 
 	//todo get this info from args
 	wolf->textures.render_mode = COMPASS_MODE;
-	//wolf->textures.render_mode = INDEX_MODE;
+	wolf->textures.render_mode = INDEX_MODE;
 	wolf->textures.texture_mode = MINECRAFT;
 	wolf->textures.texture_mode = WOLF3D;
 
