@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:21:32 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,19 @@ void		get_int_map(t_map *map)
 
 void		clean_temp_maps(t_map *map)
 {
-	int 	x;
 	int 	y;
 
 	y = 0;
 	while (y < map->height)
 	{
-		x = 0;
-		while (map->raw_map[y][x])
-		{
-			free(map->raw_map[y][x]);
-			x++;
-		}
-		free(map->raw_map[y]);
+		clean_chr_mtrx(map->raw_map[y]);
 		y++;
 	}
 	free(map->raw_map);
-	y = 0;
-	while (map->char_map[y])
-	{
-		free(map->char_map[y]);
-		y++;
-	}
-	free(map->char_map);
+	clean_chr_mtrx(map->char_map);
 	map->raw_map = NULL;
 	map->char_map = NULL;
 }
-
-//todo make config file with all paths to textures etc
 
 t_map		get_map(char *filename)
 {

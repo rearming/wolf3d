@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 12:15:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:43:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@
 # define ITEM -2
 
 # define SVA_FLAG 5
-# define ROCK_WALL 1
 # define HITLER 96
 # define RED_BRICKS 72
-# define SVA_EAGLE 11
 # define WOOD 22
 
 # define VIEW_UP 501
@@ -72,11 +70,5 @@
 # define WEAPONS_NUM 4
 
 # define POS_UPDATE 25
-
-# define TERM_MEM_SIZE 10
-# define TERM_CMD_SIZE 100
-
-# define DELETE "Backspace"
-# define SPACE "Space"
 
 #endif

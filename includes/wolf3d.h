@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 12:11:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:42:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 # include <SDL.h>
 # include <SDL2/SDL_ttf.h>
 
-# include "defines.h"
 # include "sdb_image.h"
 # include "libft.h"
+# include "defines.h"
+# include "term_defines.h"
 # include "structs.h"
 # include "colors.h"
 # include "errors.h"
@@ -154,6 +155,14 @@ void		player_run(t_wolf *wolf);
 void		break_block(t_wolf *wolf);
 void		place_block(t_wolf *wolf);
 void		change_angle(double *angle, double value);
+
+/*
+**	terminal
+*/
+
+void			get_term_input(t_wolf *wolf, SDL_Keysym key);
+int				check_term(t_wolf *wolf, SDL_Keysym key);
+void parse_command(t_wolf *wolf, t_erm *term);
 
 /*
 **	utils

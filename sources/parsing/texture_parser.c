@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:09:37 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ int				get_all_weapons(const char **files, t_anim *weapons)
 
 	last_file = 0;
 	weapons[0] = (t_anim){GUN, 0,
-				(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 90, 2};
+				(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 0.013, 2};
 	weapons[1] = (t_anim){KNIFE, 0,
-				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 100, 4};
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 0.011, 4};
 	weapons[2] = (t_anim){DAKKA, 0,
-				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 70, 4};
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 0.02, 4};
 	weapons[3] = (t_anim){PICKAXE, 0,
-				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 1, 70, 4};
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 1, 0.01, 4};
 	last_file += get_animation(files, last_file, &weapons[0], 256);
 	last_file += get_animation(files, last_file, &weapons[1], 192);
 	last_file += get_animation(files, last_file, &weapons[2], 192);
@@ -148,7 +148,7 @@ int 			get_player_head(const char **files, t_anim *head, int last_file)
 {
 	head->scale = 0.2;
 	head->frames = 4;
-	head->frequency = 350;
+	head->frequency = 0.003;
 	return (get_animation(files, last_file, head, 190));
 }
 

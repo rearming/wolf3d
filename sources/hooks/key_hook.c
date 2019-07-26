@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:29:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 17:01:41 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:15:39 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,68 +32,6 @@ void			keyup_hook(t_wolf *wolf, SDL_Event event)
 		wolf->actions.arr_right = FALSE;
 	if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
 		wolf->actions.arr_left = FALSE;
-}
-
-void			process_command(t_wolf *wolf)
-{
-
-}
-
-void			get_term_input(t_wolf *wolf, SDL_Keysym key)
-{
-	const char	*keyname;
-
-	keyname = SDL_GetScancodeName(key.scancode);
-	if (ft_strequ(keyname, DELETE))
-	{
-		if (wolf->term.i > 2)
-		{
-			wolf->term.buff[wolf->term.i - 1] = 0;
-			wolf->term.i--;
-		}
-	}
-	else if (ft_strequ(keyname, SPACE))
-	{
-		wolf->term.buff[wolf->term.i] = ' ';
-		wolf->term.i++;
-	}
-	else if (!ft_strequ(keyname, ";"))
-	{
-		wolf->term.buff[wolf->term.i] = (char)ft_tolower(keyname[0]);
-		wolf->term.i++;
-	}
-	printf("terminal's buf: [%s]\n", wolf->term.buff);
-}
-
-int				close_term(t_wolf *wolf)
-{
-	wolf->term.opened = FALSE;
-	wolf->term.prepare = FALSE;
-	ft_bzero(&wolf->term.buff[2], TERM_CMD_SIZE - 2);
-	wolf->term.i = 2;
-	return (FALSE);
-}
-
-int				check_term(t_wolf *wolf, SDL_Keysym key)
-{
-	if (key.scancode == SDL_SCANCODE_RETURN && wolf->term.opened)
-	{
-		process_command(wolf);
-		return (close_term(wolf));
-	}
-	if (key.scancode == SDL_SCANCODE_LCTRL && !wolf->term.prepare)
-	{
-		wolf->term.prepare = TRUE;
-		return (FALSE);
-	}
-	if ((key.sym == SDLK_COLON || key.sym == SDLK_SEMICOLON) && wolf->term.prepare)
-	{
-		wolf->term.opened = TRUE;
-		return (TRUE);
-	}
-	if (wolf->term.opened)
-		return (TRUE);
-	return (FALSE);
 }
 
 void			keydown_hook(t_wolf *wolf, SDL_Event event)

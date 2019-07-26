@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 22:31:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 15:25:12 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		init_actions(t_actions *actions)
 	actions->mouse_left = FALSE;
 }
 
-t_erm 		term_init(void)
+t_erm		term_init(void)
 {
 	t_erm		term;
 
@@ -67,10 +67,10 @@ t_erm 		term_init(void)
 	term.cmd_i = 0;
 	while (term.cmd_i < TERM_MEM_SIZE)
 	{
-		ft_bzero(term.prev_cmd[term.cmd_i], TERM_CMD_SIZE);
+		ft_bzero(term.prev_buffs[term.cmd_i], TERM_BUFF_SIZE);
 		term.cmd_i++;
 	}
-	ft_bzero(term.buff, TERM_CMD_SIZE);
+	ft_bzero(term.buff, TERM_BUFF_SIZE);
 	term.buff[0] = ':';
 	term.buff[1] = ' ';
 	term.cmd_i = 0;
@@ -79,6 +79,7 @@ t_erm 		term_init(void)
 	term.text_color = LIGHT_GREY;
 	term.line_color = LIGHT_GREY;
 	term.scale = 0.06;
+	term.command = NULL;
 	return (term);
 }
 
@@ -104,7 +105,7 @@ void		wolf_init(t_wolf *wolf)
 	//todo get this info from args
 	//wolf->textures.render_mode = COMPASS_MODE;
 	wolf->textures.render_mode = NUMBER_MODE;
-	//wolf->textures.texture_mode = MINECRAFT;
+	wolf->textures.texture_mode = MINECRAFT;
 	wolf->textures.texture_mode = WOLF3D;
 
 	wolf->textures.frame = 1;

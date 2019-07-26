@@ -55,8 +55,7 @@ set(render
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
 		sources/render/game_logic_utils.c
-		sources/render/terminal_render.c)
-
+		)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks
@@ -70,6 +69,9 @@ set(parsing
 		sources/parsing/fast_gnl.c
 		sources/parsing/texture_parser.c
 		sources/parsing/parsing_utils.c)
+set(terminal
+		sources/terminal/init_terminal.c
+		sources/terminal/terminal_render.c sources/terminal/term_command_parser.c)
 
 add_executable(wolf3d
 
@@ -82,6 +84,7 @@ add_executable(wolf3d
 		${parsing}
 		${debug}
 		${game_logic}
+		${terminal}
         )
 
 target_link_libraries(wolf3d

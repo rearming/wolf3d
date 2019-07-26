@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 12:31:17 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 15:28:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_sprite	fix_dir_bug(t_ray *ray, t_textures textures, t_map map)
 	}
 	if (!cell_is_empty(map, (t_point){(int)(ray->y), (int)(ray->x + 0.1)}))
 	{
-		if (sin(ray->angle) < 0)
+		if (cos(ray->angle) < 0)
 			return (textures.sprites[textures.texture_mode][SVA_FLAG]);
 		else
 			return (textures.sprites[textures.texture_mode][WOOD]);

@@ -101,7 +101,7 @@ void		draw_animated(double *frame, int tickrate,
 {
 	if (*frame)
 	{
-		*frame += (double)tickrate / anim_sprite.frequency;
+		*frame += (double)tickrate * anim_sprite.frequency;
 		if (*frame >= anim_sprite.frames)
 			*frame = FALSE;
 	}
