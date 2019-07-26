@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 15:48:15 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 18:21:08 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ t_erm		term_init(void)
 
 	term.prepare = FALSE;
 	term.opened = FALSE;
-	term.cmd_i = 0;
-	while (term.cmd_i < TERM_MEM_SIZE)
+	term.mem_i = 0;
+	while (term.mem_i < TERM_MEM_SIZE)
 	{
-		ft_bzero(term.prev_buffs[term.cmd_i], TERM_BUFF_SIZE);
-		term.cmd_i++;
+		ft_bzero(term.buffs[term.mem_i], TERM_BUFF_SIZE);
+		term.buffs[term.mem_i][0] = ':';
+		term.buffs[term.mem_i][1] = ' ';
+		term.mem_i++;
 	}
-	ft_bzero(term.buff, TERM_BUFF_SIZE);
-	term.buff[0] = ':';
-	term.buff[1] = ' ';
+	term.mem_i = 0;
 	term.cmd_i = 0;
 	term.i = 2;
 	term.pos = (t_point){200, WIN_HEIGHT - 170};

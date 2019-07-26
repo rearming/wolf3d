@@ -21,7 +21,7 @@ void		draw_term_input(t_erm *term, t_sdl sdl, TTF_Font *font)
 	SDL_Color		col;
 
 	get_rgb_from_int(&col.r, &col.g, &col.b, term->text_color);
-	surface = TTF_RenderText_Blended(font, term->buff, col);
+	surface = TTF_RenderText_Blended(font, term->buffs[term->mem_i], col);
 	pixels = (int*)surface->pixels;
 	y = 0;
 	while (y < surface->h * term->scale)

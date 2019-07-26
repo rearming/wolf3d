@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:42:16 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:43:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,12 +150,12 @@ typedef struct			s_erm
 	int 				line_color;
 	char 				prepare;
 	char				opened;
-	char				buff[TERM_BUFF_SIZE];
-	char				prev_buffs[TERM_MEM_SIZE][TERM_BUFF_SIZE];
+	char				buffs[TERM_MEM_SIZE][TERM_BUFF_SIZE];
 	char				**command;
 	int					parsed_command[TERM_CMD_LEN];
 	int					i;
 	int					cmd_i;
+	int					mem_i;
 }						t_erm;
 
 typedef struct			s_wolf
