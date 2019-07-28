@@ -6,20 +6,19 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 15:47:13 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/28 12:31:22 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF_3D_H
 # define WOLF_3D_H
 
-# include "../SDL2_libs/SDL2/src/video/SDL_pixels_c.h"
 # include <stdio.h>
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <SDL.h>
-# include <SDL2/SDL_ttf.h>
+# include "../SDL2_libs/SDL_ttf/SDL_ttf.h"
 
 # include "sdb_image.h"
 # include "libft.h"
@@ -41,7 +40,7 @@ void		wolf_init(t_wolf *wolf);
 **	params parsing
 */
 
-char **parse_params(char **argv, int argc);
+char		**parse_params(char **argv, int argc);
 
 /*
 **	map parsing
@@ -66,7 +65,6 @@ void		convert_spaces(char **map);
 **	image parsing
 */
 
-void		get_image_stbi(t_wolf *wolf, char *filename);
 void		get_bmp_image(t_img *bmp, const char *filename);
 void		get_tilemap_data(t_img *img, const char *filename);
 
@@ -177,8 +175,5 @@ void		sdl_exit(t_wolf *wolf);
 **	debug
 */
 
-void		print_bmp_params(t_img bmp);
-void		print_texture(t_sdl sdl, int width, int height,
-		int **data, t_point print_coord, int bpp);
 
 #endif

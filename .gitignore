@@ -6,3 +6,4 @@ temp
 *.dSYM
 *.o
 wolf3d
+/SDL2_libs/

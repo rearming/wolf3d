@@ -13,11 +13,21 @@ set(sdl_includes
 		SDL2_libs/SDL2/include/
 		SDL2_libs/SDL_ttf/include/)
 
+if(UNIX)
+	set(freetype_includes
+			/usr/include/freetype2
+			/usr/include/libpng16
+	)
+	set(freetype_lib
+			freetype)
+endif()
+
 include_directories(includes
 		${sdl_includes}
         ${Includes}
         ${libft_includes}
         ${ft_printf_includes}
+		${freetype_includes}
         )
 
 link_directories(
@@ -71,7 +81,9 @@ set(parsing
 		sources/parsing/parsing_utils.c)
 set(terminal
 		sources/terminal/init_terminal.c
-		sources/terminal/terminal_render.c sources/terminal/term_command_parser.c sources/terminal/term_processing.c)
+		sources/terminal/terminal_render.c
+		sources/terminal/term_command_parser.c
+		sources/terminal/term_processing.c)
 
 add_executable(wolf3d
 
@@ -87,6 +99,7 @@ add_executable(wolf3d
 		${terminal}
         )
 
+
 target_link_libraries(wolf3d
 
 		"SDL2"
@@ -94,6 +107,8 @@ target_link_libraries(wolf3d
         "ftprintf"
 		"ft"
 		"SDL2_ttf"
+		${freetype_lib}
+
 )
 
 

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:42:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 18:39:38 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/28 12:34:10 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int 		main(int argc, char **argv)
 {
 	t_wolf		wolf;
 	char 		**config_args;
+
 
 	config_args = parse_params(argv, argc);
 	wolf.map = get_map(argv[1]);
