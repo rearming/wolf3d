@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:42:56 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/28 12:34:10 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/29 09:29:05 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ int 		main(int argc, char **argv)
 {
 	t_wolf		wolf;
 	char 		**config_args;
+	char		**args1;
 
-
+//	args1 = (char**){"wolf_config.wolf", NULL};
 	config_args = parse_params(argv, argc);
+//	execvp("md5sum", argv[2]);
 	wolf.map = get_map(argv[1]);
 	wolf.sdl = init_sdl();
 	wolf.ttf = init_ttf(config_args[CONFIG_SIZE - 1]);

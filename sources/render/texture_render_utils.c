@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 16:38:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/29 10:23:21 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,12 @@ t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 
 int			get_sprite_x_index(t_ray ray, int texture_size)
 {
-	if (ray.direction == VIEW_RIGHT || ray.direction == VIEW_LEFT)
+	if (ray.direction == VIEW_RIGHT)
 		return((int)((double)texture_size * ((ray.y - (int)ray.y))));
+	else if (ray.direction == VIEW_LEFT)
+		return((int)((double)texture_size * ((1 - (ray.y - (int)ray.y)))));
+	else if (ray.direction == VIEW_DOWN)
+		return((int)((double)texture_size * ((1 - (ray.x - (int)ray.x)))));
 	return ((int)((double)texture_size * ((ray.x - (int)ray.x))));
 }
 

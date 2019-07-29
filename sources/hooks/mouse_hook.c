@@ -15,13 +15,13 @@
 void		mouse_actions(t_wolf *wolf)
 {
 	if (wolf->actions.mouse_left
-		&& (wolf->textures.w_frame > 4 || wolf->textures.w_frame == 0)
+		&& (wolf->textures.weapon_frame > 4 || wolf->textures.weapon_frame == 0)
 		&& wolf->player.weapon_type != PICKAXE)
-			wolf->textures.w_frame = 1;
+			wolf->textures.weapon_frame = 1;
 	if (wolf->actions.mouse_left && wolf->player.weapon_type == PICKAXE)
 		break_block(wolf);
 	if (wolf->actions.mouse_left == FALSE && wolf->player.weapon_type == DAKKA)
-		wolf->textures.w_frame = 0;
+		wolf->textures.weapon_frame = 0;
 }
 
 void		mouse_up_hook(t_wolf *wolf, SDL_Event event)

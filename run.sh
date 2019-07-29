@@ -2,8 +2,8 @@ mkdir SDL2_libs
 cd SDL2_libs
 git clone https://github.com/spurious/SDL-mirror.git SDL2
 cd SDL2
-DIR=`pwd`
-./configure --prefix=$DIR
+DIR=$(pwd)
+./configure --prefix="$DIR"
 make && make install
 cd ..
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -20,3 +20,10 @@ DIR=`pwd`
 ./configure --prefix=$DIR
 make && make install
 cd ../..
+MD5_SUM=$(md5sum wolf_config.wolf | cut -c -32)
+if [ "$MD5_SUM" == "57c34e0fdfa64b2a5ffd6f09a163c6a1" ]; then
+  echo "checksum correct"
+  make
+else
+  echo "incorrect config file checksum."
+fi

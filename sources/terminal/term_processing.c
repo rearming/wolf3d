@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 16:10:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 17:51:44 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/28 15:13:50 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	change_all_blocks(t_wolf *wolf, t_erm *term)
 		}
 		y++;
 	}
+
 }
 
 void	process_set_command(t_wolf *wolf, t_erm *term)

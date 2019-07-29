@@ -112,8 +112,8 @@ typedef	struct 			s_textures
 	int					render_mode;
 	t_anim				weapons[WEAPONS_NUM];
 	t_anim				head;
-	double				w_frame;
-	double				frame;
+	double				weapon_frame;
+	double				head_frame;
 }						t_textures;
 
 typedef struct			s_map

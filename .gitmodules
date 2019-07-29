@@ -1,3 +1,0 @@
-[submodule "SDL2_libs/SDL_ttf"]
-	path = SDL2_libs/SDL_ttf
-	url = https://github.com/Ecognize/SDL_ttf.git
