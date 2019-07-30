@@ -24,6 +24,8 @@
 **	terminal commands
 */
 
+# define INV_COMMAND 0
+
 /*
 **	basic commands
 */

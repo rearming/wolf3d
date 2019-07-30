@@ -13,7 +13,7 @@ set(sdl_includes
 		SDL2_libs/SDL2/include/
 		SDL2_libs/SDL_ttf/include/)
 
-if(UNIX)
+if(!OSX)
 	set(freetype_includes
 			/usr/include/freetype2
 			/usr/include/libpng16

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:13:57 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/29 09:31:54 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/30 13:01:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@ int				close_term(t_erm *term)
 	term->prepare = FALSE;
 	term->i = 2;
 	term->cmd_i = 0;
-	term->mem_i = TERM_MEM_SIZE - 2;
-	while (term->mem_i > 0)
+	if (ft_strlen(term->buffs[0]) != 2)
 	{
-		printf("buff[%i]: [%s]\n", term->mem_i, term->buffs[term->mem_i]);
-		ft_memcpy(term->buffs[term->mem_i], term->buffs[term->mem_i - 1], TERM_BUFF_SIZE);
-		term->mem_i--;
+		term->mem_i = TERM_MEM_SIZE - 2;
+		while (term->mem_i > 0)
+		{
+			ft_memcpy(term->buffs[term->mem_i], term->buffs[term->mem_i - 1],
+					  TERM_BUFF_SIZE);
+			term->mem_i--;
+		}
 	}
-	printf("\n");
 	ft_bzero(term->buffs[0], TERM_BUFF_SIZE);
-	term->buffs[term->mem_i][0] = ':';
-	term->buffs[term->mem_i][1] = ' ';
+	term->buffs[0][0] = ':';
+	term->buffs[0][1] = ' ';
 	return (FALSE);
 }
 
@@ -59,7 +61,7 @@ void			get_term_input(t_wolf *wolf, SDL_Keysym key)
 		wolf->term.buffs[wolf->term.mem_i][wolf->term.i - 1] = 0;
 	else if (ft_strequ(keyname, SPACE))
 		wolf->term.buffs[wolf->term.mem_i][wolf->term.i] = ' ';
-	else if (!ft_strequ(keyname, ";"))
+	else if (!ft_strequ(keyname, ";") && !ft_strequ(keyname, DELETE))
 		wolf->term.buffs[wolf->term.mem_i][wolf->term.i] = (char)ft_tolower(keyname[0]);
 }
 

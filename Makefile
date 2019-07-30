@@ -22,8 +22,11 @@ MAIN_DIR =						\
 
 MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_FILES:.c=.o))
 
+$(OBJ_DIR)%.o : $(MAIN_DIR)%.c
+	$(COMP) -c $< -o $@
+
 # ============================================================================ #
-# BUILD FRACTOL
+# BUILD WOLF3D
 # ============================================================================ #
 
 NAME =							\
@@ -65,9 +68,6 @@ $(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)
-
-$(OBJ_DIR)%.o : $(MAIN_DIR)%.c
-	$(COMP) -c $< -o $@
 
 clean :
 	@rm -rf $(OBJ_DIR)
