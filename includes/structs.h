@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 10:29:28 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:43:22 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ typedef	struct 			s_textures
 	int					render_mode;
 	t_anim				weapons[WEAPONS_NUM];
 	t_anim				head;
-	double				w_frame;
-	double				frame;
+	double				weapon_frame;
+	double				head_frame;
 }						t_textures;
 
 typedef struct			s_map

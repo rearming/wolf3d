@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 10:29:28 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/29 10:05:12 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ void		draw_animated(double *frame, int tickrate,
 	if (*frame)
 	{
 		*frame += (double)tickrate * anim_sprite.frequency;
-		if (*frame >= anim_sprite.frames)
-			*frame = FALSE;
+		if ((int)(*frame) >= anim_sprite.frames)
+			*frame = anim_sprite.type == HEAD ? 1 : 0;
 	}
-	scaled_draw(sdl, anim_sprite.sprite[(int)*frame], anim_sprite.scale,
+	scaled_draw(sdl, anim_sprite.sprite[(int)(*frame)], anim_sprite.scale,
 			anim_sprite.placement);
 }
 
@@ -145,8 +145,8 @@ void		render(t_wolf *wolf)
 	render_columns(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
-	draw_animated(&wolf->textures.w_frame, wolf->tickrate, wolf->sdl,
-			wolf->textures.weapons[(int) wolf->player.weapon_type]);
+	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
+				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
 	//draw_item(wolf);
 	if (wolf->term.opened)
 		draw_terminal(wolf);

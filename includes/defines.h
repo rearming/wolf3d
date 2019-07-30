@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 10:29:28 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/29 09:47:27 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@
 # define DAKKA 2
 # define PICKAXE 3
 
+# define HEAD 14
+
 # define WEAPONS_NUM 4
 
-# define POS_UPDATE 25
+# define POS_UPDATE 15
 
 #endif

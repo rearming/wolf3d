@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 10:29:28 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/29 10:06:01 by rearming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		wolf_init(t_wolf *wolf)
 	wolf->player.fov = M_PI / 2; // pi / 3 = 60 градусов, pi / 2 = 90
 	wolf->player.angle = 0;
 	wolf->player.ang_speed = 0.001;
-	wolf->player.speed_fwd = 0.2;
+	wolf->player.speed_fwd = 0.1;
 	wolf->player.speed_side = wolf->player.speed_fwd / 2;
 	wolf->player.fat = 3;
 
@@ -102,14 +102,14 @@ void		wolf_init(t_wolf *wolf)
 	wolf->minimap.size.x = 30;
 	wolf->minimap.size.y = 30;
 
-	//todo get this info from args
 	wolf->textures.render_mode = COMPASS_MODE;
 	wolf->textures.render_mode = INDEX_MODE;
-	wolf->textures.texture_type = MINECRAFT;
-	wolf->textures.texture_type = WOLF3D;
+	wolf->textures.texture_mode = MINECRAFT;
+	wolf->textures.texture_mode = WOLF3D;
 
-	wolf->textures.frame = 1;
-	wolf->textures.w_frame = 0;
+	wolf->tickrate = 0;
+	wolf->textures.head_frame = 1;
+	wolf->textures.weapon_frame = 0;
 	wolf->player.weapon_type = GUN;
 	init_actions(&wolf->actions);
 	wolf->no_mouse = TRUE;

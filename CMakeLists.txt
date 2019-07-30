@@ -65,7 +65,7 @@ set(render
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
 		sources/render/game_logic_utils.c
-		)
+        sources/render/items.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks

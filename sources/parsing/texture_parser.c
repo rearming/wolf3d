@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 10:29:28 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:09:37 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ t_sprite		*get_minecraft_art(const char *filename)
 
 int 			get_player_head(const char **files, t_anim *head, int last_file)
 {
+	head->type = HEAD;
 	head->scale = 0.2;
 	head->frames = 4;
 	head->frequency = 0.003;
