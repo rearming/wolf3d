@@ -92,6 +92,7 @@ void		draw_animated(double *frame, int tickrate,
 */
 
 void		draw_item(t_wolf *wolf, int i);
+void 		draw_items(t_wolf *wolf);
 
 /*
 **	render utils

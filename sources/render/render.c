@@ -26,7 +26,7 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.distance = 0;
 	while ((int)ray.y < wolf->map.height && (int)ray.x < wolf->map.width)
 	{
-		if (wolf->map.int_map[(int)ray.y][(int)ray.x] != 0)
+		if (wolf->map.int_map[(int)ray.y][(int)ray.x] > 0)
 			break ;
 		ray.x = wolf->player.x + ray.distance * delta_x;
 		ray.y = wolf->player.y + ray.distance * delta_y;
@@ -109,19 +109,53 @@ void		draw_animated(double *frame, int tickrate,
 			anim_sprite.placement);
 }
 
+//void		render(t_wolf *wolf)
+//{
+//	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
+//	render_columns(wolf);
+//	draw_minimap(wolf);
+//	draw_minimap_fov(wolf);
+//	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
+//				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
+//	//draw_item(wolf);
+//	if (wolf->term.opened)
+//		draw_terminal(wolf);
+//	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
+//			WIN_WIDTH * sizeof(int));
+//	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
+//	SDL_RenderPresent(wolf->sdl.rend);
+//}
+
 void		render(t_wolf *wolf)
 {
+	double	x;
+	double	y;
+	double	atan_item;
+	t_ray	ray;
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
-	render_columns(wolf);
+	x = wolf->map.items[0].x - wolf->player.x;
+	y = wolf->map.items[0].y - wolf->player.y;
+	atan_item = atan2(y, x);
+	if (atan_item < 0)
+		atan_item += 2 * M_PI;
+	ray = raycast(wolf, atan_item);
+	if (ray.distance > sqrt(x * x + y * y))
+	{
+		render_columns(wolf);
+		draw_items(wolf);
+	}
+	else
+	{
+		draw_items(wolf);
+		render_columns(wolf);
+	}
+
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
 				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
-	//draw_item(wolf);
-	if (wolf->term.opened)
-		draw_terminal(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
-			WIN_WIDTH * sizeof(int));
+					  WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
 }

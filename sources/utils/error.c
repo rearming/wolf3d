@@ -36,7 +36,7 @@ void 		raise_error(int err_code)
 		ft_printf("Expected two args: first for map (text file)"
 			" and second for \"wolf_config.wolf\" file\n");
 	if (err_code == ERR_NO_PLAYER_SPOT)
-		ft_printf("Player's spawn point ('5') must exist"
+		ft_printf("Player's spawn point ('-1') must exist"
 			" and be inside the map, surrounded by empty cells!\n");
 	if (err_code == ERR_INV_MAP_SYMBOL)
 		ft_printf("Valid maps must contain only numbers.\n");
