@@ -88,6 +88,12 @@ void		draw_animated(double *frame, int tickrate,
 						  t_sdl sdl, t_anim anim_sprite);
 
 /*
+**	item render
+*/
+
+void		draw_item(t_wolf *wolf, int i);
+
+/*
 **	render utils
 */
 

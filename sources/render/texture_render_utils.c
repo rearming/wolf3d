@@ -57,22 +57,22 @@ t_sprite	get_column_sprite(t_ray *ray, t_map map, t_textures textures)
 		return (get_sprite_by_side(ray, textures, map));
 	if ((int)ray->y < map.height && (int)ray->x < map.width)
 		texture_id = map.int_map[(int)ray->y][(int)ray->x];
-	if (textures.render_mode == WOLF3D && texture_id >= WOLF_SPRITES)
+	if (textures.texture_type == WOLF3D && texture_id >= WOLF_SPRITES)
 		texture_id = 1;
-	if (textures.render_mode == MINECRAFT && texture_id >= MINE_SPRITES)
+	if (textures.texture_type == MINECRAFT && texture_id >= MINE_SPRITES)
 		texture_id = 1;
 	return (textures.sprites[textures.texture_type][texture_id > 0 ? texture_id : 1]);
 }
 
-int			get_sprite_x_index(t_ray ray, int texture_size)
+int			get_sprite_x_index(t_ray *ray, int texture_size)
 {
-	if (ray.direction == VIEW_RIGHT)
-		return((int)((double)texture_size * ((ray.y - (int)ray.y))));
-	else if (ray.direction == VIEW_LEFT)
-		return((int)((double)texture_size * ((1 - (ray.y - (int)ray.y)))));
-	else if (ray.direction == VIEW_DOWN)
-		return((int)((double)texture_size * ((1 - (ray.x - (int)ray.x)))));
-	return ((int)((double)texture_size * ((ray.x - (int)ray.x))));
+	if (ray->direction == VIEW_RIGHT)
+		return((int)((double)texture_size * ((ray->y - (int)ray->y))));
+	else if (ray->direction == VIEW_LEFT)
+		return((int)((double)texture_size * ((1 - (ray->y - (int)ray->y)))));
+	else if (ray->direction == VIEW_DOWN)
+		return((int)((double)texture_size * ((1 - (ray->x - (int)ray->x)))));
+	return ((int)((double)texture_size * ((ray->x - (int)ray->x))));
 }
 
 int 		get_view_direction(t_ray ray)
@@ -108,7 +108,8 @@ void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 		height = WIN_HEIGHT * 2;
 	column_y = (WIN_HEIGHT - height) / 2;
 	sprite = get_column_sprite(ray, wolf->map, wolf->textures);
-	sprite_index.x = get_sprite_x_index(*ray, sprite.size);
+
+	sprite_index.x = get_sprite_x_index(ray, sprite.size);
 	while (win_y < height)
 	{
 		if (win_x + column_y * WIN_WIDTH > 0)

@@ -104,8 +104,8 @@ void		wolf_init(t_wolf *wolf)
 
 	wolf->textures.render_mode = COMPASS_MODE;
 	wolf->textures.render_mode = INDEX_MODE;
-	wolf->textures.texture_mode = MINECRAFT;
-	wolf->textures.texture_mode = WOLF3D;
+	wolf->textures.texture_type = MINECRAFT;
+	wolf->textures.texture_type = WOLF3D;
 
 	wolf->tickrate = 0;
 	wolf->textures.head_frame = 1;

@@ -109,36 +109,6 @@ void		draw_animated(double *frame, int tickrate,
 			anim_sprite.placement);
 }
 
-
-void 		draw_item(t_wolf *wolf)
-{
-	t_point		item;
-	t_point		res;
-	double 		atan_item;
-	double 		player;
-
-	item = wolf->map.items[0];
-
-	res.x = item.x - (int)wolf->player.x;
-	res.y = item.y - (int)wolf->player.y;
-	atan_item = atan2(res.y, res.x);
-	//player = atan2(wolf->player.x, wolf->player.y);
-	if (atan_item <= wolf->player.angle + wolf->player.fov / 2 && atan_item >= wolf->player.angle - wolf->player.fov / 2)
-	{
-		printf("%f\n", atan_item);
-		printf("visiable!\n");
-		printf("max: [%f] | min: [%f]\n", wolf->player.angle + wolf->player.fov / 2, wolf->player.angle - wolf->player.fov / 2);
-	}
-	else
-	{
-		printf("NOT\n");
-		printf("max: [%f] | min: [%f]\n", wolf->player.angle + wolf->player.fov / 2, wolf->player.angle - wolf->player.fov / 2);
-		printf("item: [%f]\n", atan_item);
-	//	printf("player: [%f]\n", new_angle);
-	}
-	//printf("item's x: [%i] | y: [%i]\n", item.x, item.y);
-}
-
 void		render(t_wolf *wolf)
 {
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
