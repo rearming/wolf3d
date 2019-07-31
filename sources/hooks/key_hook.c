@@ -12,52 +12,52 @@
 
 #include "wolf3d.h"
 
-void			keyup_hook(t_wolf *wolf, SDL_Event event)
+void			keyup_hook(t_wolf *wolf, SDL_Event *event)
 {
-	if (event.key.keysym.scancode == SDL_SCANCODE_UP
-		|| event.key.keysym.scancode == SDL_SCANCODE_W)
+	if (event->key.keysym.scancode == SDL_SCANCODE_UP
+		|| event->key.keysym.scancode == SDL_SCANCODE_W)
 		wolf->actions.up = FALSE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_DOWN
-		|| event.key.keysym.scancode == SDL_SCANCODE_S)
+	if (event->key.keysym.scancode == SDL_SCANCODE_DOWN
+		|| event->key.keysym.scancode == SDL_SCANCODE_S)
 		wolf->actions.down = FALSE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT
-		|| event.key.keysym.scancode == SDL_SCANCODE_D)
+	if (event->key.keysym.scancode == SDL_SCANCODE_RIGHT
+		|| event->key.keysym.scancode == SDL_SCANCODE_D)
 		wolf->actions.right = FALSE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_LEFT
-		|| event.key.keysym.scancode == SDL_SCANCODE_A)
+	if (event->key.keysym.scancode == SDL_SCANCODE_LEFT
+		|| event->key.keysym.scancode == SDL_SCANCODE_A)
 		wolf->actions.left = FALSE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_LSHIFT)
+	if (event->key.keysym.scancode == SDL_SCANCODE_LSHIFT)
 		wolf->actions.lshift = FALSE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+	if (event->key.keysym.scancode == SDL_SCANCODE_RIGHT)
 		wolf->actions.arr_right = FALSE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+	if (event->key.keysym.scancode == SDL_SCANCODE_LEFT)
 		wolf->actions.arr_left = FALSE;
 }
 
-void			keydown_hook(t_wolf *wolf, SDL_Event event)
+void			keydown_hook(t_wolf *wolf, SDL_Event *event)
 {
-	if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+	if (event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 		sdl_exit(wolf);
-	if (check_term(wolf, event.key.keysym))
-		return (get_term_input(wolf, event.key.keysym));
-	if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT)
+	if (check_term(wolf, event->key.keysym))
+		return (get_term_input(wolf, event->key.keysym));
+	if (event->key.keysym.scancode == SDL_SCANCODE_RIGHT)
 		wolf->actions.arr_right = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_LEFT)
+	if (event->key.keysym.scancode == SDL_SCANCODE_LEFT)
 		wolf->actions.arr_left = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_UP
-		|| event.key.keysym.scancode == SDL_SCANCODE_W)
+	if (event->key.keysym.scancode == SDL_SCANCODE_UP
+		|| event->key.keysym.scancode == SDL_SCANCODE_W)
 		wolf->actions.up = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_DOWN
-		|| event.key.keysym.scancode == SDL_SCANCODE_S)
+	if (event->key.keysym.scancode == SDL_SCANCODE_DOWN
+		|| event->key.keysym.scancode == SDL_SCANCODE_S)
 		wolf->actions.down = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_D)
+	if (event->key.keysym.scancode == SDL_SCANCODE_D)
 		wolf->actions.right = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_A)
+	if (event->key.keysym.scancode == SDL_SCANCODE_A)
 		wolf->actions.left = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_LSHIFT)
+	if (event->key.keysym.scancode == SDL_SCANCODE_LSHIFT)
 		wolf->actions.lshift = TRUE;
-	if (event.key.keysym.scancode == SDL_SCANCODE_P)
+	if (event->key.keysym.scancode == SDL_SCANCODE_P)
 		SDL_SetRelativeMouseMode(SDL_FALSE);
-	if (event.key.keysym.scancode == SDL_SCANCODE_R)
+	if (event->key.keysym.scancode == SDL_SCANCODE_R)
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 }

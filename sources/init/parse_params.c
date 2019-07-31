@@ -15,8 +15,8 @@
 char	**parse_params(char **argv, int argc)
 {
 	char	**config_args;
-	int 	fd;
-	int 	config_size;
+	int		fd;
+	int		config_size;
 
 	config_args = NULL;
 	if (argc != 3)

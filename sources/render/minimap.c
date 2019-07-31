@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/29 10:07:51 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:06:36 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static t_point	set_head_position(t_wolf *wolf)
 	* (wolf->textures.head.scale / 2)});
 }
 
-static t_point	scale_fov_drawing(t_ray ray, t_wolf *wolf)
+static t_point*	scale_fov_drawing(t_ray ray, t_wolf *wolf)
 {
-	return ((t_point){(wolf->minimap.scale.x / 2) +
+	return (&(t_point){(wolf->minimap.scale.x / 2) +
 	(ray.x * wolf->minimap.fov_scale -
 	wolf->player.x * wolf->minimap.fov_scale),
 				(wolf->minimap.scale.y / 2) +
@@ -50,8 +50,8 @@ static void		raycast_draw(t_wolf *wolf, t_dpoint delta)
 		ray.y = wolf->player.y + ray.distance * delta.y;
 		ray.distance += 0.1;
 		if (!is_outside_map(ray, wolf))
-			sdl_put_pixel(scale_fov_drawing(ray, wolf), wolf->sdl);
-		if (wolf->map.int_map[(int)ray.y][(int)ray.x] != 0)
+			sdl_put_pixel(scale_fov_drawing(ray, wolf), &wolf->sdl);
+		if (wolf->map.int_map[(int)ray.y][(int)ray.x] > 0)
 			break ;
 	}
 }
@@ -91,9 +91,9 @@ void			draw_minimap(t_wolf *wolf)
 		while (iter.x < wolf->minimap.scale.x)
 		{
 			if (cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
-				sdl_put_pixel((t_point){iter.x, iter.y, 0, GREY}, wolf->sdl);
+				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, GREY}, &wolf->sdl);
 			if (!cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
-				sdl_put_pixel((t_point){iter.x, iter.y, 0, BLACK}, wolf->sdl);
+				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, BLACK}, &wolf->sdl);
 			iter.x++;
 			map.x += (double)wolf->minimap.size.x / wolf->minimap.scale.x;
 		}

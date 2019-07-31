@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 19:36:57 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:22:00 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void 		draw_items(t_wolf *wolf);
 **	render utils
 */
 
-void		sdl_put_pixel(t_point point, t_sdl sdl);
+void		sdl_put_pixel(t_point *point, t_sdl *sdl);
 void		bresen_line(t_sdl sdl, t_point start, t_point end, int color);
 int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(unsigned char *r, unsigned char *g,
@@ -136,12 +136,12 @@ void		sdl_clean(t_wolf *wolf);
 **	hooks
 */
 
-void		keydown_hook(t_wolf *wolf, SDL_Event event);
-void		keyup_hook(t_wolf *wolf, SDL_Event event);
-void		mouse_motion_hook(t_wolf *wolf, SDL_Event event);
-void		mouse_down_hook(t_wolf *wolf, SDL_Event event);
-void 		mouse_wheel_event(t_wolf *wolf, SDL_Event event);
-void		mouse_up_hook(t_wolf *wolf, SDL_Event event);
+void		keydown_hook(t_wolf *wolf, SDL_Event *event);
+void		keyup_hook(t_wolf *wolf, SDL_Event *event);
+void		mouse_motion_hook(t_wolf *wolf, SDL_Event *event);
+void		mouse_down_hook(t_wolf *wolf, SDL_Event *event);
+void 		mouse_wheel_event(t_wolf *wolf, SDL_Event *event);
+void		mouse_up_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_actions(t_wolf *wolf);
 
 /*
@@ -176,8 +176,8 @@ void			process_full_command(t_wolf *wolf, t_erm *term);
 **	utils
 */
 
-void 		raise_error(int err_code);
-void		sdl_exit(t_wolf *wolf);
+void			raise_error(int err_code);
+void			sdl_exit(t_wolf *wolf);
 
 /*
 **	debug

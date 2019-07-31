@@ -6,13 +6,13 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 11:59:40 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:22:08 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		player_moving(t_wolf *wolf)
+static void	player_moving(t_wolf *wolf)
 {
 	if (wolf->actions.up)
 		move_forward(wolf);
@@ -23,13 +23,13 @@ void		player_moving(t_wolf *wolf)
 	if (wolf->actions.left)
 		move_left(wolf);
 	if (wolf->actions.arr_left)
-		change_angle(&wolf->player.angle, -0.05);
+		wolf->player.angle -= 0.05;
 	if (wolf->actions.arr_right)
-		change_angle(&wolf->player.angle, 0.05);
+		wolf->player.angle += 0.05;
 	player_run(wolf);
 }
 
-int 		get_tickrate(t_wolf *wolf)
+static int	get_tickrate(t_wolf *wolf)
 {
 	uint32_t		tick;
 
@@ -39,31 +39,34 @@ int 		get_tickrate(t_wolf *wolf)
 	return (tick);
 }
 
+void		process_event(SDL_Event *event, t_wolf *wolf)
+{
+	if (event->type == SDL_WINDOWEVENT_EXPOSED)
+		SDL_SetRelativeMouseMode(SDL_TRUE);
+	if (event->type == SDL_KEYDOWN)
+		keydown_hook(wolf, event);
+	if (event->type == SDL_KEYUP)
+		keyup_hook(wolf, event);
+	if (event->type == SDL_MOUSEMOTION)
+		mouse_motion_hook(wolf, event);
+	if (event->type == SDL_MOUSEBUTTONDOWN)
+		mouse_down_hook(wolf, event);
+	if (event->type == SDL_MOUSEBUTTONUP)
+		mouse_up_hook(wolf, event);
+	if (event->type == SDL_MOUSEWHEEL)
+		mouse_wheel_event(wolf, event);
+}
+
 void		sdl_loop(t_wolf *wolf)
 {
 	SDL_Event		event;
-	double 			ticks;
+	double			ticks;
 
 	ticks = 0;
 	while (21)
 	{
 		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_WINDOWEVENT_EXPOSED)
-				SDL_SetRelativeMouseMode(SDL_TRUE);
-			if (event.type == SDL_KEYDOWN)
-				keydown_hook(wolf, event);
-			if (event.type == SDL_KEYUP)
-				keyup_hook(wolf, event);
-			if (event.type == SDL_MOUSEMOTION)
-				mouse_motion_hook(wolf, event);
-			if (event.type == SDL_MOUSEBUTTONDOWN)
-				mouse_down_hook(wolf, event);
-			if (event.type == SDL_MOUSEBUTTONUP)
-				mouse_up_hook(wolf, event);
-			if (event.type == SDL_MOUSEWHEEL)
-				mouse_wheel_event(wolf, event);
-		}
+			process_event(&event, wolf);
 		if (event.type == SDL_QUIT)
 			break ;
 		wolf->tickrate = get_tickrate(wolf);

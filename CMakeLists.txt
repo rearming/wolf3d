@@ -45,9 +45,6 @@ set(init
 		sources/init/init.c
 		sources/init/parse_params.c)
 
-set(debug
-		sources/debug/debug.c)
-
 set(utils
 		sources/utils/error.c
 		sources/utils/exit.c
@@ -55,7 +52,7 @@ set(utils
 
 set(SDL_utils
 		sources/SDL_utils/sdl_loop.c
-		sources/SDL_utils/SDL_clean.c
+		sources/SDL_utils/sdl_clean.c
 		)
 
 set(render
@@ -64,7 +61,7 @@ set(render
 		sources/render/bresenham.c
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
-		sources/render/game_logic_utils.c
+		sources/game_logic/game_logic_utils.c
         sources/render/items.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
@@ -72,7 +69,7 @@ set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
 		sources/hooks/player_moves.c
-		sources/hooks/player_actions.c)
+		sources/game_logic/player_actions.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c

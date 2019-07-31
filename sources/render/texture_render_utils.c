@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 14:28:21 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/29 10:23:21 by rearming         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:07:39 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,16 @@ void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 	win_y = 0;
 	ray->distance *= cos(ray->angle - wolf->player.angle);
 	height = (int)((double)WIN_HEIGHT / ray->distance);
-	if (height > WIN_HEIGHT * 2)
-		height = WIN_HEIGHT * 2;
 	column_y = (WIN_HEIGHT - height) / 2;
 	sprite = get_column_sprite(ray, wolf->map, wolf->textures);
-
 	sprite_index.x = get_sprite_x_index(ray, sprite.size);
 	while (win_y < height)
 	{
-		if (win_x + column_y * WIN_WIDTH > 0)
-			wolf->sdl.pixels[win_x + column_y * WIN_WIDTH] =
-					sprite.data[win_y * sprite.height / height][sprite_index.x];
+		if (win_x + column_y * WIN_WIDTH > 0
+		&& win_x + column_y * WIN_WIDTH < WIN_HEIGHT * WIN_WIDTH
+		&& win_y * sprite.height / height < sprite.size)
+			wolf->sdl.pixels[win_x + column_y * WIN_WIDTH]
+			= sprite.data[win_y * sprite.height / height][sprite_index.x];
 		column_y++;
 		win_y++;
 	}

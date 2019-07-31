@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 12:27:06 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:00:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ int			cell_is_empty(t_map map, t_point pos)
 {
 	if (pos.x >= map.width || pos.x < 0 || pos.y >= map.height || pos.y < 0)
 		return (1);
-	if (map.int_map[pos.y][pos.x] != 0)
+	if (map.int_map[pos.y][pos.x] > 0)
 			return (0);
 	return (1);
 }
 
-void		sdl_put_pixel(t_point point, t_sdl sdl)
+inline void		sdl_put_pixel(t_point *point, t_sdl *sdl)
 {
-	if (point.x >= 0 && point.y >= 0
-		&& point.x < WIN_WIDTH && point.y < WIN_HEIGHT)
-			sdl.pixels[point.x + point.y * WIN_WIDTH] = point.color;
+	if (point->x >= 0 && point->y >= 0
+		&& point->x < WIN_WIDTH && point->y < WIN_HEIGHT)
+			sdl->pixels[point->x + point->y * WIN_WIDTH] = point->color;
 }
 
 int			get_int_from_rgb(int r, int g, int b, int a)

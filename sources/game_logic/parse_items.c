@@ -6,17 +6,17 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/19 13:10:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/19 20:43:05 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:25:18 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int 		count_items(t_map map)
+int			count_items(t_map map)
 {
-	int 		items_nbr;
-	int		 	y;
-	int		 	x;
+	int			items_nbr;
+	int			y;
+	int			x;
 
 	y = 0;
 	items_nbr = 0;
@@ -34,12 +34,14 @@ int 		count_items(t_map map)
 	return (items_nbr);
 }
 
+//todo сделать нормальный парсинг айтемов
+
 t_point		*find_items(t_wolf *wolf)
 {
 	t_point		*items;
-	int		 	y;
-	int		 	x;
-	int 		i;
+	int			y;
+	int			x;
+	int			i;
 
 	i = 0;
 	y = 0;

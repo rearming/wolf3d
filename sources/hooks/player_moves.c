@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:26:24 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:29:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void		move_forward(t_wolf *wolf)
 	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y += wolf->player.speed_fwd
-						  * sin(wolf->player.angle);
+				* sin(wolf->player.angle);
 		wolf->player.x += wolf->player.speed_fwd
-						  * cos(wolf->player.angle);
+				* cos(wolf->player.angle);
 	}
 }
 
@@ -40,9 +40,9 @@ void		move_back(t_wolf *wolf)
 	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y -= wolf->player.speed_fwd
-						  * sin(wolf->player.angle);
+				* sin(wolf->player.angle);
 		wolf->player.x -= wolf->player.speed_fwd
-						  * cos(wolf->player.angle);
+				* cos(wolf->player.angle);
 	}
 }
 
@@ -57,9 +57,9 @@ void		move_right(t_wolf *wolf)
 	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y += wolf->player.speed_side
-						  * sin(wolf->player.angle + M_PI / 2);
+				* sin(wolf->player.angle + M_PI / 2);
 		wolf->player.x += wolf->player.speed_side
-						  * cos(wolf->player.angle + M_PI / 2);
+				* cos(wolf->player.angle + M_PI / 2);
 	}
 }
 
@@ -74,9 +74,9 @@ void		move_left(t_wolf *wolf)
 	if (cell_is_empty(wolf->map, block))
 	{
 		wolf->player.y += wolf->player.speed_side
-						  * sin(wolf->player.angle - M_PI / 2);
+				* sin(wolf->player.angle - M_PI / 2);
 		wolf->player.x += wolf->player.speed_side
-						  * cos(wolf->player.angle - M_PI / 2);
+				* cos(wolf->player.angle - M_PI / 2);
 	}
 }
 
@@ -96,5 +96,4 @@ void		player_run(t_wolf *wolf)
 		wolf->player.speed_fwd /= 2;
 		wolf->actions.lshift_was_pressed = FALSE;
 	}
-
 }

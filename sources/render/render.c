@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 19:36:57 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:06:00 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void		scaled_draw(t_sdl sdl, t_sprite sprite,
 		while (x < scale * sprite.width)
 		{
 			if ((sprite.data[(int)(y / scale)][(int)(x / scale)] >> 24) != 0)
-				sdl_put_pixel((t_point){x + print_coord.x, y + print_coord.y, 0,
+				sdl_put_pixel(&(t_point){x + print_coord.x, y + print_coord.y, 0,
 							sprite.data
-							[(int)(y / scale)][(int)(x / scale)]}, sdl);
+							[(int)(y / scale)][(int)(x / scale)]}, &sdl);
 			x++;
 		}
 		y++;
@@ -154,6 +154,8 @@ void		render(t_wolf *wolf)
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
 				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
+	if (wolf->term.opened)
+		draw_terminal(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
 					  WIN_WIDTH * sizeof(int));
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
