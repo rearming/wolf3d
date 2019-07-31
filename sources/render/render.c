@@ -128,28 +128,28 @@ void		draw_animated(double *frame, int tickrate,
 
 void		render(t_wolf *wolf)
 {
-	double	x;
-	double	y;
-	double	atan_item;
-	t_ray	ray;
+//	double	x;
+//	double	y;
+//	double	atan_item;
+//	t_ray	ray;
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
-	x = wolf->map.items[0].x - wolf->player.x;
-	y = wolf->map.items[0].y - wolf->player.y;
-	atan_item = atan2(y, x);
-	if (atan_item < 0)
-		atan_item += 2 * M_PI;
-	ray = raycast(wolf, atan_item);
-	if (ray.distance > sqrt(x * x + y * y))
-	{
-		render_columns(wolf);
-		draw_items(wolf);
-	}
-	else
-	{
-		draw_items(wolf);
-		render_columns(wolf);
-	}
-
+//	x = wolf->map.items[0].x - wolf->player.x;
+//	y = wolf->map.items[0].y - wolf->player.y;
+//	atan_item = atan2(y, x);
+//	if (atan_item < 0)
+//		atan_item += 2 * M_PI;
+//	ray = raycast(wolf, atan_item);
+//	if (ray.distance > sqrt(x * x + y * y))
+//	{
+//		render_columns(wolf);
+//		draw_items(wolf);
+//	}
+//	else
+//	{
+//		draw_items(wolf);
+//		render_columns(wolf);
+//	}
+    draw_items(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,

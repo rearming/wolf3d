@@ -1,16 +1,47 @@
 #include "wolf3d.h"
 
-void 	draw_items(t_wolf *wolf)
+void    draw_items(t_wolf *wolf)
 {
-	int i;
+    int     i;
+    double  x;
+    double  y;
+    t_ray   ray;
+    double	atan_item;
 
-	i = 0;
-	while (i < wolf->map.items_nbr)
-	{
-		draw_item(wolf, i);
-		i++;
-	}
+    while (i < wolf->map.items_nbr)
+    {
+        x = wolf->map.items[i].x - wolf->player.x;
+        y = wolf->map.items[i].y - wolf->player.y;
+        atan_item = atan2(y, x);
+        if (atan_item < 0)
+            atan_item += 2 * M_PI;
+        ray = raycast(wolf, atan_item);
+        if (ray.distance > sqrt(x * x + y * y))
+        {
+            render_columns(wolf);
+            draw_item(wolf, i);
+        }
+        else
+        {
+            draw_item(wolf, i);
+            render_columns(wolf);
+        }
+        i++;
+    }
+
 }
+
+//void 	draw_items(t_wolf *wolf)
+//{
+//	int i;
+//
+//	i = 0;
+//	while (i < wolf->map.items_nbr)
+//	{
+//		draw_item(wolf, i);
+//		i++;
+//	}
+//}
 
 void check_condition(t_wolf *wolf, double atan_item, double *cord, int i)
 {
