@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 20:06:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 22:20:23 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,8 @@ void		render(t_wolf *wolf)
 //		draw_items(wolf);
 //		render_columns(wolf);
 //	}
-    draw_items(wolf);
+	render_columns(wolf);
+    //draw_items(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,

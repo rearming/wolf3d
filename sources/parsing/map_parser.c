@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/07/26 14:21:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 21:44:08 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		split_map(t_map *map)
 {
-	int 	x;
-	int 	y;
+	int		x;
+	int		y;
 
 	y = 0;
 	map->width = 0;
@@ -33,11 +33,22 @@ void		split_map(t_map *map)
 	}
 }
 
+static void	get_int_map_cell(t_map *map, int *is_ended, int x, int y)
+{
+	if (map->raw_map[y][x] && !(*is_ended))
+		map->int_map[y][x] = ft_atoi(map->raw_map[y][x]);
+	else
+	{
+		*is_ended = TRUE;
+		map->int_map[y][x] = 0;
+	}
+}
+
 void		get_int_map(t_map *map)
 {
-	int 	x;
-	int 	y;
-	int 	is_ended;
+	int		x;
+	int		y;
+	int		is_ended;
 
 	is_ended = FALSE;
 	split_map(map);
@@ -51,13 +62,7 @@ void		get_int_map(t_map *map)
 			raise_error(ERR_MALLOC);
 		while (x < map->width)
 		{
-			if (map->raw_map[y][x] && !is_ended)
-				map->int_map[y][x] = ft_atoi(map->raw_map[y][x]);
-			else
-			{
-				is_ended = TRUE;
-				map->int_map[y][x] = 0;
-			}
+			get_int_map_cell(map, &is_ended, x, y);
 			x++;
 		}
 		is_ended = FALSE;
@@ -67,7 +72,7 @@ void		get_int_map(t_map *map)
 
 void		clean_temp_maps(t_map *map)
 {
-	int 	y;
+	int		y;
 
 	y = 0;
 	while (y < map->height)
@@ -83,7 +88,7 @@ void		clean_temp_maps(t_map *map)
 
 t_map		get_map(char *filename)
 {
-	int 	fd;
+	int		fd;
 	t_map	map;
 
 	fd = open(filename, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 18:59:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/25 12:59:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 20:45:31 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			get_bmp_title(t_img *bmp, FILE *file)
 {
-	char 	buff[4];
+	char	buff[4];
 
 	fread(buff, sizeof(short), 1, file);
 	fread(buff, sizeof(int), 1, file);
@@ -27,10 +27,11 @@ int			get_bmp_title(t_img *bmp, FILE *file)
 
 void		get_bmp_image(t_img *bmp, const char *filename)
 {
-	int 			i;
-	int 			offset;
+	int				i;
+	int				offset;
 	FILE			*file;
 
+	printf("reading bmp!, filename: [%s]\n", filename);
 	if (!(file = fopen(filename, "rb")))
 		raise_error(ERR_INV_IMAGE);
 	offset = get_bmp_title(bmp, file);
@@ -50,7 +51,7 @@ void		get_bmp_image(t_img *bmp, const char *filename)
 
 void		get_tilemap_data(t_img *img, const char *filename)
 {
-	int 	filename_len;
+	int		filename_len;
 
 	img->data = NULL;
 	filename_len = ft_strlen(filename);

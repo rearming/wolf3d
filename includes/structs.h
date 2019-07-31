@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:43:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 22:05:37 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 typedef	struct			s_dpoint
 {
-	double 				x;
-	double 				y;
+	double				x;
+	double				y;
 }						t_dpoint;
 
 typedef struct			s_point
@@ -29,13 +29,13 @@ typedef struct			s_point
 
 typedef struct			s_img
 {
-	int 				width;
-	int 				height;
-	int 				bpp;
-	long 				file_size;
-	long 				img_size;
-	int 				offset;
-	unsigned char 		*data;
+	int					width;
+	int					height;
+	int					bpp;
+	long				file_size;
+	long				img_size;
+	int					offset;
+	unsigned char		*data;
 }						t_img;
 
 typedef struct			s_sdl
@@ -56,25 +56,25 @@ typedef	struct			s_ttf
 
 typedef	struct			s_ray
 {
-	double 				x;
-	double 				y;
-	double 				distance;
-	double 				angle;
-	int 				direction;
+	double				x;
+	double				y;
+	double				distance;
+	double				angle;
+	int					direction;
 }						t_ray;
 
 typedef struct			s_actions
 {
 	char				up;
-	char 				down;
-	char 				right;
-	char 				left;
-	char 				arr_left;
-	char 				arr_right;
-	char 				lshift;
-	char 				lshift_was_pressed;
-	char 				mouse_left;
-	char 				mouse_right;
+	char				down;
+	char				right;
+	char				left;
+	char				arr_left;
+	char				arr_right;
+	char				lshift;
+	char				lshift_was_pressed;
+	char				mouse_left;
+	char				mouse_right;
 }						t_actions;
 
 typedef struct			s_minimap
@@ -87,15 +87,15 @@ typedef struct			s_minimap
 typedef	struct			s_sprite
 {
 	int					**data;
-	int 				size;
-	int 				width;
-	int 				height;
-	int 				bpp;
+	int					size;
+	int					width;
+	int					height;
+	int					bpp;
 }						t_sprite;
 
 typedef struct			s_anim
 {
-	int 				type;
+	int					type;
 	t_sprite			*sprite;
 	t_point				placement;
 	int					frames;
@@ -103,11 +103,14 @@ typedef struct			s_anim
 	double				scale;
 }						t_anim;
 
-typedef	struct 			s_textures
+/*
+** 114 tiles in wolf tilemap
+** 256 tiles in minecraft tilemap
+*/
+
+typedef	struct			s_textures
 {
-	//110 (без оранжевой штуки внизу) тайлов в вульфе
-	//256 (c фиолетовой хренью) тайлов в майнкрафте
-	t_sprite**			sprites;
+	t_sprite			**sprites;
 	int					texture_type;
 	int					render_mode;
 	t_anim				weapons[WEAPONS_NUM];
@@ -119,36 +122,36 @@ typedef	struct 			s_textures
 typedef struct			s_map
 {
 	char				***raw_map;
-	char 				**char_map;
-	int 				**int_map;
-	int 				height;
-	int 				width;
+	char				**char_map;
+	int					**int_map;
+	int					height;
+	int					width;
 	t_point				player_spawn;
 	t_point				*items;
-	int 				items_nbr;
+	int					items_nbr;
 }						t_map;
 
 typedef struct			s_player
 {
-	double 				x;
-	double 				y;
-	double 				fov;
-	double 				angle;
-	double 				base_speed;
-	double 				speed_fwd;
-	double 				speed_side;
-	double 				ang_speed;
-	double 				fat;
-	int 				weapon_type;
+	double				x;
+	double				y;
+	double				fov;
+	double				angle;
+	double				base_speed;
+	double				speed_fwd;
+	double				speed_side;
+	double				ang_speed;
+	double				fat;
+	int					weapon_type;
 }						t_player;
 
 typedef struct			s_erm
 {
 	t_point				pos;
 	double				scale;
-	int 				text_color;
-	int 				line_color;
-	char 				prepare;
+	int					text_color;
+	int					line_color;
+	char				prepare;
 	char				opened;
 	char				buffs[TERM_MEM_SIZE][TERM_BUFF_SIZE];
 	char				**command;
@@ -166,8 +169,8 @@ typedef struct			s_wolf
 	t_sdl				sdl;
 	t_ttf				ttf;
 	t_textures			textures;
-	int 				tickrate;
-	int 				no_mouse;
+	int					tickrate;
+	int					no_mouse;
 	t_map				map;
 	t_erm				term;
 }						t_wolf;
@@ -189,7 +192,7 @@ typedef struct			s_fast_gnl
 {
 	char				*temp_str;
 	char				*backup;
-	char 				**result;
+	char				**result;
 	char				buf[WOLF_BUFF_SIZE + 1];
 	int					read_res;
 	size_t				sum_len;

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:16:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 19:36:57 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 21:58:30 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	raise_error2(int err_code)
 {
 	if (err_code == ERR_BIG_MAP)
 		ft_printf("Map is too big - size of valid maps can't be more than"
-				  " %i x %i chars.\n", MAX_MAP_SIZE, MAX_MAP_SIZE);
+				" %i x %i chars.\n", MAX_MAP_SIZE, MAX_MAP_SIZE);
 	if (err_code == ERR_INV_IMAGE)
 		ft_printf("Image or texture file is invalid for some reason!\n");
 	if (err_code == ERR_INV_CONFIG_SIZE)
@@ -29,7 +29,7 @@ static void	raise_error2(int err_code)
 		ft_printf("SDL ttf error: %s\n", "TTF_RenderText failed.");
 }
 
-void 		raise_error(int err_code)
+void		raise_error(int err_code)
 {
 	ft_printf("\nError!\n");
 	if (err_code == ERR_INV_ARGS)

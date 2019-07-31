@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:13:57 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 13:01:58 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 21:53:35 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int				close_term(t_erm *term)
 		while (term->mem_i > 0)
 		{
 			ft_memcpy(term->buffs[term->mem_i], term->buffs[term->mem_i - 1],
-					  TERM_BUFF_SIZE);
+					TERM_BUFF_SIZE);
 			term->mem_i--;
 		}
 	}
@@ -44,8 +44,8 @@ void			get_prev_term_buff(t_wolf *wolf, SDL_Keysym key)
 	if (key.scancode == SDL_SCANCODE_DOWN && wolf->term.mem_i > 0)
 	{
 		if (ft_strlen(wolf->term.buffs[wolf->term.mem_i - 1]) != 2
-			|| wolf->term.mem_i == 1)
-				wolf->term.mem_i--;
+		|| wolf->term.mem_i == 1)
+			wolf->term.mem_i--;
 	}
 }
 
@@ -62,14 +62,16 @@ void			get_term_input(t_wolf *wolf, SDL_Keysym key)
 	else if (ft_strequ(keyname, SPACE))
 		wolf->term.buffs[wolf->term.mem_i][wolf->term.i] = ' ';
 	else if (!ft_strequ(keyname, ";") && !ft_strequ(keyname, DELETE))
-		wolf->term.buffs[wolf->term.mem_i][wolf->term.i] = (char)ft_tolower(keyname[0]);
+		wolf->term.buffs[wolf->term.mem_i][wolf->term.i] =
+				(char)ft_tolower(keyname[0]);
 }
 
 int				check_term(t_wolf *wolf, SDL_Keysym key)
 {
 	if (key.scancode == SDL_SCANCODE_RETURN && wolf->term.opened)
 	{
-		wolf->term.command = ft_strsplit(&wolf->term.buffs[wolf->term.mem_i][2], ' ');
+		wolf->term.command =
+				ft_strsplit(&wolf->term.buffs[wolf->term.mem_i][2], ' ');
 		if (wolf->term.command)
 			parse_command(wolf, &wolf->term);
 		return (close_term(&wolf->term));
@@ -79,7 +81,8 @@ int				check_term(t_wolf *wolf, SDL_Keysym key)
 		wolf->term.prepare = TRUE;
 		return (FALSE);
 	}
-	if ((key.sym == SDLK_COLON || key.sym == SDLK_SEMICOLON) && wolf->term.prepare)
+	if ((key.sym == SDLK_COLON || key.sym == SDLK_SEMICOLON)
+	&& wolf->term.prepare)
 	{
 		wolf->term.opened = TRUE;
 		return (TRUE);

@@ -6,12 +6,12 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 20:22:00 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/07/31 22:48:04 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WOLF_3D_H
-# define WOLF_3D_H
+#ifndef WOLF3D_H
+# define WOLF3D_H
 
 # include <stdio.h>
 # include <math.h>
@@ -49,17 +49,17 @@ char		**parse_params(char **argv, int argc);
 
 t_map		get_map(char *filename);
 char		**fast_gnl(int fd);
-int 		count_items(t_map map);
+int			count_items(t_map map);
 t_point		*find_items(t_wolf *wolf);
 
 /*
 **	parsing utils
 */
 
-void 		check_player_spot(t_map *map, t_point spot);
+void		check_player_spot(t_map *map, t_point spot);
 void		check_cell(t_map *map, int x, int y);
 void		check_valid(t_map *map);
-int 		get_map_height(const char **char_map);
+int			get_map_height(const char **char_map);
 void		convert_spaces(char **map);
 
 /*
@@ -73,26 +73,37 @@ void		get_tilemap_data(t_img *img, const char *filename);
 **	textures parsing
 */
 
-t_textures get_all_textures(const char **files);
+t_textures	get_all_textures(const char **files);
+t_sprite	get_sprite(t_img img, int sprite_size, t_point sprite_pos);
+int			get_color_from_tilemap(t_img img, int j, int i);
+int			get_animation(const char **files, int start,
+								t_anim *weapon, int size);
+/*
+**	sprites parsing
+*/
+int			get_all_weapons(const char **files, t_anim *weapons);
+t_sprite	*get_minecraft_art(const char *filename);
+int			get_player_head(const char **files, t_anim *head, int last_file);
 
 /*
 **	render
 */
 
 void		render(t_wolf *wolf);
+void		render_columns(t_wolf *wolf);
 t_ray		raycast(t_wolf *wolf, double angle);
 void		draw_column(t_ray *ray, t_wolf *wolf, int win_x);
 void		scaled_draw(t_sdl sdl, t_sprite sprite,
 					double scale, t_point print_coord);
 void		draw_animated(double *frame, int tickrate,
-						  t_sdl sdl, t_anim anim_sprite);
+					t_sdl sdl, t_anim anim_sprite);
 
 /*
 **	item render
 */
 
 void		draw_item(t_wolf *wolf, int i);
-void 		draw_items(t_wolf *wolf);
+void		draw_items(t_wolf *wolf);
 
 /*
 **	render utils
@@ -102,9 +113,9 @@ void		sdl_put_pixel(t_point *point, t_sdl *sdl);
 void		bresen_line(t_sdl sdl, t_point start, t_point end, int color);
 int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(unsigned char *r, unsigned char *g,
-							 unsigned char *b, int color);
+							unsigned char *b, int color);
 int			cell_is_empty(t_map map, t_point pos);
-int 		get_view_direction(t_ray ray);
+int			get_view_direction(t_ray ray);
 
 /*
 **	terminal render
@@ -116,7 +127,7 @@ void		draw_terminal(t_wolf *wolf);
 **	game logic utils
 */
 
-int 		is_border_block(t_map map, t_point block);
+int			is_border_block(t_map map, t_point block);
 
 /*
 **	minimap
@@ -140,7 +151,7 @@ void		keydown_hook(t_wolf *wolf, SDL_Event *event);
 void		keyup_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_down_hook(t_wolf *wolf, SDL_Event *event);
-void 		mouse_wheel_event(t_wolf *wolf, SDL_Event *event);
+void		mouse_wheel_event(t_wolf *wolf, SDL_Event *event);
 void		mouse_up_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_actions(t_wolf *wolf);
 
@@ -166,22 +177,28 @@ void		change_angle(double *angle, double value);
 **	terminal
 */
 
-void			get_term_input(t_wolf *wolf, SDL_Keysym key);
-int				check_term(t_wolf *wolf, SDL_Keysym key);
-void			parse_command(t_wolf *wolf, t_erm *term);
+void		get_term_input(t_wolf *wolf, SDL_Keysym key);
+int			check_term(t_wolf *wolf, SDL_Keysym key);
+void		parse_command(t_wolf *wolf, t_erm *term);
 
-void			process_full_command(t_wolf *wolf, t_erm *term);
+void		process_full_command(t_wolf *wolf, t_erm *term);
+
+/*
+**	terminal actions
+*/
+
+void		change_block_index(t_wolf *wolf, t_erm *term);
+void		change_all_blocks(t_wolf *wolf, t_erm *term);
 
 /*
 **	utils
 */
 
-void			raise_error(int err_code);
-void			sdl_exit(t_wolf *wolf);
+void		raise_error(int err_code);
+void		sdl_exit(t_wolf *wolf);
 
 /*
 **	debug
 */
-
 
 #endif

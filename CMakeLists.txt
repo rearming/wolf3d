@@ -43,7 +43,7 @@ set(main
 
 set(init
 		sources/init/init.c
-		sources/init/parse_params.c)
+		sources/init/parse_params.c sources/init/sdl_init.c)
 
 set(utils
 		sources/utils/error.c
@@ -75,12 +75,12 @@ set(parsing
 		sources/parsing/map_parser.c
 		sources/parsing/fast_gnl.c
 		sources/parsing/texture_parser.c
-		sources/parsing/parsing_utils.c)
+		sources/parsing/parsing_utils.c sources/parsing/sprites_parsing.c sources/parsing/texture_parsing_utils.c)
 set(terminal
-		sources/terminal/init_terminal.c
-		sources/terminal/terminal_render.c
+		sources/terminal/term_init.c
+		sources/terminal/term_render.c
 		sources/terminal/term_command_parser.c
-		sources/terminal/term_processing.c)
+		sources/terminal/term_processing.c sources/terminal/term_actions.c)
 
 add_executable(wolf3d
 

@@ -29,9 +29,11 @@ void		draw_term_input(t_erm *term, t_sdl *sdl, TTF_Font *font)
 		x = 0;
 		while (x < surface->w * term->scale)
 		{
-			if (pixels[(int)(x / term->scale) + (int)(y / term->scale) * surface->w] >> 24 != 0)
+			if (pixels[(int)(x / term->scale)
+			+ (int)(y / term->scale) * surface->w] >> 24 != 0)
 				sdl_put_pixel(&(t_point){x + term->pos.x, y + term->pos.y, 0,
-					pixels[(int)(x / term->scale) + (int)(y / term->scale) * surface->w]}, sdl);
+					pixels[(int)(x / term->scale)
+					+ (int)(y / term->scale) * surface->w]}, sdl);
 			x++;
 		}
 		y++;
