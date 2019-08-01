@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 22:05:37 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:19:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,8 @@ typedef struct			s_sdl
 	SDL_Window			*win;
 	SDL_Renderer		*rend;
 	SDL_Texture			*texture;
-	SDL_Texture			*text;
-	int					*text_pixels;
 	int					*pixels;
+	int					*all_pixels;
 }						t_sdl;
 
 typedef	struct			s_ttf
@@ -73,6 +72,7 @@ typedef struct			s_actions
 	char				arr_right;
 	char				lshift;
 	char				lshift_was_pressed;
+	char				space;
 	char				mouse_left;
 	char				mouse_right;
 }						t_actions;
@@ -142,6 +142,8 @@ typedef struct			s_player
 	double				speed_side;
 	double				ang_speed;
 	double				fat;
+	int					look_height;
+	int					look_coeff;
 	int					weapon_type;
 }						t_player;
 

@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 20:41:05 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:19:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		init_actions(t_actions *actions)
 	actions->lshift_was_pressed = FALSE;
 	actions->mouse_right = FALSE;
 	actions->mouse_left = FALSE;
+	actions->space = FALSE;
 }
 
 t_erm		term_init(void)
@@ -63,6 +64,7 @@ static void	init_player(t_wolf *wolf, double fov)
 	wolf->player.speed_fwd = 0.1;
 	wolf->player.speed_side = wolf->player.speed_fwd / 2;
 	wolf->player.fat = 3;
+	wolf->player.look_height = 1;
 }
 
 void		wolf_init(t_wolf *wolf)

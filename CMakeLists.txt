@@ -69,7 +69,7 @@ set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
 		sources/hooks/player_moves.c
-		sources/game_logic/player_actions.c)
+		sources/game_logic/player_actions.c sources/hooks/player_look.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c

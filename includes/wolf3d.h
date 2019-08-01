@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 22:48:04 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 12:00:06 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void		move_back(t_wolf *wolf);
 void		move_right(t_wolf *wolf);
 void		move_left(t_wolf *wolf);
 void		player_run(t_wolf *wolf);
+void player_look(t_wolf *wolf);
 
 /*
 **	player's actions

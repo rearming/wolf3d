@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 22:20:23 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 14:31:21 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,52 +109,15 @@ void		draw_animated(double *frame, int tickrate,
 			anim_sprite.placement);
 }
 
-//void		render(t_wolf *wolf)
-//{
-//	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
-//	render_columns(wolf);
-//	draw_minimap(wolf);
-//	draw_minimap_fov(wolf);
-//	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-//				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
-//	//draw_item(wolf);
-//	if (wolf->term.opened)
-//		draw_terminal(wolf);
-//	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
-//			WIN_WIDTH * sizeof(int));
-//	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
-//	SDL_RenderPresent(wolf->sdl.rend);
-//}
-
 void		render(t_wolf *wolf)
 {
-//	double	x;
-//	double	y;
-//	double	atan_item;
-//	t_ray	ray;
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
-//	x = wolf->map.items[0].x - wolf->player.x;
-//	y = wolf->map.items[0].y - wolf->player.y;
-//	atan_item = atan2(y, x);
-//	if (atan_item < 0)
-//		atan_item += 2 * M_PI;
-//	ray = raycast(wolf, atan_item);
-//	if (ray.distance > sqrt(x * x + y * y))
-//	{
-//		render_columns(wolf);
-//		draw_items(wolf);
-//	}
-//	else
-//	{
-//		draw_items(wolf);
-//		render_columns(wolf);
-//	}
 	render_columns(wolf);
-    //draw_items(wolf);
+	player_look(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
+					  wolf->textures.weapons[(int) wolf->player.weapon_type]);
 	if (wolf->term.opened)
 		draw_terminal(wolf);
 	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
@@ -162,3 +125,41 @@ void		render(t_wolf *wolf)
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
 }
+
+//void		render(t_wolf *wolf)
+//{
+////	double	x;
+////	double	y;
+////	double	atan_item;
+////	t_ray	ray;
+//	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
+////	x = wolf->map.items[0].x - wolf->player.x;
+////	y = wolf->map.items[0].y - wolf->player.y;
+////	atan_item = atan2(y, x);
+////	if (atan_item < 0)
+////		atan_item += 2 * M_PI;
+////	ray = raycast(wolf, atan_item);
+////	if (ray.distance > sqrt(x * x + y * y))
+////	{
+////		render_columns(wolf);
+////		draw_items(wolf);
+////	}
+////	else
+////	{
+////		draw_items(wolf);
+////		render_columns(wolf);
+////	}
+//	render_columns(wolf);
+//    //draw_items(wolf);
+//	player_look(wolf, wolf->player.look_coeff);
+//	draw_minimap(wolf);
+//	draw_minimap_fov(wolf);
+//	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
+//				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
+//	if (wolf->term.opened)
+//		draw_terminal(wolf);
+//	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
+//					  WIN_WIDTH * sizeof(int));
+//	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
+//	SDL_RenderPresent(wolf->sdl.rend);
+//}

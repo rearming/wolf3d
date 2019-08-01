@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/29 09:47:27 by rearming         ###   ########.fr       */
+/*   Updated: 2019/08/01 14:37:20 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@
 # define WEAPONS_NUM 4
 
 # define POS_UPDATE 15
+
+# define LOOK_LIMIT 500
 
 #endif

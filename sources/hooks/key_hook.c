@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:29:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:15:39 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ void			keyup_hook(t_wolf *wolf, SDL_Event *event)
 		wolf->actions.arr_right = FALSE;
 	if (event->key.keysym.scancode == SDL_SCANCODE_LEFT)
 		wolf->actions.arr_left = FALSE;
+	if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
+		wolf->actions.space = FALSE;
+}
+
+void			keydown_hook2(t_wolf *wolf, SDL_Event *event)
+{
+	if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
+		wolf->actions.space = TRUE;
 }
 
 void			keydown_hook(t_wolf *wolf, SDL_Event *event)
@@ -60,4 +68,5 @@ void			keydown_hook(t_wolf *wolf, SDL_Event *event)
 		SDL_SetRelativeMouseMode(SDL_FALSE);
 	if (event->key.keysym.scancode == SDL_SCANCODE_R)
 		SDL_SetRelativeMouseMode(SDL_TRUE);
+	keydown_hook2(wolf, event);
 }

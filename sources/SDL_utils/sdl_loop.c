@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 17:06:46 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 20:22:08 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 14:13:06 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	get_tickrate(t_wolf *wolf)
 
 void		process_event(SDL_Event *event, t_wolf *wolf)
 {
-	if (event->type == SDL_WINDOWEVENT_EXPOSED)
-		SDL_SetRelativeMouseMode(SDL_TRUE);
 	if (event->type == SDL_KEYDOWN)
 		keydown_hook(wolf, event);
+	if (wolf->term.opened)
+		return ;
 	if (event->type == SDL_KEYUP)
 		keyup_hook(wolf, event);
 	if (event->type == SDL_MOUSEMOTION)
