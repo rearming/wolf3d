@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 16:10:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 12:33:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:55:05 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,23 @@ void	process_render_command(t_wolf *wolf, t_erm *term)
 	}
 }
 
+void	process_player_command(t_wolf *wolf, t_erm *term)
+{
+	if (term->parsed_command[1] == LOOK)
+	{
+		if (term->parsed_command[2] == FREEZE)
+			wolf->player.look_frozen = TRUE;
+		if (term->parsed_command[2] == UNFREEZE)
+			wolf->player.look_frozen = FALSE;
+	}
+}
+
 void	process_full_command(t_wolf *wolf, t_erm *term)
 {
 	if (term->parsed_command[0] == RENDER)
 		process_render_command(wolf, term);
 	if (term->parsed_command[0] == SET)
 		process_set_command(wolf, term);
+	if (term->parsed_command[0] == PLAYER)
+		process_player_command(wolf, term);
 }

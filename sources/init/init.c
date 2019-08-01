@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 12:19:47 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 19:15:14 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,9 @@ static void	init_player(t_wolf *wolf, double fov)
 	wolf->player.speed_side = wolf->player.speed_fwd / 2;
 	wolf->player.fat = 3;
 	wolf->player.look_height = 1;
+	wolf->player.look_frozen = TRUE;
+	wolf->player.look_coeff = 0;
+	wolf->player.weapon_type = GUN;
 }
 
 void		wolf_init(t_wolf *wolf)
@@ -80,12 +83,14 @@ void		wolf_init(t_wolf *wolf)
 	wolf->tickrate = 0;
 	wolf->textures.head_frame = 1;
 	wolf->textures.weapon_frame = 0;
-	wolf->player.weapon_type = GUN;
 	init_actions(&wolf->actions);
 	wolf->no_mouse = TRUE;
-	if (!(wolf->sdl.pixels = (int*)malloc(sizeof(int)
-			* WIN_HEIGHT * WIN_WIDTH)))
-		raise_error(ERR_MALLOC);
+	wolf->sdl.pixels = 0;
+	wolf->sdl.pitch = 0;
 	wolf->map.items = find_items(wolf);
+	if (!(wolf->map.item_vis = (double*)malloc(sizeof(double) * WIN_WIDTH)))
+		raise_error(ERR_MALLOC);
+	if (!(wolf->map.ray_dists = (double*)malloc(sizeof(double) * WIN_WIDTH)))
+		raise_error(ERR_MALLOC);
 	wolf->term = term_init();
 }

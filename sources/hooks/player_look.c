@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 11:53:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 14:18:10 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:35:42 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void		player_look_up(t_wolf *wolf)
 
 void		player_look(t_wolf *wolf)
 {
+	if (wolf->player.look_frozen)
+		return ;
 	wolf->player.look_height -= wolf->player.look_coeff;
 	if (wolf->player.look_height > LOOK_LIMIT
 	|| wolf->player.look_height < -LOOK_LIMIT)

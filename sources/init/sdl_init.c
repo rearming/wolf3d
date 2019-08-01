@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 20:36:57 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 14:24:01 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:03:32 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_sdl		init_sdl(void)
 	if (!(sdl.rend = SDL_CreateRenderer(sdl.win, -1, SDL_RENDERER_SOFTWARE)))
 		raise_error(ERR_SDL_RENDER);
 	if (!(sdl.texture = SDL_CreateTexture(sdl.rend, SDL_PIXELFORMAT_ARGB8888,
-			SDL_TEXTUREACCESS_STATIC, WIN_WIDTH, WIN_HEIGHT)))
+			SDL_TEXTUREACCESS_STREAMING, WIN_WIDTH, WIN_HEIGHT)))
 		raise_error(ERR_SDL_TEXTURE_CREATE);
 	return (sdl);
 }

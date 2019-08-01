@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:17:08 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/30 13:20:02 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 17:00:50 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int		parse_command_type(t_erm *term)
 		return (RENDER);
 	if (ft_strequ(term->command[0], "set"))
 		return (SET);
+	if (ft_strequ(term->command[0], "player"))
+		return (PLAYER);
 	return (INV_COMMAND);
 }
 
@@ -31,6 +33,8 @@ int		parse_command_target(t_erm *term)
 		return (ALL);
 	else if (ft_strequ(term->command[1], "block"))
 		return (BLOCK);
+	else if (ft_strequ(term->command[1], "look"))
+		return (LOOK);
 	return (INV_COMMAND);
 }
 
@@ -46,6 +50,10 @@ int		parse_command_content(t_erm *term)
 		return (COMPASS_MODE);
 	else if (ft_strequ(term->command[2], "index"))
 		return (INDEX_MODE);
+	else if (ft_strequ(term->command[2], "freeze"))
+		return (FREEZE);
+	else if (ft_strequ(term->command[2], "unfreeze"))
+		return (UNFREEZE);
 	return (ft_atoi(term->command[2]));
 }
 

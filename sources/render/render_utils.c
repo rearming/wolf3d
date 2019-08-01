@@ -18,6 +18,8 @@ int			cell_is_empty(t_map map, t_point pos)
 		return (1);
 	if (map.int_map[pos.y][pos.x] > 0)
 			return (0);
+	if (map.int_map[pos.y][pos.x] < 0)
+		return (ITEM);
 	return (1);
 }
 

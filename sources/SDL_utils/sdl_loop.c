@@ -45,6 +45,8 @@ void		process_event(SDL_Event *event, t_wolf *wolf)
 		keydown_hook(wolf, event);
 	if (wolf->term.opened)
 		return ;
+	if (event->type == SDL_MOUSEWHEEL)
+		mouse_wheel_event(wolf, event);
 	if (event->type == SDL_KEYUP)
 		keyup_hook(wolf, event);
 	if (event->type == SDL_MOUSEMOTION)
@@ -53,8 +55,6 @@ void		process_event(SDL_Event *event, t_wolf *wolf)
 		mouse_down_hook(wolf, event);
 	if (event->type == SDL_MOUSEBUTTONUP)
 		mouse_up_hook(wolf, event);
-	if (event->type == SDL_MOUSEWHEEL)
-		mouse_wheel_event(wolf, event);
 }
 
 void		sdl_loop(t_wolf *wolf)

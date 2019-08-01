@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 14:14:41 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 17:30:49 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void		mouse_down_hook(t_wolf *wolf, SDL_Event *event)
 void		mouse_motion_hook(t_wolf *wolf, SDL_Event *event)
 {
 	wolf->player.angle += event->motion.xrel * wolf->player.ang_speed;
+	if (wolf->player.angle >= M_PI * 2)
+		wolf->player.angle = 0;
+	if (wolf->player.angle <= -M_PI * 2)
+		wolf->player.angle = 0;
 	wolf->player.look_coeff = event->motion.yrel;
 	if (wolf->no_mouse)
 	{

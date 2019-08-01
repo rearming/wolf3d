@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 21:45:50 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 21:51:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 15:55:46 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int				get_all_weapons(const char **files, t_anim *weapons)
 
 	last_file = 0;
 	weapons[0] = (t_anim){GUN, 0,
-				(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT / 2}, 6, 0.013, 2};
+				(t_point) {WIN_WIDTH / 3 + 100, WIN_HEIGHT - 256 * 2}, 6, 0.013, 2};
 	weapons[1] = (t_anim){KNIFE, 0,
-				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 4, 0.011, 4};
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT - 192 * 4}, 4, 0.011, 4};
 	weapons[2] = (t_anim){DAKKA, 0,
-				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 11, 0.02, 4};
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT - 192 * 4}, 11, 0.02, 4};
 	weapons[3] = (t_anim){PICKAXE, 0,
-				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT / 4}, 1, 0.01, 4};
+				(t_point) {WIN_WIDTH / 3, WIN_HEIGHT - 200 * 4}, 1, 0.01, 4};
 	last_file += get_animation(files, last_file, &weapons[0], 256);
 	last_file += get_animation(files, last_file, &weapons[1], 192);
 	last_file += get_animation(files, last_file, &weapons[2], 192);

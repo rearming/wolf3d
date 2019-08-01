@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 14:31:21 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 19:33:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	ray.x = wolf->player.x;
 	ray.y = wolf->player.y;
 	ray.distance = 0;
+	ray.item_dist = 0;
 	while ((int)ray.y < wolf->map.height && (int)ray.x < wolf->map.width)
 	{
+		if (wolf->map.int_map[(int)ray.y][(int)ray.x] < 0)
+			ray.item_dist = ray.distance;
 		if (wolf->map.int_map[(int)ray.y][(int)ray.x] > 0)
 			break ;
 		ray.x = wolf->player.x + ray.distance * delta_x;
@@ -46,13 +49,15 @@ void		render_columns(t_wolf *wolf)
 	while (win_x < WIN_WIDTH)
 	{
 		ray = raycast(wolf, ray.angle);
+		wolf->map.item_vis[win_x] = ray.item_dist;
+		wolf->map.ray_dists[win_x] = ray.distance;
 		draw_column(&ray, wolf, win_x);
 		ray.angle += wolf->player.fov / WIN_WIDTH;
 		win_x++;
 	}
 }
 
-void		draw_floor_and_sky(t_sdl sdl, int floor_color) //todo make floor and celling
+void		draw_floor_and_sky(t_sdl sdl, int floor_color)
 {
 	long	y;
 	long	half_screen;
@@ -111,55 +116,20 @@ void		draw_animated(double *frame, int tickrate,
 
 void		render(t_wolf *wolf)
 {
+	SDL_LockTexture(wolf->sdl.texture, 0,
+			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
+	draw_items(wolf);
 	player_look(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-					  wolf->textures.weapons[(int) wolf->player.weapon_type]);
+			wolf->textures.weapons[(int) wolf->player.weapon_type]);
 	if (wolf->term.opened)
 		draw_terminal(wolf);
-	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
-					  WIN_WIDTH * sizeof(int));
+	SDL_UnlockTexture(wolf->sdl.texture);
+	SDL_SetRenderTarget(wolf->sdl.rend, wolf->sdl.texture);
 	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
 	SDL_RenderPresent(wolf->sdl.rend);
 }
-
-//void		render(t_wolf *wolf)
-//{
-////	double	x;
-////	double	y;
-////	double	atan_item;
-////	t_ray	ray;
-//	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
-////	x = wolf->map.items[0].x - wolf->player.x;
-////	y = wolf->map.items[0].y - wolf->player.y;
-////	atan_item = atan2(y, x);
-////	if (atan_item < 0)
-////		atan_item += 2 * M_PI;
-////	ray = raycast(wolf, atan_item);
-////	if (ray.distance > sqrt(x * x + y * y))
-////	{
-////		render_columns(wolf);
-////		draw_items(wolf);
-////	}
-////	else
-////	{
-////		draw_items(wolf);
-////		render_columns(wolf);
-////	}
-//	render_columns(wolf);
-//    //draw_items(wolf);
-//	player_look(wolf, wolf->player.look_coeff);
-//	draw_minimap(wolf);
-//	draw_minimap_fov(wolf);
-//	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-//				  wolf->textures.weapons[(int) wolf->player.weapon_type]);
-//	if (wolf->term.opened)
-//		draw_terminal(wolf);
-//	SDL_UpdateTexture(wolf->sdl.texture, NULL, wolf->sdl.pixels,
-//					  WIN_WIDTH * sizeof(int));
-//	SDL_RenderCopy(wolf->sdl.rend, wolf->sdl.texture, NULL, NULL);
-//	SDL_RenderPresent(wolf->sdl.rend);
-//}

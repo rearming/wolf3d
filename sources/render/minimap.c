@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 19:03:33 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void			draw_minimap(t_wolf *wolf)
 		{
 			if (cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
 				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, GREY}, &wolf->sdl);
+			if (cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}) == ITEM)
+				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, RED}, &wolf->sdl);
 			if (!cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
 				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, BLACK}, &wolf->sdl);
 			iter.x++;

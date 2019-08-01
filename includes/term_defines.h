@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:43:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/26 14:54:55 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 17:06:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define DELETE "Backspace"
 # define SPACE "Space"
+# define ARR_LEFT "Left"
+# define ARR_RIGHT "Right"
 
 /*
 **	terminal commands
@@ -32,10 +34,7 @@
 
 # define RENDER 1
 # define SET 2
-
-/*
-**	arguments
-*/
+# define PLAYER 3
 
 /*
 **	targets
@@ -43,6 +42,13 @@
 
 # define ALL 100
 # define BLOCK 101
-# define MODE
+# define LOOK 102
+
+/*
+**	arguments
+*/
+
+# define FREEZE 10
+# define UNFREEZE 11
 
 #endif

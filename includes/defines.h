@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 14:37:20 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:25:38 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # ifdef __APPLE__
 
-#  define WIN_WIDTH 1980
-#  define WIN_HEIGHT 1020
+#  define WIN_WIDTH 1920
+#  define WIN_HEIGHT 1080
 
 #  define SCALE_WIDTH 1.328
 #  define SCALE_HEIGHT 1.274
