@@ -6,7 +6,7 @@
 /*   By: rearming <rearming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 14:15:10 by rearming          #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 21:16:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,36 @@ void		split_map(t_map *map)
 	}
 }
 
-static void	get_int_map_cell(t_map *map, int *is_ended, int x, int y)
+static void	get_int_map_cell(t_map *map, int **target,
+		int *is_ended, t_point pos)
 {
-	if (map->raw_map[y][x] && !(*is_ended))
-		map->int_map[y][x] = ft_atoi(map->raw_map[y][x]);
+	if (map->raw_map[pos.y][pos.x] && !(*is_ended))
+		target[pos.y][pos.x] = ft_atoi(map->raw_map[pos.y][pos.x]);
 	else
 	{
 		*is_ended = TRUE;
-		map->int_map[y][x] = 0;
+		target[pos.y][pos.x] = 0;
 	}
 }
 
-void		get_int_map(t_map *map)
+void		get_int_map(t_map *map, int ***target)
 {
 	int		x;
 	int		y;
 	int		is_ended;
 
 	is_ended = FALSE;
-	split_map(map);
 	y = 0;
-	if (!(map->int_map = (int**)malloc(sizeof(int*) * map->height)))
+	if (!((*target) = (int**)malloc(sizeof(int*) * map->height)))
 		raise_error(ERR_MALLOC);
 	while (y < map->height)
 	{
 		x = 0;
-		if (!(map->int_map[y] = (int*)malloc(sizeof(int*) * map->width)))
+		if (!((*target)[y] = (int*)malloc(sizeof(int*) * map->width)))
 			raise_error(ERR_MALLOC);
 		while (x < map->width)
 		{
-			get_int_map_cell(map, &is_ended, x, y);
+			get_int_map_cell(map, *target, &is_ended, (t_point){x, y});
 			x++;
 		}
 		is_ended = FALSE;
@@ -93,11 +93,16 @@ t_map		get_map(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	map.char_map = NULL;
+	map.int_map = NULL;
+	map.backup = NULL;
+	map.board = TRUE;
 	map.char_map = fast_gnl(fd);
 	if (!map.char_map)
 		raise_error(ERR_INV_FILE);
 	convert_spaces(map.char_map);
-	get_int_map(&map);
+	split_map(&map);
+	get_int_map(&map, &map.int_map);
+	get_int_map(&map, &map.backup);
 	check_valid(&map);
 	clean_temp_maps(&map);
 	close(fd);

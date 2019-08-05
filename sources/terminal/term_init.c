@@ -31,6 +31,7 @@ int				close_term(t_erm *term)
 	ft_bzero(term->buffs[0], TERM_BUFF_SIZE);
 	term->buffs[0][0] = ':';
 	term->buffs[0][1] = ' ';
+	clean_chr_mtrx(term->command);
 	return (FALSE);
 }
 

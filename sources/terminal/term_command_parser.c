@@ -54,6 +54,8 @@ int		parse_command_content(t_erm *term)
 		return (FREEZE);
 	else if (ft_strequ(term->command[2], "unfreeze"))
 		return (UNFREEZE);
+	else if (ft_strequ(term->command[2], "default"))
+		return (DEFAULT);
 	return (ft_atoi(term->command[2]));
 }
 

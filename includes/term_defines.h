@@ -50,5 +50,6 @@
 
 # define FREEZE 10
 # define UNFREEZE 11
+# define DEFAULT 12
 
 #endif

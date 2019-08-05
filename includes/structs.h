@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 13:18:17 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 21:11:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ typedef struct			s_map
 	char				***raw_map;
 	char				**char_map;
 	int					**int_map;
+	int					**backup;
+	int					board;
 	int					height;
 	int					width;
 	t_point				player_spawn;
