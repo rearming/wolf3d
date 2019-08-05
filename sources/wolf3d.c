@@ -23,6 +23,7 @@ int			main(int argc, char **argv)
 	wolf.sdl = init_sdl();
 	wolf.ttf = init_ttf(config_args[CONFIG_SIZE - 1]);
 	wolf.textures = get_all_textures((const char **)config_args);
+	clean_chr_mtrx(config_args);
 	wolf_init(&wolf);
 	render(&wolf);
 	sdl_loop(&wolf);

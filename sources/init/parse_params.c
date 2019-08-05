@@ -31,5 +31,6 @@ char	**parse_params(char **argv, int argc)
 		config_size++;
 	if (config_size != CONFIG_SIZE)
 		raise_error(ERR_INV_CONFIG_SIZE);
+	close(fd);
 	return (config_args);
 }

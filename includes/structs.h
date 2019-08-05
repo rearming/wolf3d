@@ -191,7 +191,7 @@ typedef struct			s_line
 	int					ystep;
 }						t_line;
 
-# define WOLF_BUFF_SIZE 2000000
+# define WOLF_BUFF_SIZE 200000
 
 typedef struct			s_fast_gnl
 {

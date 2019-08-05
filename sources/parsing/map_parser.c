@@ -100,5 +100,6 @@ t_map		get_map(char *filename)
 	get_int_map(&map);
 	check_valid(&map);
 	clean_temp_maps(&map);
+	close(fd);
 	return (map);
 }
