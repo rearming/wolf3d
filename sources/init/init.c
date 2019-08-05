@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 19:15:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:38:51 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void		wolf_init(t_wolf *wolf)
 	wolf->no_mouse = TRUE;
 	wolf->sdl.pixels = 0;
 	wolf->sdl.pitch = 0;
-	wolf->map.items = find_items(wolf);
+	wolf->map.items = find_items(&wolf->map);
 	if (!(wolf->map.item_vis = (double*)malloc(sizeof(double) * WIN_WIDTH)))
 		raise_error(ERR_MALLOC);
 	if (!(wolf->map.ray_dists = (double*)malloc(sizeof(double) * WIN_WIDTH)))

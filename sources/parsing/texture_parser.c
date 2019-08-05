@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:41:42 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:04:38 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ t_textures		get_all_textures(const char **files)
 	textures.sprites[MINECRAFT] =
 			get_all_sprites(files[last_file + 1], 16, MINE_SPRITES);
 	textures.sprites[MINECRAFT_ART] = get_minecraft_art(files[last_file + 2]);
+	textures.table = get_texture_table(files[last_file + 3]);
 	return (textures);
 }

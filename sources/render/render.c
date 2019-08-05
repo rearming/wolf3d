@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 19:33:48 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 12:30:31 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,32 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	return (ray);
 }
 
+void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
+{
+	int			column_y;
+	int			win_y;
+	int			height;
+	t_point		sprite_index;
+	t_sprite	sprite;
+
+	win_y = 0;
+	ray->distance *= cos(ray->angle - wolf->player.angle);
+	height = (int)((double)WIN_HEIGHT / ray->distance);
+	column_y = (WIN_HEIGHT - height) / 2;
+	sprite = get_column_sprite(ray, &wolf->map, &wolf->textures);
+	sprite_index.x = get_sprite_x_index(ray, sprite.size);
+	while (win_y < height)
+	{
+		if (win_x + column_y * WIN_WIDTH > 0
+			&& win_x + column_y * WIN_WIDTH < WIN_HEIGHT * WIN_WIDTH
+			&& win_y * sprite.height / height < sprite.size)
+			wolf->sdl.pixels[win_x + column_y * WIN_WIDTH] =
+					sprite.data[win_y * sprite.height / height][sprite_index.x];
+		column_y++;
+		win_y++;
+	}
+}
+
 void		render_columns(t_wolf *wolf)
 {
 	int		win_x;
@@ -57,75 +83,17 @@ void		render_columns(t_wolf *wolf)
 	}
 }
 
-void		draw_floor_and_sky(t_sdl sdl, int floor_color)
-{
-	long	y;
-	long	half_screen;
-
-	y = 0;
-	half_screen = WIN_HEIGHT / 2 * WIN_WIDTH;
-	while (y < half_screen)
-	{
-		sdl.pixels[y] = BLACK;
-		y++;
-	}
-	y = half_screen;
-	half_screen *= 2;
-	while (y < half_screen)
-	{
-		sdl.pixels[y] = floor_color;
-		y++;
-	}
-}
-
-void		scaled_draw(t_sdl sdl, t_sprite sprite,
-		double scale, t_point print_coord)
-{
-	int		x;
-	int		y;
-
-	y = 0;
-	scale = scale < 20 ? scale : 20;
-	while (y < scale * sprite.height)
-	{
-		x = 0;
-		while (x < scale * sprite.width)
-		{
-			if ((sprite.data[(int)(y / scale)][(int)(x / scale)] >> 24) != 0)
-				sdl_put_pixel(&(t_point){x + print_coord.x, y + print_coord.y, 0,
-							sprite.data
-							[(int)(y / scale)][(int)(x / scale)]}, &sdl);
-			x++;
-		}
-		y++;
-	}
-}
-
-void		draw_animated(double *frame, int tickrate,
-						  t_sdl sdl, t_anim anim_sprite)
-{
-	if (*frame)
-	{
-		*frame += (double)tickrate * anim_sprite.frequency;
-		if ((int)(*frame) >= anim_sprite.frames)
-			*frame = anim_sprite.type == HEAD ? 1 : 0;
-	}
-	scaled_draw(sdl, anim_sprite.sprite[(int)(*frame)], anim_sprite.scale,
-			anim_sprite.placement);
-}
-
 void		render(t_wolf *wolf)
 {
 	SDL_LockTexture(wolf->sdl.texture, 0,
 			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
 	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
-	draw_items(wolf);
 	player_look(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);
 	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-			wolf->textures.weapons[(int) wolf->player.weapon_type]);
+			wolf->textures.weapons[(int)wolf->player.weapon_type]);
 	if (wolf->term.opened)
 		draw_terminal(wolf);
 	SDL_UnlockTexture(wolf->sdl.texture);

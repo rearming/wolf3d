@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 19:15:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:18:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ typedef struct			s_anim
 typedef	struct			s_textures
 {
 	t_sprite			**sprites;
+	int					**table;
 	int					texture_type;
 	int					render_mode;
 	t_anim				weapons[WEAPONS_NUM];

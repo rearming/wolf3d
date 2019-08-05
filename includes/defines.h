@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 16:25:38 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 13:40:25 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@
 # define TRUE 1
 # define FALSE 0
 
+# define SEARCH_FAIL -1
+
 # define PLAYER_POS -1
 # define ITEM -2
 
 # define NORTH 5
-# define WEST 96
+# define WEST 44
 # define EAST 72
 # define SOUTH 22
 
@@ -60,7 +62,7 @@
 
 # define TILEMAPS 3
 
-# define CONFIG_SIZE 30
+# define CONFIG_SIZE 31
 
 # define GUN 0
 # define KNIFE 1

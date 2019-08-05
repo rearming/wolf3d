@@ -48,7 +48,7 @@ set(init
 set(utils
 		sources/utils/error.c
 		sources/utils/exit.c
-		)
+		sources/utils/binary_search.c)
 
 set(SDL_utils
 		sources/SDL_utils/sdl_loop.c
@@ -62,7 +62,7 @@ set(render
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
 		sources/game_logic/game_logic_utils.c
-        sources/render/items.c)
+		sources/render/sprite_getter.c sources/render/minimap_utils.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks
@@ -75,7 +75,7 @@ set(parsing
 		sources/parsing/map_parser.c
 		sources/parsing/fast_gnl.c
 		sources/parsing/texture_parser.c
-		sources/parsing/parsing_utils.c sources/parsing/sprites_parsing.c sources/parsing/texture_parsing_utils.c)
+		sources/parsing/parsing_utils.c sources/parsing/sprites_parsing.c sources/parsing/texture_parsing_utils.c sources/parsing/texture_table_parsing.c)
 set(terminal
 		sources/terminal/term_init.c
 		sources/terminal/term_render.c

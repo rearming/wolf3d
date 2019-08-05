@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 19:15:14 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/05 14:45:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ char		**parse_params(char **argv, int argc);
 
 t_map		get_map(char *filename);
 char		**fast_gnl(int fd);
-int			count_items(t_map map);
-t_point		*find_items(t_wolf *wolf);
+int			count_items(t_map *map);
+t_point		*find_items(t_map *map);
 
 /*
 **	parsing utils
@@ -78,6 +78,8 @@ t_sprite	get_sprite(t_img img, int sprite_size, t_point sprite_pos);
 int			get_color_from_tilemap(t_img img, int j, int i);
 int			get_animation(const char **files, int start,
 								t_anim *weapon, int size);
+int			**get_texture_table(const char *config);
+
 /*
 **	sprites parsing
 */
@@ -99,6 +101,13 @@ void		draw_animated(double *frame, int tickrate,
 					t_sdl sdl, t_anim anim_sprite);
 
 /*
+**	texture render
+*/
+
+t_sprite	get_column_sprite(t_ray *ray, t_map *map, t_textures *textures);
+int			get_sprite_x_index(t_ray *ray, int texture_size);
+
+/*
 **	item render
 */
 
@@ -116,6 +125,7 @@ void		get_rgb_from_int(unsigned char *r, unsigned char *g,
 							unsigned char *b, int color);
 int			cell_is_empty(t_map map, t_point pos);
 int			get_view_direction(t_ray ray);
+void		draw_floor_and_sky(t_sdl sdl, int floor_color);
 
 /*
 **	terminal render
@@ -135,6 +145,15 @@ int			is_border_block(t_map map, t_point block);
 
 void		draw_minimap(t_wolf *wolf);
 void		draw_minimap_fov(t_wolf *wolf);
+
+/*
+**	minimap utils
+*/
+
+int			is_outside_map(t_ray ray, t_wolf *wolf);
+t_point		set_head_position(t_wolf *wolf);
+t_point		*scale_fov_drawing(t_ray ray, t_wolf *wolf);
+void		raycast_draw(t_wolf *wolf, t_dpoint delta);
 
 /*
 **	SDL utils
@@ -164,7 +183,7 @@ void		move_back(t_wolf *wolf);
 void		move_right(t_wolf *wolf);
 void		move_left(t_wolf *wolf);
 void		player_run(t_wolf *wolf);
-void player_look(t_wolf *wolf);
+void		player_look(t_wolf *wolf);
 
 /*
 **	player's actions
@@ -197,6 +216,7 @@ void		change_all_blocks(t_wolf *wolf, t_erm *term);
 
 void		raise_error(int err_code);
 void		sdl_exit(t_wolf *wolf);
+int			ft_bin_search(int *arr, int elem, int len);
 
 /*
 **	debug
