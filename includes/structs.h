@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 21:11:58 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:15:02 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef	struct			s_textures
 	t_anim				head;
 	double				weapon_frame;
 	double				head_frame;
+	int					channels[3];
 }						t_textures;
 
 typedef struct			s_map
@@ -144,6 +145,7 @@ typedef struct			s_player
 	double				angle;
 	double				speed_fwd;
 	double				speed_side;
+	double				speed_coeff;
 	double				ang_speed;
 	double				fat;
 	int					look_height;

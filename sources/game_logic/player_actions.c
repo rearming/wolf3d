@@ -20,8 +20,8 @@ void		break_block(t_wolf *wolf)
 			* wolf->player.fat * cos(wolf->player.angle));
 	block.y = (int)(wolf->player.y + wolf->player.speed_side
 			* wolf->player.fat * sin(wolf->player.angle));
-	if (!cell_is_empty(wolf->map, block)
-		&& !is_border_block(wolf->map, block))
+	if (!cell_is_empty(&wolf->map, block)
+		&& !is_border_block(&wolf->map, block))
 		wolf->map.int_map[block.y][block.x] = 0;
 }
 

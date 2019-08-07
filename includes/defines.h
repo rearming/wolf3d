@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 13:40:25 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 13:35:28 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 
 # define WOLF_SPRITES 114
 # define MINE_SPRITES 256
+# define SPRITES_LIM 160
 
 # define WOLF3D 0
 # define MINECRAFT 1
@@ -76,5 +77,7 @@
 # define POS_UPDATE 15
 
 # define LOOK_LIMIT 500
+
+# define DEF_TEXTURE 1
 
 #endif

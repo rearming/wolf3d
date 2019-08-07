@@ -66,7 +66,7 @@ int				get_animation(const char **files, int start,
 	while (i < weapon->frames)
 	{
 		get_tilemap_data(&img, files[i + start]);
-		weapon->sprite[i] = get_sprite(img, size, (t_point) {0, 0});
+		weapon->sprite[i] = get_sprite(img, size, (t_point) {0, 0, 0, 0});
 		free(img.data);
 		i++;
 	}

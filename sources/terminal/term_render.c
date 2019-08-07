@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 15:53:12 by sleonard          #+#    #+#             */
-/*   Updated: 2019/07/31 20:07:56 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:05:16 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void		draw_term_input(t_erm *term, t_sdl *sdl, TTF_Font *font)
 void		draw_terminal(t_wolf *wolf)
 {
 	draw_term_input(&wolf->term, &wolf->sdl, wolf->ttf.font);
-	bresen_line(wolf->sdl, (t_point) {0, WIN_HEIGHT - 200},
-			(t_point){WIN_WIDTH, WIN_HEIGHT - 200}, wolf->term.line_color);
+	bresen_line(wolf->sdl, (t_point) {0, WIN_HEIGHT - 200, 0, 0},
+		(t_point){WIN_WIDTH, WIN_HEIGHT - 200, 0, 0}, wolf->term.line_color);
 }

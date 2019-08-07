@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:06:30 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 12:26:26 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:22:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void			draw_minimap(t_wolf *wolf)
 		map.x = wolf->player.x - (double)wolf->minimap.size.x / 2;
 		while (iter.x < wolf->minimap.scale.x)
 		{
-			if (cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
+			if (cell_is_empty(&wolf->map, (t_point){map.x, map.y, 0, 0}))
 				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, GREY}, &wolf->sdl);
-			if (cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y})
+			if (cell_is_empty(&wolf->map, (t_point){map.x, map.y, 0, 0})
 			== ITEM)
 				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, RED}, &wolf->sdl);
-			if (!cell_is_empty(wolf->map, (t_point){(int)map.x, (int)map.y}))
+			if (!cell_is_empty(&wolf->map, (t_point){map.x, map.y, 0, 0}))
 				sdl_put_pixel(&(t_point){iter.x, iter.y, 0, BLACK}, &wolf->sdl);
 			iter.x++;
 			map.x += (double)wolf->minimap.size.x / wolf->minimap.scale.x;

@@ -2,8 +2,9 @@
 *.idea*
 *.out*
 .DS_Store
-temp
 *.dSYM
 *.o
+temp
+*.a
 wolf3d
 /SDL2_libs/

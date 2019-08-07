@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:13:57 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 17:09:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:39:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int				close_term(t_erm *term)
 	ft_bzero(term->buffs[0], TERM_BUFF_SIZE);
 	term->buffs[0][0] = ':';
 	term->buffs[0][1] = ' ';
+	term->mem_i = 0;
 	clean_chr_mtrx(term->command);
 	return (FALSE);
 }

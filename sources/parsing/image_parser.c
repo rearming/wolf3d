@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 18:59:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:09:44 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void		get_bmp_image(t_img *bmp, const char *filename)
 	int				offset;
 	FILE			*file;
 
-	printf("reading bmp!, filename: [%s]\n", filename);
+	ft_printf("reading bmp!, filename: [%s]\n", filename);
 	if (!(file = fopen(filename, "rb")))
 		raise_error(ERR_INV_IMAGE);
 	offset = get_bmp_title(bmp, file);
@@ -45,7 +45,8 @@ void		get_bmp_image(t_img *bmp, const char *filename)
 	bmp->bpp = *((int*)(bmp->data + 28 - offset)) / 8;
 	bmp->img_size = *((int*)(bmp->data + 34 - offset));
 	i = bmp->img_size - 2;
-	while (fread(&bmp->data[i], sizeof(char), 1, file))
+	ft_bzero(bmp->data, bmp->file_size);
+	while (fread(&bmp->data[i], sizeof(unsigned char), 1, file))
 		i--;
 }
 
@@ -57,7 +58,8 @@ void		get_tilemap_data(t_img *img, const char *filename)
 	filename_len = ft_strlen(filename);
 	if (filename_len > 3 && ft_strequ(&filename[filename_len - 4], ".bmp"))
 		get_bmp_image(img, filename);
-	if (!(img->data =
-				stbi_load(filename, &img->width, &img->height, &img->bpp, 0)))
-		raise_error(ERR_INV_IMAGE);
+	else if (!ft_strequ(&filename[filename_len - 4], ".bmp"))
+		if (!(img->data = stbi_load(filename, &img->width, &img->height,
+									&img->bpp, 0)))
+			raise_error(ERR_INV_IMAGE);
 }

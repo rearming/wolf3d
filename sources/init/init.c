@@ -44,7 +44,7 @@ t_erm		term_init(void)
 	term.mem_i = 0;
 	term.cmd_i = 0;
 	term.i = 2;
-	term.pos = (t_point){200, WIN_HEIGHT - 170};
+	term.pos = (t_point){200, WIN_HEIGHT - 170, 0, 0};
 	term.text_color = LIGHT_GREY;
 	term.line_color = LIGHT_GREY;
 	term.scale = 0.06;
@@ -62,7 +62,8 @@ static void	init_player(t_wolf *wolf, double fov)
 	wolf->player.angle = 0;
 	wolf->player.ang_speed = 0.001;
 	wolf->player.speed_fwd = 0.1;
-	wolf->player.speed_side = wolf->player.speed_fwd / 2;
+	wolf->player.speed_coeff = 1.5;
+	wolf->player.speed_side = wolf->player.speed_fwd / wolf->player.speed_coeff;
 	wolf->player.fat = 3;
 	wolf->player.look_height = 1;
 	wolf->player.look_frozen = TRUE;

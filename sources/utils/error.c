@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:16:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:55:45 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	raise_error2(int err_code)
 		ft_printf("SDL ttf error: %s\n", "can't open font file.");
 	if (err_code == ERR_SDL_TTF_RENDERTEXT)
 		ft_printf("SDL ttf error: %s\n", "TTF_RenderText failed.");
+	if (err_code == ERR_INV_TEXTURE_TABLE)
+		ft_printf("Invalid wolf_ignore.wolf file\n");
 }
 
 void		raise_error(int err_code)
@@ -34,7 +36,7 @@ void		raise_error(int err_code)
 	ft_printf("\nError!\n");
 	if (err_code == ERR_INV_ARGS)
 		ft_printf("Expected two args: first for map (text file)"
-			" and second for \"wolf_config.wolf\" file\n");
+			" and second for \"wolf_config.wolf\" file.\n");
 	if (err_code == ERR_NO_PLAYER_SPOT)
 		ft_printf("Player's spawn point ('-1') must exist"
 			" and be inside the map, surrounded by empty cells!\n");

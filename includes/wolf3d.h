@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 14:45:02 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 15:20:53 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ void		bresen_line(t_sdl sdl, t_point start, t_point end, int color);
 int			get_int_from_rgb(int r, int g, int b, int a);
 void		get_rgb_from_int(unsigned char *r, unsigned char *g,
 							unsigned char *b, int color);
-int			cell_is_empty(t_map map, t_point pos);
+int			cell_is_empty(t_map *map, t_point pos);
 int			get_view_direction(t_ray ray);
-void		draw_floor_and_sky(t_sdl sdl, int floor_color);
+void		draw_floor_and_sky(t_sdl *sdl, int floor_color);
 
 /*
 **	terminal render
@@ -137,7 +137,7 @@ void		draw_terminal(t_wolf *wolf);
 **	game logic utils
 */
 
-int			is_border_block(t_map map, t_point block);
+int			is_border_block(t_map *map, t_point block);
 
 /*
 **	minimap
@@ -200,7 +200,6 @@ void		change_angle(double *angle, double value);
 void		get_term_input(t_wolf *wolf, SDL_Keysym key);
 int			check_term(t_wolf *wolf, SDL_Keysym key);
 void		parse_command(t_wolf *wolf, t_erm *term);
-
 void		process_full_command(t_wolf *wolf, t_erm *term);
 
 /*
@@ -209,7 +208,8 @@ void		process_full_command(t_wolf *wolf, t_erm *term);
 
 void		change_block_index(t_wolf *wolf, t_erm *term);
 void		change_all_blocks(t_wolf *wolf, t_erm *term);
-
+void		teleport_player(t_wolf *wolf, t_erm *term);
+void		change_channels(t_wolf *wolf, t_erm *term);
 /*
 **	utils
 */

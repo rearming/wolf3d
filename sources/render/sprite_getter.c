@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 12:28:03 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 14:44:08 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 13:35:28 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,21 @@ t_sprite	get_sprite_by_side(t_ray *ray, t_textures *textures, t_map *map)
 t_sprite	get_column_sprite(t_ray *ray, t_map *map, t_textures *textures)
 {
 	int		texture_id;
+	int		texture_lim;
 
-	texture_id = 1;
+	texture_lim =
+			textures->texture_type == WOLF3D ? WOLF_SPRITES : MINE_SPRITES;
+	texture_id = DEF_TEXTURE;
 	if (textures->render_mode == COMPASS_MODE)
 		return (get_sprite_by_side(ray, textures, map));
 	if ((int)ray->y < map->height && (int)ray->x < map->width)
 		texture_id = map->int_map[(int)ray->y][(int)ray->x];
-	if ((textures->texture_type == WOLF3D && texture_id >= WOLF_SPRITES)
-	|| ft_bin_search(textures->table[WOLF3D], texture_id, WOLF_SPRITES)
-	!= SEARCH_FAIL)
-		texture_id = 1;
-	if ((textures->texture_type == MINECRAFT && texture_id >= MINE_SPRITES)
-	|| ft_bin_search(textures->table[MINECRAFT], texture_id, MINE_SPRITES)
-	!= SEARCH_FAIL)
-		texture_id = 1;
-	texture_id = texture_id > 0 ? texture_id : 1;
+	if (texture_id >= texture_lim)
+		texture_id = DEF_TEXTURE;
+	if (ft_bin_search(textures->table[textures->texture_type],
+			texture_id, texture_lim) != SEARCH_FAIL || texture_id > SPRITES_LIM)
+		texture_id = DEF_TEXTURE;
+	texture_id = texture_id > 0 ? texture_id : DEF_TEXTURE;
 	return (textures->sprites[textures->texture_type][texture_id]);
 }
 

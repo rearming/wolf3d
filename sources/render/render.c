@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 12:30:31 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:20:03 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ t_ray		raycast(t_wolf *wolf, double angle)
 	return (ray);
 }
 
+void		switch_pxls(int *pix, t_wolf *wolf)
+{
+	unsigned char	color[3];
+
+	get_rgb_from_int(&color[0], &color[1], &color[2], *pix);
+	*pix = get_int_from_rgb(color[wolf->textures.channels[0]],
+			color[wolf->textures.channels[1]],
+			color[wolf->textures.channels[2]], 0);
+}
+
 void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 {
 	int			column_y;
@@ -56,10 +66,13 @@ void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 	while (win_y < height)
 	{
 		if (win_x + column_y * WIN_WIDTH > 0
-			&& win_x + column_y * WIN_WIDTH < WIN_HEIGHT * WIN_WIDTH
-			&& win_y * sprite.height / height < sprite.size)
+		&& win_x + column_y * WIN_WIDTH < WIN_HEIGHT * WIN_WIDTH
+		&& win_y * sprite.height / height < sprite.size)
+		{
 			wolf->sdl.pixels[win_x + column_y * WIN_WIDTH] =
 					sprite.data[win_y * sprite.height / height][sprite_index.x];
+			switch_pxls(&wolf->sdl.pixels[win_x + column_y * WIN_WIDTH], wolf);
+		}
 		column_y++;
 		win_y++;
 	}
@@ -87,7 +100,7 @@ void		render(t_wolf *wolf)
 {
 	SDL_LockTexture(wolf->sdl.texture, 0,
 			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
-	draw_floor_and_sky(wolf->sdl, FLOOR_GREY);
+	draw_floor_and_sky(&wolf->sdl, FLOOR_GREY);
 	render_columns(wolf);
 	player_look(wolf);
 	draw_minimap(wolf);

@@ -62,7 +62,7 @@ void		get_int_map(t_map *map, int ***target)
 			raise_error(ERR_MALLOC);
 		while (x < map->width)
 		{
-			get_int_map_cell(map, *target, &is_ended, (t_point){x, y});
+			get_int_map_cell(map, *target, &is_ended, (t_point){x, y, 0, 0});
 			x++;
 		}
 		is_ended = FALSE;

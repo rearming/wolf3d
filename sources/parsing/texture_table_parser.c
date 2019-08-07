@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/05 12:45:26 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 14:18:33 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:59:34 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	**init_table(const char *config, int *i, int *tab_i, int **table)
 	char	**raw_table;
 
 	raw_table = 0;
-	if (!ft_strequ(config, "../wolf_ignore.wolf"))
+	if (!ft_strequ(config, "wolf_ignore.wolf"))
 		raise_error(ERR_INV_TEXTURE_TABLE);
 	if (!(table[0] = (int*)malloc(sizeof(int) * WOLF_SPRITES)))
 		raise_error(ERR_MALLOC);

@@ -3,6 +3,10 @@ project(wolf3d C)
 
 set(CMAKE_C_STANDARD 11)
 
+set(MY_CFLAGS "-O2")
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MY_CFLAGS}")
+
 set(libft_includes
         libft/includes)
 
@@ -43,7 +47,8 @@ set(main
 
 set(init
 		sources/init/init.c
-		sources/init/parse_params.c sources/init/sdl_init.c)
+		sources/init/parse_params.c
+		sources/init/sdl_init.c)
 
 set(utils
 		sources/utils/error.c
@@ -62,25 +67,32 @@ set(render
 		sources/render/minimap.c
 		sources/render/texture_render_utils.c
 		sources/game_logic/game_logic_utils.c
-		sources/render/sprite_getter.c sources/render/minimap_utils.c)
+		sources/render/sprite_getter.c
+		sources/render/minimap_utils.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
 		sources/hooks/player_moves.c
-		sources/game_logic/player_actions.c sources/hooks/player_look.c)
+		sources/game_logic/player_actions.c
+		sources/hooks/player_look.c)
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c
 		sources/parsing/fast_gnl.c
 		sources/parsing/texture_parser.c
-		sources/parsing/parsing_utils.c sources/parsing/sprites_parsing.c sources/parsing/texture_parsing_utils.c sources/parsing/texture_table_parsing.c)
+		sources/parsing/parsing_utils.c
+		sources/parsing/sprites_parser.c
+		sources/parsing/texture_parsing_utils.c
+		sources/parsing/texture_table_parser.c)
 set(terminal
 		sources/terminal/term_init.c
 		sources/terminal/term_render.c
 		sources/terminal/term_command_parser.c
-		sources/terminal/term_processing.c sources/terminal/term_actions.c)
+		sources/terminal/term_processing.c
+		sources/terminal/term_actions.c
+		sources/terminal/term_actions2.c)
 
 add_executable(wolf3d
 
@@ -104,7 +116,7 @@ target_link_libraries(wolf3d
         "ftprintf"
 		"ft"
 		"SDL2_ttf"
-		${freetype_lib}
+		#${freetype_lib}
 
 )
 

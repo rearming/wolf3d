@@ -12,10 +12,10 @@
 
 #include "wolf3d.h"
 
-int			is_border_block(t_map map, t_point block)
+int			is_border_block(t_map *map, t_point block)
 {
-	if (block.y != 0 && block.x != 0
-		&& block.y < map.height - 1 && block.x < map.width - 1)
+	if (block.y > 0 && block.x > 0
+		&& block.y < map->height - 1 && block.x < map->width - 1)
 		return (FALSE);
 	return (TRUE);
 }

@@ -18,7 +18,7 @@ t_sdl		init_sdl(void)
 
 	if (SDL_Init(SDL_INIT_EVERYTHING))
 		raise_error(ERR_SDL_INIT);
-	if (!(sdl.win = SDL_CreateWindow("Dota 2",
+	if (!(sdl.win = SDL_CreateWindow("Dota 3",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			WIN_WIDTH * SCALE_WIDTH, WIN_HEIGHT * SCALE_HEIGHT,
 			SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE)))

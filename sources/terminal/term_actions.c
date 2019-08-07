@@ -37,7 +37,7 @@ void		change_block_index(t_wolf *wolf, t_erm *term)
 		wolf->map.int_map[(int)ray.y][(int)ray.x] = term->parsed_command[2];
 }
 
-int			switch_int_maps(t_map *map, t_erm *term)
+static int	switch_int_maps(t_map *map, t_erm *term)
 {
 	int		**temp;
 
