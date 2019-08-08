@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 16:10:32 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/07 16:03:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:31:17 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	process_player_command(t_wolf *wolf, t_erm *term)
 	}
 	if (term->parsed_command[1] == TELEPORT)
 		teleport_player(wolf, term);
+	if (term->parsed_command[1] == FOV)
+		change_player_fov(wolf, term);
 }
 
 void	process_change_command(t_wolf *wolf, t_erm *term)

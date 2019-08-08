@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 13:39:01 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/07 16:13:33 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:05:48 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ void		change_channels(t_wolf *wolf, t_erm *term)
 				get_channel(term->command[2][channel]);
 		channel++;
 	}
+}
+
+void		change_player_fov(t_wolf *wolf, t_erm *term)
+{
+	if (term->parsed_command[2] == DEFAULT)
+		wolf->player.fov = DEF_FOV;
+	else if (term->parsed_command[2] > 0 && term->parsed_command[2] < 361)
+		wolf->player.fov = (M_PI / 180) * term->parsed_command[2];
 }

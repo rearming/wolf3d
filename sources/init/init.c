@@ -73,7 +73,7 @@ static void	init_player(t_wolf *wolf, double fov)
 
 void		wolf_init(t_wolf *wolf)
 {
-	init_player(wolf, M_PI / 2);
+	init_player(wolf, DEF_FOV);
 	wolf->minimap.fov_scale = 10;
 	wolf->minimap.scale.x = 300;
 	wolf->minimap.scale.y = 300;

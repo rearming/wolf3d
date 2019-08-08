@@ -75,9 +75,8 @@
 # define WEAPONS_NUM 4
 
 # define POS_UPDATE 15
-
 # define LOOK_LIMIT 500
-
 # define DEF_TEXTURE 1
+# define DEF_FOV M_PI / 2
 
 #endif

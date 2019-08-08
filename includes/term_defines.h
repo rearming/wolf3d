@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:43:27 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/07 16:03:42 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/08 12:51:03 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define TELEPORT 103
 # define COLORS 104
 # define CHANNELS 105
+# define FOV 106
+
 /*
 **	arguments
 */

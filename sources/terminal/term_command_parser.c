@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:17:08 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/07 16:37:58 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/08 15:07:21 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int		parse_command_target(t_erm *term, int cmd_num)
 		return (LOOK);
 	else if (ft_strequ(term->command[1], "tp"))
 		return (TELEPORT);
+	else if (ft_strequ(term->command[1], "fov"))
+		return (FOV);
 	return (INV_COMMAND);
 }
 
@@ -64,12 +66,14 @@ int		parse_command_content(t_erm *term, int cmd_num)
 		return (UNFREEZE);
 	else if (ft_strequ(term->command[2], "default"))
 		return (DEFAULT);
+	if (!term->command[2])
+		return (INV_COMMAND);
 	return (ft_atoi(term->command[2]));
 }
 
 int		parse_command_content2(t_erm *term, int cmd_num, int lim)
 {
-	if (term->cmd_i != lim || cmd_num < lim)
+	if (term->cmd_i != lim || cmd_num < lim || !term->command[lim])
 		return (INV_COMMAND);
 	return (ft_atoi(term->command[lim]));
 }

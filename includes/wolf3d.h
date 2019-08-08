@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/07 15:20:53 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/08 14:57:32 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,6 @@ void		player_look(t_wolf *wolf);
 
 void		break_block(t_wolf *wolf);
 void		place_block(t_wolf *wolf);
-void		change_angle(double *angle, double value);
 
 /*
 **	terminal
@@ -210,6 +209,8 @@ void		change_block_index(t_wolf *wolf, t_erm *term);
 void		change_all_blocks(t_wolf *wolf, t_erm *term);
 void		teleport_player(t_wolf *wolf, t_erm *term);
 void		change_channels(t_wolf *wolf, t_erm *term);
+void		change_player_fov(t_wolf *wolf, t_erm *term);
+
 /*
 **	utils
 */
