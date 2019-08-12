@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/08 14:23:11 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/12 08:34:38 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,8 @@ void		render(t_wolf *wolf)
 	SDL_LockTexture(wolf->sdl.texture, 0,
 			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
 	draw_floor_and_sky(&wolf->sdl, FLOOR_GREY);
-	render_columns(wolf);
+	//render_columns(wolf);
+	check_walls(wolf);
 	player_look(wolf);
 	draw_minimap(wolf);
 	draw_minimap_fov(wolf);

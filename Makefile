@@ -78,6 +78,7 @@ RENDER_FILES =					\
 	render_utils.c				\
 	sprite_getter.c				\
 	texture_render_utils.c		\
+	items.c                     \
 
 RENDER_DIR =					\
 	$(SRC_DIR)/render/

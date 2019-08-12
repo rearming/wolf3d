@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/08 14:57:32 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/12 08:34:48 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,9 @@ int			get_sprite_x_index(t_ray *ray, int texture_size);
 **	item render
 */
 
-void		draw_item(t_wolf *wolf, int i);
-void		draw_items(t_wolf *wolf);
+void		draw_item(t_wolf *wolf, int i, int flag);
+void 	    draw_items(t_wolf *wolf, int *far, int *close);
+void	    check_walls(t_wolf *wolf);
 
 /*
 **	render utils
