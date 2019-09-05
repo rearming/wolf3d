@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 08:17:26 by bbear             #+#    #+#             */
-/*   Updated: 2019/08/12 08:34:33 by bbear            ###   ########.fr       */
+/*   Updated: 2019/08/23 20:44:27 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,42 +41,92 @@ double scale, t_point print_coord)
 	}
 }
 
+//void	check_walls(t_wolf *wolf)
+//{
+//	int		far[wolf->map.items_nbr];
+//	int		close[wolf->map.items_nbr];
+//	int		i[3];
+//	t_ray	ray;
+//	double	coord[3];
+//	double	dist;
+//
+//	i[0] = 0;
+//	i[1] = 0;
+//	i[2] = 0;
+//	ft_bzero(far, wolf->map.items_nbr);
+//	ft_bzero(close, wolf->map.items_nbr);
+//	while (i[0] < wolf->map.items_nbr)
+//	{
+//		coord[0] = wolf->map.items[i[0]].x + 0.5 - wolf->player.x;
+//		coord[1] = wolf->map.items[i[0]].y + 0.5 - wolf->player.y;
+//		 if (i[0] == 1)
+//		 {
+//		 	coord[0] += wolf->enemy.x;
+//		 	coord[1] += wolf->enemy.y;
+//		 }
+//		coord[2] = atan2(coord[1], coord[0]);
+//		if (coord[2] < 0)
+//			coord[2] += M_PI * 2;
+//		ray = raycast(wolf, coord[2]);
+//		dist = sqrt(coord[0] * coord[0] + coord[1] * coord[1]);
+//		if (ray.distance < dist)
+//		{
+//			far[i[1]] = i[0] + 1;
+//			i[1]++;
+//		}
+//		else
+//		{
+//			close[i[2]] = i[0] + 1;
+//			i[2]++;
+//		}
+//		i[0]++;
+//	}
+//	draw_items(wolf, far, close);
+//}
+
 void	check_walls(t_wolf *wolf)
 {
-	int		far[wolf->map.items_nbr];
-	int		close[wolf->map.items_nbr];
-	int		i[3];
-	t_ray	ray;
-	double	coord[3];
-	double	dist;
+    int		far[wolf->map.items_nbr];
+    int		close[wolf->map.items_nbr];
+    int		i;
+    int     j;
+    int     k;
+    t_ray	ray;
+    double	x;
+    double  y;
+    double  atan;
+    double	dist;
 
-	i[0] = 0;
-	i[1] = 0;
-	i[2] = 0;
-	ft_bzero(far, wolf->map.items_nbr);
-	ft_bzero(close, wolf->map.items_nbr);
-	while (i[0] < wolf->map.items_nbr)
-	{
-		coord[0] = wolf->map.items[i[0]].x + 0.5 - wolf->player.x;
-		coord[1] = wolf->map.items[i[0]].y + 0.5 - wolf->player.y;
-		coord[2] = atan2(coord[1], coord[0]);
-		if (coord[2] < 0)
-			coord[2] += M_PI * 2;
-		ray = raycast(wolf, coord[2]);
-		dist = sqrt(coord[0] * coord[0] + coord[1] * coord[1]);
-		if (ray.distance < dist)
-		{
-			far[i[1]] = i[0] + 1;
-			i[1]++;
-		}
-		else
-		{
-			close[i[2]] = i[0] + 1;
-			i[2]++;
-		}
-		i[0]++;
-	}
-	draw_items(wolf, far, close);
+    i = 0;
+    j = 0;
+    k = 0;
+    ft_bzero(far, wolf->map.items_nbr);
+    ft_bzero(close, wolf->map.items_nbr);
+    while (i < wolf->map.items_nbr)
+    {
+//        if (i == 1)
+//            en_move(wolf);
+        x = wolf->map.items[i].x + 0.5 - wolf->player.x;// + 0.1 * wolf->mulx;
+        y = wolf->map.items[i].y + 0.5 - wolf->player.y;
+
+        atan = atan2(y, x);
+        if (atan < 0)
+            atan += M_PI * 2;
+        ray = raycast(wolf, atan);
+        dist = sqrt(x * x + y * y);
+        if (ray.distance < dist)
+        {
+            far[j] = i + 1;
+            j++;
+        }
+        else
+        {
+            close[k] = i + 1;
+            k++;
+        }
+        i++;
+    }
+    draw_items(wolf, far, close);
 }
 
 void	draw_items(t_wolf *wolf, int *far, int *close)
@@ -109,6 +160,7 @@ int flag)
 	{
 		wolf->map.int_map[wolf->map.items[i].y][wolf->map.items[i].x] = 0;
 		wolf->map.items[i].x = 0;
+		//printf("location of first item: %d %d\n", wolf->map.items[1].x, wolf->map.items[1].y);
 	}
 	if (flag)
 		scaled_draw_new(wolf, *wolf->textures.weapons[WEAPONS_NUM - 1].sprite,

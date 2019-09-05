@@ -68,7 +68,9 @@ set(render
 		sources/render/texture_render_utils.c
 		sources/game_logic/game_logic_utils.c
 		sources/render/sprite_getter.c
-		sources/render/minimap_utils.c)
+		sources/render/minimap_utils.c
+		sources/render/items.c
+		sources/render/enemy.c sources/render/main_menu.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks
@@ -116,7 +118,7 @@ target_link_libraries(wolf3d
         "ftprintf"
 		"ft"
 		"SDL2_ttf"
-		#${freetype_lib}
+		${freetype_lib}
 
 )
 

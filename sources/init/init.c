@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sdl_init.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 16:11:38 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/05 13:38:51 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/09/01 07:17:56 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,6 @@ void		wolf_init(t_wolf *wolf)
 	if (!(wolf->map.ray_dists = (double*)malloc(sizeof(double) * WIN_WIDTH)))
 		raise_error(ERR_MALLOC);
 	wolf->term = term_init();
+	wolf->mulx = 0;
+	wolf->flag = 1;
 }

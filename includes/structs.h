@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/07 15:15:02 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/08/26 06:09:21 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,8 @@ typedef struct			s_wolf
 	int					no_mouse;
 	t_map				map;
 	t_erm				term;
+	int                 mulx;
+	int                 flag;
 }						t_wolf;
 
 typedef struct			s_line

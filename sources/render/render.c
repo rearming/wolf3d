@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/12 08:34:38 by bbear            ###   ########.fr       */
+/*   Updated: 2019/08/29 19:07:56 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,22 @@ void		render(t_wolf *wolf)
 {
 	SDL_LockTexture(wolf->sdl.texture, 0,
 			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
-	draw_floor_and_sky(&wolf->sdl, FLOOR_GREY);
-	//render_columns(wolf);
-	check_walls(wolf);
-	player_look(wolf);
-	draw_minimap(wolf);
-	draw_minimap_fov(wolf);
-	draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-			wolf->textures.weapons[(int)wolf->player.weapon_type]);
+	if (wolf->actions.mouse_left == TRUE)
+	    wolf->flag = 0;
+	if (wolf->flag)
+	    main_menu(wolf);
+	else
+    {
+        draw_floor_and_sky(&wolf->sdl, FLOOR_GREY);
+        //render_columns(wolf);
+        check_walls(wolf);
+        //en_move(wolf);
+        player_look(wolf);
+        draw_minimap(wolf);
+        draw_minimap_fov(wolf);
+        draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
+                      wolf->textures.weapons[(int)wolf->player.weapon_type]);
+    }
 	if (wolf->term.opened)
 		draw_terminal(wolf);
 	SDL_UnlockTexture(wolf->sdl.texture);

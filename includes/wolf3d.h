@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/12 08:34:48 by bbear            ###   ########.fr       */
+/*   Updated: 2019/08/27 01:45:34 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ int			get_sprite_x_index(t_ray *ray, int texture_size);
 void		draw_item(t_wolf *wolf, int i, int flag);
 void 	    draw_items(t_wolf *wolf, int *far, int *close);
 void	    check_walls(t_wolf *wolf);
+void        en_move(t_wolf *wolf);
+void        main_menu(t_wolf *wolf);
 
 /*
 **	render utils
