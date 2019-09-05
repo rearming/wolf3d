@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:09:32 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/01 11:45:08 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/05 18:58:12 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void    main_menu(t_wolf *wolf)
     int     x;
     int     y;
 
-
     y = 0;
+    SDL_SetRelativeMouseMode(SDL_FALSE);
     while (y < WIN_HEIGHT)
     {
         x = 0;

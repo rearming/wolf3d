@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/26 06:09:21 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/05 17:30:50 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ typedef struct			s_wolf
 	t_erm				term;
 	int                 mulx;
 	int                 flag;
+	int                 mouse_x;
+	int                 mouse_y;
 }						t_wolf;
 
 typedef struct			s_line

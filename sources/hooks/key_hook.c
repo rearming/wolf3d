@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:29:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 11:04:43 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/09/05 19:18:05 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ void			keydown_hook2(t_wolf *wolf, SDL_Event *event)
 {
 	if (event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 		wolf->actions.space = TRUE;
+    if (event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+        if (wolf->flag)
+            sdl_exit(wolf);
+        else
+            wolf->flag = 2;
 }
 
 void			keydown_hook(t_wolf *wolf, SDL_Event *event)
 {
-	if (event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-		sdl_exit(wolf);
 	if (check_term(wolf, event->key.keysym))
 		return (get_term_input(wolf, event->key.keysym));
 	if (event->key.keysym.scancode == SDL_SCANCODE_RIGHT)

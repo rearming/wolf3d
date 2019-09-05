@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/27 01:45:34 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/05 17:26:47 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ void		mouse_down_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_wheel_event(t_wolf *wolf, SDL_Event *event);
 void		mouse_up_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_actions(t_wolf *wolf);
+void        mouse_cords(t_wolf *wolf);
 
 /*
 **	player's moves

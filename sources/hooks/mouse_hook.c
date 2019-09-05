@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/01 17:30:49 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/09/05 20:11:57 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void		mouse_motion_hook(t_wolf *wolf, SDL_Event *event)
 	if (wolf->player.angle <= -M_PI * 2)
 		wolf->player.angle = 0;
 	wolf->player.look_coeff = event->motion.yrel;
+	wolf->mouse_x = event->motion.x;
+    wolf->mouse_y = event->motion.y;
 	if (wolf->no_mouse)
 	{
 		SDL_SetRelativeMouseMode(SDL_TRUE);
