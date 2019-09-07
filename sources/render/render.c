@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/05 17:47:21 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/07 16:10:21 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,10 @@ void		render(t_wolf *wolf)
 	SDL_LockTexture(wolf->sdl.texture, 0,
 			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
 	mouse_cords(wolf);
-	if (wolf->flag)
+	if (wolf->flag == 1)
 	    main_menu(wolf);
+	else if (wolf->flag == 2)
+	    controls(wolf);
 	else
     {
         SDL_SetRelativeMouseMode(SDL_TRUE);

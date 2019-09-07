@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/05 17:26:47 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/07 16:10:21 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void 	    draw_items(t_wolf *wolf, int *far, int *close);
 void	    check_walls(t_wolf *wolf);
 void        en_move(t_wolf *wolf);
 void        main_menu(t_wolf *wolf);
+void        controls(t_wolf *wolf);
 
 /*
 **	render utils

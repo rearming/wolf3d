@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:09:32 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/05 18:58:12 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/07 16:10:14 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void    draw_buttons(t_wolf *wolf)
         i++;
     }
 }
+
 void    main_menu(t_wolf *wolf)
 {
     int     x;
