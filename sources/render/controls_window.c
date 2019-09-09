@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 17:46:17 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/07 18:22:12 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/09 20:38:03 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@ SDL_Surface *draw_text_three(t_wolf *wolf, int i, SDL_Color col)
         return (TTF_RenderText_Blended(wolf->ttf.font, "      LMB "
         "                    Shot, break block", col));
     if (i == 4)
-        return (TTF_RenderText_Blended(wolf->ttf.font, "      RMB                   "
-        "  Set block", col));
+        return (TTF_RenderText_Blended(wolf->ttf.font, "      RMB           "
+        "          Set block", col));
     else if (i == 5)
         return (TTF_RenderText_Blended(wolf->ttf.font, "     : + Ctrl         "
         "         Call terminal", col));
-    else
+    else if (i == 6)
         return (TTF_RenderText_Blended(wolf->ttf.font, "Mouse Wheel     "
         "     Change weapon", col));
+    else
+        return (TTF_RenderText_Blended(wolf->ttf.font, "<- Back     "
+        "                       Controls", col));
 }
 
 void    draw_text_two(t_wolf *wolf, int width, int height, int i)
@@ -56,6 +59,28 @@ void    draw_text_two(t_wolf *wolf, int width, int height, int i)
     SDL_FreeSurface(surface);
 }
 
+void    draw_back_button(t_wolf *wolf)
+{
+    int     height;
+    int     width;
+    int     x;
+    int     y;
+
+    height = WIN_HEIGHT / 14;
+    width = WIN_WIDTH / 8;
+    y = height;
+    while (y < height * 2)
+    {
+        x = width / 2;
+        while (x < width * 2 - 100)
+        {
+            wolf->sdl.pixels[x + y * WIN_WIDTH] = 255 * 255 * 255 + 255 * 1 + 255;
+            x++;
+        }
+        y++;
+    }
+}
+
 void    draw_buttons_two(t_wolf *wolf)
 {
     int     height;
@@ -64,10 +89,12 @@ void    draw_buttons_two(t_wolf *wolf)
     int     y;
     int     i;
 
-    i = 2;
+    i = 1;
     height = WIN_HEIGHT / 14;
     width = WIN_WIDTH / 8;
-    while (i < 7)
+    draw_back_button(wolf);
+    draw_text_two(wolf, width - 100, height, i);
+    while (++i < 7)
     {
         y = height + (i - 1) * 2 * height;
         while (y < height * 2 * i)
@@ -81,7 +108,6 @@ void    draw_buttons_two(t_wolf *wolf)
             y++;
         }
         draw_text_two(wolf, x - 2 * width, y - height, i);
-        i++;
     }
 }
 
@@ -91,7 +117,6 @@ void    controls(t_wolf *wolf)
     int     y;
 
     y = 0;
-    //SDL_SetRelativeMouseMode(SDL_FALSE);
     while (y < WIN_HEIGHT)
     {
         x = 0;

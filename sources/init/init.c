@@ -96,4 +96,5 @@ void		wolf_init(t_wolf *wolf)
 	wolf->term = term_init();
 	wolf->mulx = 0;
 	wolf->flag = 1;
+	wolf->flag_two = 0;
 }

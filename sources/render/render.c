@@ -109,7 +109,6 @@ void		render(t_wolf *wolf)
     {
         SDL_SetRelativeMouseMode(SDL_TRUE);
         draw_floor_and_sky(&wolf->sdl, FLOOR_GREY);
-        //render_columns(wolf);
         check_walls(wolf);
         //en_move(wolf);
         player_look(wolf);

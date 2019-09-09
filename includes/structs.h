@@ -184,6 +184,7 @@ typedef struct			s_wolf
 	t_erm				term;
 	int                 mulx;
 	int                 flag;
+	int                 flag_two;
 	int                 mouse_x;
 	int                 mouse_y;
 }						t_wolf;

@@ -44,7 +44,11 @@ void			keydown_hook2(t_wolf *wolf, SDL_Event *event)
         if (wolf->flag == 1)
             sdl_exit(wolf);
         else if (wolf->flag == 2 || !wolf->flag)
+        {
+            if (!wolf->flag && !wolf->flag_two)
+                wolf->flag_two = 1;
             wolf->flag = 1;
+        }
         else
             wolf->flag = 2;
 }
