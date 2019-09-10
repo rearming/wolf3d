@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:09:32 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/09 20:38:47 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/10 15:41:32 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void    draw_buttons(t_wolf *wolf)
             x = width;
             while (x < width * 3)
             {
-                wolf->sdl.pixels[x + y * WIN_WIDTH] = 0;//200 * 255 * 255 + 255 * 1 + 255;
+                wolf->sdl.pixels[x + y * WIN_WIDTH] = 0;
                 x++;
             }
             y++;
@@ -90,7 +90,7 @@ void    main_menu(t_wolf *wolf)
         x = 0;
         while (x < WIN_WIDTH)
         {
-            wolf->sdl.pixels[x + y * WIN_WIDTH] = 176 * 255 * 255 + 128 * 255 + 255;
+            wolf->sdl.pixels[x + y * WIN_WIDTH] = 7667733;
             x++;
         }
         y++;

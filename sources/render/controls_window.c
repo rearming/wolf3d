@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 17:46:17 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/09 20:38:03 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/10 15:46:45 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ SDL_Surface *draw_text_three(t_wolf *wolf, int i, SDL_Color col)
         "     Change weapon", col));
     else
         return (TTF_RenderText_Blended(wolf->ttf.font, "<- Back     "
-        "                       Controls", col));
+        "                      *CONTROLS*", col));
 }
 
 void    draw_text_two(t_wolf *wolf, int width, int height, int i)
@@ -42,8 +42,8 @@ void    draw_text_two(t_wolf *wolf, int width, int height, int i)
     int				y;
     SDL_Color		col;
 
-    get_rgb_from_int(&col.r, &col.g, &col.b, 0);
-    surface = draw_text_three(wolf, i, col);//surface = TTF_RenderText_Blended(wolf->ttf.font, "   Exit", col);
+    get_rgb_from_int(&col.r, &col.g, &col.b, 16777215);
+    surface = draw_text_three(wolf, i, col);
     pixels = (int*)surface->pixels;
     y = -1;
     while (++y < surface->h*0.12)
@@ -74,7 +74,7 @@ void    draw_back_button(t_wolf *wolf)
         x = width / 2;
         while (x < width * 2 - 100)
         {
-            wolf->sdl.pixels[x + y * WIN_WIDTH] = 255 * 255 * 255 + 255 * 1 + 255;
+            wolf->sdl.pixels[x + y * WIN_WIDTH] = 0;
             x++;
         }
         y++;
@@ -102,7 +102,7 @@ void    draw_buttons_two(t_wolf *wolf)
             x = width / 2;
             while (x < width * 3)
             {
-                wolf->sdl.pixels[x + y * WIN_WIDTH] = 200 * 255 * 255 + 255 * 1 + 255;
+                wolf->sdl.pixels[x + y * WIN_WIDTH] = 0;
                 x++;
             }
             y++;
@@ -122,7 +122,7 @@ void    controls(t_wolf *wolf)
         x = 0;
         while (x < WIN_WIDTH)
         {
-            wolf->sdl.pixels[x + y * WIN_WIDTH] = 128 * 255 * 255 + 19 * 255 + 128;
+            wolf->sdl.pixels[x + y * WIN_WIDTH] = 7667733;
             x++;
         }
         y++;
