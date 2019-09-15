@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
+#    By: bbear <bbear@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/08/07 19:09:33 by sleonard         ###   ########.fr        #
+#    Updated: 2019/09/15 15:25:13 by bbear            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,9 @@ RENDER_FILES =					\
 	sprite_getter.c				\
 	texture_render_utils.c		\
 	items.c                     \
+	main_menu.c                 \
+	controls_window.c           \
+	map_choose_menu.c           \
 
 RENDER_DIR =					\
 	$(SRC_DIR)/render/
@@ -127,6 +130,7 @@ HOOKS_FILES =					\
 	mouse_hook.c				\
 	player_look.c				\
 	player_moves.c				\
+	menu_interactions.c         \
 
 HOOKS_DIR =						\
 	$(SRC_DIR)/hooks/
@@ -178,7 +182,7 @@ SRC_DIR =						\
 	./sources
 
 COMP_FLAGS = 					\
-	-Wall -Wextra -Werror -O2
+	-Wall -Wextra -Werror -O2 -g
 
 INCLUDES = 						\
     	./includes/

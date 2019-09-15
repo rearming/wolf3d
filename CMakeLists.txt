@@ -70,7 +70,7 @@ set(render
 		sources/render/sprite_getter.c
 		sources/render/minimap_utils.c
 		sources/render/items.c
-		sources/render/enemy.c sources/render/main_menu.c sources/render/controls_window.c)
+		sources/render/main_menu.c sources/render/controls_window.c sources/render/map_choose_menu.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks

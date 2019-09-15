@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse_hook.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/05 20:11:57 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/13 13:20:35 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		mouse_motion_hook(t_wolf *wolf, SDL_Event *event)
 		wolf->player.angle = 0;
 	wolf->player.look_coeff = event->motion.yrel;
 	wolf->mouse_x = event->motion.x;
-    wolf->mouse_y = event->motion.y;
+	wolf->mouse_y = event->motion.y;
 	if (wolf->no_mouse)
 	{
 		SDL_SetRelativeMouseMode(SDL_TRUE);

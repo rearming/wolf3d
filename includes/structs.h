@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/05 17:30:50 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/15 15:38:28 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,11 +182,10 @@ typedef struct			s_wolf
 	int					no_mouse;
 	t_map				map;
 	t_erm				term;
-	int                 mulx;
-	int                 flag;
-	int                 flag_two;
-	int                 mouse_x;
-	int                 mouse_y;
+	int					flag;
+	int					flag_two;
+	int					mouse_x;
+	int					mouse_y;
 }						t_wolf;
 
 typedef struct			s_line

@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/07 16:10:21 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/15 15:39:43 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,13 @@ int			get_sprite_x_index(t_ray *ray, int texture_size);
 */
 
 void		draw_item(t_wolf *wolf, int i, int flag);
-void 	    draw_items(t_wolf *wolf, int *far, int *close);
-void	    check_walls(t_wolf *wolf);
-void        en_move(t_wolf *wolf);
-void        main_menu(t_wolf *wolf);
-void        controls(t_wolf *wolf);
+void		draw_items(t_wolf *wolf, int *far, int *close);
+void		check_walls(t_wolf *wolf);
+void		main_menu(t_wolf *wolf);
+void		controls(t_wolf *wolf);
+void		draw_back_button(t_wolf *wolf);
+void		choose_map(t_wolf *wolf, int i);
+void		maps_menu(t_wolf *wolf);
 
 /*
 **	render utils
@@ -177,7 +179,7 @@ void		mouse_down_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_wheel_event(t_wolf *wolf, SDL_Event *event);
 void		mouse_up_hook(t_wolf *wolf, SDL_Event *event);
 void		mouse_actions(t_wolf *wolf);
-void        mouse_cords(t_wolf *wolf);
+void		mouse_cords(t_wolf *wolf);
 
 /*
 **	player's moves
