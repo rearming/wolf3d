@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/25 23:44:46 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/16 16:05:11 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@
 # define POS_UPDATE 15
 # define LOOK_LIMIT 500
 # define DEF_TEXTURE 1
-# define DEF_FOV M_PI / 2
+# define DEF_FOV M_PI / 3
 
 #endif

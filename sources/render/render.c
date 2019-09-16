@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/15 14:51:07 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/16 15:54:34 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,7 @@ void		render(t_wolf *wolf)
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 		draw_floor_and_sky(&wolf->sdl, FLOOR_GREY);
 		check_walls(wolf);
-		player_look(wolf);
-		draw_minimap(wolf);
-		draw_minimap_fov(wolf);
-		draw_animated(&wolf->textures.weapon_frame, wolf->tickrate, wolf->sdl,
-			wolf->textures.weapons[(int)wolf->player.weapon_type]);
+		game_window(wolf);
 	}
 	if (wolf->term.opened)
 		draw_terminal(wolf);

@@ -6,7 +6,7 @@
 #    By: bbear <bbear@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/09/15 15:25:13 by bbear            ###   ########.fr        #
+#    Updated: 2019/09/16 15:54:34 by bbear            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ RENDER_FILES =					\
 	main_menu.c                 \
 	controls_window.c           \
 	map_choose_menu.c           \
+	game_window.c               \
 
 RENDER_DIR =					\
 	$(SRC_DIR)/render/

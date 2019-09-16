@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/15 15:39:43 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/16 15:54:34 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			get_player_head(const char **files, t_anim *head, int last_file);
 */
 
 void		render(t_wolf *wolf);
+void		game_window(t_wolf *wolf);
 void		render_columns(t_wolf *wolf);
 t_ray		raycast(t_wolf *wolf, double angle);
 void		draw_column(t_ray *ray, t_wolf *wolf, int win_x);

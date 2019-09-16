@@ -6,7 +6,7 @@
 /*   By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 15:16:36 by sleonard          #+#    #+#             */
-/*   Updated: 2019/08/08 14:25:22 by sleonard         ###   ########.fr       */
+/*   Updated: 2019/09/16 14:28:21 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void		raise_error(int err_code)
 {
 	ft_printf("\nError!\n");
 	if (err_code == ERR_INV_ARGS)
-		ft_printf("Expected two args: first for map (text file)"
-			" and second for \"wolf_config.wolf\" file.\n");
+		ft_printf("Expected one or two args: first for \"wolf_config.wolf\""
+			" file and second for map (text file).\n");
 	if (err_code == ERR_NO_PLAYER_SPOT)
 		ft_printf("Player's spawn point ('-1') must exist"
 			" and be inside the map, surrounded by empty cells!\n");
