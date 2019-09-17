@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 12:54:14 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/15 16:31:47 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/17 18:14:23 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct			s_wolf
 	int					flag_two;
 	int					mouse_x;
 	int					mouse_y;
+	double				dist;
 }						t_wolf;
 
 typedef struct			s_line

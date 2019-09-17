@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/16 15:54:34 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/17 18:54:39 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ t_ray		raycast(t_wolf *wolf, double angle);
 void		draw_column(t_ray *ray, t_wolf *wolf, int win_x);
 void		scaled_draw(t_sdl sdl, t_sprite sprite,
 					double scale, t_point print_coord);
+void		scaled_draw_new(t_wolf *wolf, t_sprite sprite,
+					double scale, t_point print_coord);
 void		draw_animated(double *frame, int tickrate,
 					t_sdl sdl, t_anim anim_sprite);
 
@@ -115,6 +117,7 @@ int			get_sprite_x_index(t_ray *ray, int texture_size);
 void		draw_item(t_wolf *wolf, int i, int flag);
 void		draw_items(t_wolf *wolf, int *far, int *close);
 void		check_walls(t_wolf *wolf);
+int			check_walls_utils(t_wolf *wolf, int i);
 void		main_menu(t_wolf *wolf);
 void		controls(t_wolf *wolf);
 void		draw_back_button(t_wolf *wolf);

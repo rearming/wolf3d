@@ -6,57 +6,11 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 08:17:26 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/16 20:18:51 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/17 18:54:02 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-
-void	scaled_draw_new(t_wolf *wolf, t_sprite sprite,
-double scale, t_point print_coord)
-{
-	int		x;
-	int		y;
-	t_ray	ray;
-
-	scale = scale < 20 ? scale : 20;
-	x = 0;
-	while (x < scale * sprite.width)
-	{
-		y = 0;
-		ray = raycast(wolf, ((double)(print_coord.x + x) / 22 / 180 * M_PI));
-		if (ray.distance > print_coord.z)
-		{
-			while (y < scale * sprite.height)
-			{
-				if ((sprite.data[(int)(y / scale)][(int)(x / scale)] >> 24))
-					sdl_put_pixel(&(t_point){x + print_coord.x, y
-					+ print_coord.y, 0, sprite.data[(int)(y / scale)]
-					[(int)(x / scale)]}, &(wolf->sdl));
-				y++;
-			}
-		}
-		x++;
-	}
-}
-
-int		check_walls_utils(t_wolf *wolf, int i)
-{
-	t_ray	ray;
-	double	coord[3];
-	double	dist;
-
-	coord[0] = wolf->map.items[i].x + 0.5 - wolf->player.x;
-	coord[1] = wolf->map.items[i].y + 0.5 - wolf->player.y;
-	coord[2] = atan2(coord[1], coord[0]);
-	if (coord[2] < 0)
-		coord[2] += M_PI * 2;
-	ray = raycast(wolf, coord[2]);
-	dist = sqrt(coord[0] * coord[0] + coord[1] * coord[1]);
-	if (ray.distance < dist)
-		return (1);
-	return (0);
-}
 
 void	check_walls(t_wolf *wolf)
 {
@@ -107,12 +61,11 @@ void	draw_items(t_wolf *wolf, int *far, int *close)
 	}
 }
 
-void	check_condition(t_wolf *wolf, double atan_item, double *cord, int i,
-int flag)
+void	check_condition(t_wolf *wolf, double atan_item, int i, int flag)
 {
 	double	dist;
 
-	dist = sqrt(cord[0] * cord[0] + cord[1] * cord[1]) * 0.25;
+	dist = wolf->dist;
 	if (dist < 0.1)
 	{
 		wolf->map.int_map[wolf->map.items[i].y][wolf->map.items[i].x] = 0;
@@ -133,6 +86,27 @@ int flag)
 		* 0.5, WIN_HEIGHT * 0.55 - dist * 10, 0, 0});
 }
 
+void	check_draw(t_wolf *wolf, int i, int flag, double atan_item)
+{
+	if (atan_item <= wolf->player.angle + wolf->player.fov / 2 &&
+		atan_item >= wolf->player.angle - wolf->player.fov / 2)
+		check_condition(wolf, atan_item, i, flag);
+	else if (wolf->player.angle + wolf->player.fov * 0.5 > M_PI * 2)
+	{
+		wolf->player.angle -= 2 * M_PI;
+		if (atan_item >= wolf->player.angle - wolf->player.fov * 0.5 &&
+			atan_item <= wolf->player.angle + wolf->player.fov * 0.5)
+			check_condition(wolf, atan_item, i, flag);
+	}
+	else if (atan_item + wolf->player.fov * 0.5 > 2 * M_PI)
+	{
+		atan_item -= 2 * M_PI;
+		if (atan_item >= wolf->player.angle - wolf->player.fov * 0.5 &&
+			atan_item <= wolf->player.angle + wolf->player.fov * 0.5)
+			check_condition(wolf, atan_item, i, flag);
+	}
+}
+
 void	draw_item(t_wolf *wolf, int i, int flag)
 {
 	double	cord[2];
@@ -143,27 +117,12 @@ void	draw_item(t_wolf *wolf, int i, int flag)
 	cord[0] = wolf->map.items[i].x + 0.5 - wolf->player.x;
 	cord[1] = wolf->map.items[i].y + 0.5 - wolf->player.y;
 	atan_item = atan2(cord[1], cord[0]);
+	wolf->dist = sqrt(cord[0] * cord[0] + cord[1] * cord[1]) * 0.25;
 	if (atan_item < 0)
 		atan_item += 2 * M_PI;
 	while (wolf->player.angle - wolf->player.fov < 0)
 		wolf->player.angle += M_PI * 2;
 	while (wolf->player.angle >= M_PI * 2)
 		wolf->player.angle -= M_PI * 2;
-	if (atan_item <= wolf->player.angle + wolf->player.fov / 2 &&
-		atan_item >= wolf->player.angle - wolf->player.fov / 2)
-		check_condition(wolf, atan_item, cord, i, flag);
-	else if (wolf->player.angle + wolf->player.fov * 0.5 > M_PI * 2)
-	{
-		wolf->player.angle -= 2 * M_PI;
-		if (atan_item >= wolf->player.angle - wolf->player.fov * 0.5 &&
-			atan_item <= wolf->player.angle + wolf->player.fov * 0.5)
-			check_condition(wolf, atan_item, cord, i, flag);
-	}
-	else if (atan_item + wolf->player.fov * 0.5 > 2 * M_PI)
-	{
-		atan_item -= 2 * M_PI;
-		if (atan_item >= wolf->player.angle - wolf->player.fov * 0.5 &&
-			atan_item <= wolf->player.angle + wolf->player.fov * 0.5)
-			check_condition(wolf, atan_item, cord, i, flag);
-	}
+	check_draw(wolf, i, flag, atan_item);
 }
