@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 13:29:22 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/15 15:30:08 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 21:27:56 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ void			keydown_hook2(t_wolf *wolf, SDL_Event *event)
 		wolf->actions.space = TRUE;
 	if (event->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 	{
-		if (wolf->flag == 1)
+		if (wolf->menu_flag == MENU_MAIN)
 			sdl_exit(wolf);
-		else if (wolf->flag == 2 || !wolf->flag || wolf->flag == 3)
+		else if (wolf->menu_flag == MENU_GAME
+			|| wolf->menu_flag == MENU_CONTROLS
+			|| wolf->menu_flag == MENU_MAPS)
 		{
-			if (!wolf->flag && !wolf->flag_two)
+			if (wolf->menu_flag == MENU_GAME && !wolf->flag_two)
 				wolf->flag_two = 1;
-			wolf->flag = 1;
+			wolf->menu_flag = MENU_MAIN;
 		}
 		else
-			wolf->flag = 2;
+			wolf->menu_flag = MENU_CONTROLS;
 	}
 }
 

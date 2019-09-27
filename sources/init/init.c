@@ -94,6 +94,6 @@ void		wolf_init(t_wolf *wolf)
 	if (!(wolf->map.ray_dists = (double*)malloc(sizeof(double) * WIN_WIDTH)))
 		raise_error(ERR_MALLOC);
 	wolf->term = term_init();
-	wolf->flag = 1;
+	wolf->menu_flag = 1;
 	wolf->flag_two = 0;
 }

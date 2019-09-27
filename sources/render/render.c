@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 18:42:55 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/16 15:54:34 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 22:20:07 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void		switch_pxls(int *pix, t_wolf *wolf)
 			color[wolf->textures.channels[2]], 0);
 }
 
+#pragma clang optimize off
+
 void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 {
 	int			column_y;
@@ -66,17 +68,19 @@ void		draw_column(t_ray *ray, t_wolf *wolf, int win_x)
 	while (win_y < height)
 	{
 		if (win_x + column_y * WIN_WIDTH > 0
-		&& win_x + column_y * WIN_WIDTH < WIN_HEIGHT * WIN_WIDTH
-		&& win_y * sprite.height / height < sprite.size)
+			&& win_x + column_y * WIN_WIDTH < WIN_HEIGHT * WIN_WIDTH
+			&& win_y * sprite.height / height < sprite.size)
 		{
 			wolf->sdl.pixels[win_x + column_y * WIN_WIDTH] =
-					sprite.data[win_y * sprite.height / height][sprite_index.x];
+				sprite.data[win_y * sprite.height / height][sprite_index.x];
 			switch_pxls(&wolf->sdl.pixels[win_x + column_y * WIN_WIDTH], wolf);
 		}
 		column_y++;
 		win_y++;
 	}
 }
+
+#pragma clang optimize on
 
 void		render_columns(t_wolf *wolf)
 {
@@ -101,11 +105,11 @@ void		render(t_wolf *wolf)
 	SDL_LockTexture(wolf->sdl.texture, 0,
 			(void**)&wolf->sdl.pixels, &wolf->sdl.pitch);
 	mouse_cords(wolf);
-	if (wolf->flag == 1)
+	if (wolf->menu_flag == MENU_MAIN)
 		main_menu(wolf);
-	else if (wolf->flag == 2)
+	else if (wolf->menu_flag == MENU_CONTROLS)
 		controls(wolf);
-	else if (wolf->flag == 3)
+	else if (wolf->menu_flag == MENU_MAPS)
 		maps_menu(wolf);
 	else
 	{

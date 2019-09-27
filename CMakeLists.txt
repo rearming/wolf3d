@@ -71,7 +71,9 @@ set(render
 		sources/render/minimap_utils.c
 		sources/render/items.c
 		sources/render/game_window.c
-		sources/render/main_menu.c sources/render/controls_window.c sources/render/map_choose_menu.c)
+		sources/render/main_menu.c
+		sources/render/controls_window.c
+		sources/render/map_choose_menu.c)
 set(game_logic
 		sources/game_logic/parse_items.c)
 set(hooks

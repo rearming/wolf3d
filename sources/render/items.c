@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 08:17:26 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/17 18:54:02 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 22:48:47 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ void	check_condition(t_wolf *wolf, double atan_item, int i, int flag)
 	}
 	if (flag)
 		scaled_draw_new(wolf, *wolf->textures.weapons[WEAPONS_NUM - 1].sprite,
-					0.5 / dist, (t_point) {(atan_item - wolf->player.angle
-					+ wolf->player.fov * 0.5) * 180 / M_PI * 32
-					- (*wolf->textures.weapons[WEAPONS_NUM - 1].sprite).width
-					* 0.75 / dist * 0.5, WIN_HEIGHT * 0.55 - dist * 10, dist
-					* 4, 0});
+		0.5 / dist, (t_point) {(atan_item - wolf->player.angle
+		+ wolf->player.fov * 0.5) * 180 / M_PI * 32
+		- (*wolf->textures.weapons[WEAPONS_NUM - 1].sprite).width
+		* 0.75 / dist * 0.5, WIN_HEIGHT * 0.55 - dist * 10, dist
+		* 4, 0});
 	else
 		scaled_draw(wolf->sdl, *wolf->textures.weapons[WEAPONS_NUM - 1].sprite,
 		0.5 / dist, (t_point){(atan_item - wolf->player.angle + wolf->player.fov

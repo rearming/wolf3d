@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 18:24:54 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/16 16:05:11 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 21:25:27 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@
 # define LOOK_LIMIT 500
 # define DEF_TEXTURE 1
 # define DEF_FOV M_PI / 3
+
+# define MENU_GAME 0
+# define MENU_MAIN 1
+# define MENU_CONTROLS 2
+# define MENU_MAPS 3
 
 #endif

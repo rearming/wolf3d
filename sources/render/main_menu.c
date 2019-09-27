@@ -103,7 +103,7 @@ void		main_menu(t_wolf *wolf)
 
 void		choose_map(t_wolf *wolf, int i)
 {
-	if (wolf->flag == 3)
+	if (wolf->menu_flag == 3)
 	{
 		clean_map(wolf);
 		if (i == 1)

@@ -6,7 +6,7 @@
 #    By: bbear <bbear@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/09/16 15:54:34 by bbear            ###   ########.fr        #
+#    Updated: 2019/09/27 21:16:52 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,7 +183,7 @@ SRC_DIR =						\
 	./sources
 
 COMP_FLAGS = 					\
-	-Wall -Wextra -Werror -O2 -g
+	-Wall -Wextra -Werror -O2
 
 INCLUDES = 						\
     	./includes/

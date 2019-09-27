@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 18:33:09 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/13 13:20:35 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 22:21:58 by sleonard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void		mouse_actions(t_wolf *wolf)
 {
+	if (wolf->menu_flag != MENU_GAME)
+		return ;
 	if (wolf->actions.mouse_left
-	&& (wolf->textures.weapon_frame > 4 || wolf->textures.weapon_frame == 0)
-	&& wolf->player.weapon_type != PICKAXE)
+		&& (wolf->textures.weapon_frame > 4 || wolf->textures.weapon_frame == 0)
+		&& wolf->player.weapon_type != PICKAXE)
 		wolf->textures.weapon_frame = 1;
 	if (wolf->actions.mouse_left && wolf->player.weapon_type == PICKAXE)
 		break_block(wolf);
