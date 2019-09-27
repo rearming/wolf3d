@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 14:43:10 by sleonard          #+#    #+#             */
-/*   Updated: 2019/09/17 18:54:39 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 18:44:12 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void		controls(t_wolf *wolf);
 void		draw_back_button(t_wolf *wolf);
 void		choose_map(t_wolf *wolf, int i);
 void		maps_menu(t_wolf *wolf);
+void		clean_map(t_wolf *wolf);
 
 /*
 **	render utils

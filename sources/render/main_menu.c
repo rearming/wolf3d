@@ -6,7 +6,7 @@
 /*   By: bbear <bbear@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/27 10:09:32 by bbear             #+#    #+#             */
-/*   Updated: 2019/09/15 16:31:47 by bbear            ###   ########.fr       */
+/*   Updated: 2019/09/27 18:43:22 by bbear            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void		choose_map(t_wolf *wolf, int i)
 {
 	if (wolf->flag == 3)
 	{
+		clean_map(wolf);
 		if (i == 1)
 			wolf->map = get_map("maps/map1");
 		else if (i == 2)
