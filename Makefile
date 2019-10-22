@@ -6,7 +6,7 @@
 #    By: bbear <bbear@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/09/27 21:16:52 by sleonard         ###   ########.fr        #
+#    Updated: 2019/10/22 18:40:00 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -208,13 +208,13 @@ LIBS =																\
 	-L $(LIBFT_DIR) -lft -L $(FT_PRINTF) -lftprintf					\
 	-L $(SDL2_LIBS) -lSDL2 -L $(TTF_LIBS) -lSDL2_ttf				\
 
-all : $(NAME)
+all : configure $(NAME)
 
 .PHONY: configure
 configure:
 	./run.sh
 
-$(NAME) : configure $(LIBFT) $(OBJ_DIR) $(OBJ)
+$(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
 	$(COMPILE) $(LIBS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR) :
