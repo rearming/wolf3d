@@ -33,7 +33,6 @@ install_SDL2()
 		./configure --prefix="$SDL2"
 		make && make install
 	fi
-	echo "PATH=\$PATH:$SDL2" >> ~/.zshrc
 }
 
 if [[ ! -d "$SDL2" ]]; then
@@ -62,7 +61,6 @@ install_freetype()
 		sed -i -r 's:.*(#.*SUBPIXEL.*) \(.*\):\1:' \
 			include/freetype/config/ftoption.h &&
 		./configure --prefix="$FREETYPE_DIR"
-		echo "PATH=\$PATH:$FREETYPE_DIR/builds/unix/" >> ~/.zshrc
 		make && make install
 		chmod 755 "$FREETYPE_DIR"/freetype-config
 	fi
@@ -85,13 +83,11 @@ install_sdl_ttf()
 	# upgrade timestamps for authoconfig
 	touch aclocal.m4 Makefile.am configure Makefile.in
 
-#	export PATH=\$PATH:"$FREETYPE_DIR"/builds/unix/
 	export SDL_CONFIG="$SDL2"/sdl2-config
 	if [[ ! -f "Makefile" ]]; then
 		./configure --prefix="$TTF_DIR" --with-freetype-prefix="$FREETYPE_DIR"
 		make && make install
 	fi
-	echo "PATH=\$PATH:$TTF_DIR" >> ~/.zshrc
 }
 
 if [[ ! -d "$TTF_DIR" ]]; then
