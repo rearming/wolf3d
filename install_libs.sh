@@ -10,12 +10,6 @@ TTF_DIR="$SDL_DIR"/sdl_ttf
 
 FREETYPE_DIR="$SDL_DIR"/freetype-2.4.9
 
-echo "$PROJECT_DIR"
-echo "$SDL_DIR"
-echo "$SDL2"
-echo "$TTF_DIR"
-echo "$FREETYPE_DIR"
-
 if [[ ! -d "$SDL_DIR" ]]; then
 	mkdir "$SDL_DIR"
 fi

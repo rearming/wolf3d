@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bbear <bbear@student.42.fr>                +#+  +:+       +#+         #
+#    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/10/22 18:40:00 by sleonard         ###   ########.fr        #
+#    Updated: 2019/11/21 11:00:35 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -212,7 +212,7 @@ all : configure $(NAME)
 
 .PHONY: configure
 configure:
-	./run.sh
+	./install_libs.sh
 
 $(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
 	$(COMPILE) $(LIBS) $(OBJ) -o $(NAME)
