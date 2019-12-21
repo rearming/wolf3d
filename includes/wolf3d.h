@@ -18,7 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# include "SDL.h"
+# include <SDL.h>
 # include "SDL2/SDL_ttf.h"
 
 # include "sdb_image.h"

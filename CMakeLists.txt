@@ -116,10 +116,10 @@ add_executable(wolf3d
 
 target_link_libraries(wolf3d
 
+		"ftprintf"
+		"ft"
 		"SDL2"
 		"m"
-        "ftprintf"
-		"ft"
 		"SDL2_ttf"
 		${freetype_lib}
 

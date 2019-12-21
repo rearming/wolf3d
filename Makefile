@@ -202,20 +202,21 @@ FREETYPE = $(SDL)/freetype-2.4.9
 FREETYPE_LIBS = $(FREETYPE)/lib
 FREETYPE_INCL = $(FREETYPE)/include
 
-COMPILE = gcc $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(SDL2_INCL) -I $(TTF_INCL)
+COMPILE = clang $(COMP_FLAGS) -I $(INCLUDES) -I $(LIBFT_INC) -I $(SDL2_INCL) -I $(TTF_INCL)
 
 LIBS =																\
-	-L $(LIBFT_DIR) -lft -L $(FT_PRINTF) -lftprintf					\
-	-L $(SDL2_LIBS) -lSDL2 -L $(TTF_LIBS) -lSDL2_ttf				\
+	-L $(FT_PRINTF) -lftprintf -L $(LIBFT_DIR) -lft			\
+	-L $(SDL2_LIBS) -lSDL2 -L $(TTF_LIBS) -lSDL2_ttf -lm	\
 
 all : configure $(NAME)
 
 .PHONY: configure
 configure:
+	#echo "not installing"
 	./install_libs.sh
 
 $(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
-	$(COMPILE) $(LIBS) $(OBJ) -o $(NAME)
+	$(COMPILE) $(OBJ) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR) :
 	mkdir -p $(OBJ_DIR)

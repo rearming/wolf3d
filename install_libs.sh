@@ -6,7 +6,7 @@ SDL_DIR="$PROJECT_DIR"/SDL2_libs
 
 SDL2="$SDL_DIR"/SDL2
 
-TTF_DIR="$SDL_DIR"/sdl_ttf
+TTF_DIR="$SDL_DIR"/SDL_ttf
 
 FREETYPE_DIR="$SDL_DIR"/freetype-2.4.9
 
@@ -40,10 +40,6 @@ fi
 install_freetype()
 {
 	cd "$SDL_DIR"
-	if [[ "$OSTYPE" == "linux-gnu" ]]; then
- 		sudo apt install libfreetype6 libfreetype6-dev
- 		sudo apt-get install automake
-	else
 		if [[ ! -d FREETYPE_DIR ]]; then
 			tar -xf "$PROJECT_DIR"/freetype-2.4.9.tar.bz2 -C "$SDL_DIR"
 		else
@@ -57,7 +53,6 @@ install_freetype()
 		./configure --prefix="$FREETYPE_DIR"
 		make && make install
 		chmod 755 "$FREETYPE_DIR"/freetype-config
-	fi
 }
 
 if [[ ! -d "$FREETYPE_DIR" ]]; then
