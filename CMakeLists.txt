@@ -3,9 +3,11 @@ project(wolf3d C)
 
 set(CMAKE_C_STANDARD 11)
 
-set(MY_CFLAGS "-O2")
+add_compile_options(-Wall -Wextra)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MY_CFLAGS}")
+if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
+	add_compile_options(-Werror -O2)
+endif()
 
 set(libft_includes
         libft/includes)
@@ -74,14 +76,18 @@ set(render
 		sources/render/main_menu.c
 		sources/render/controls_window.c
 		sources/render/map_choose_menu.c)
+
 set(game_logic
 		sources/game_logic/parse_items.c)
+
 set(hooks
 		sources/hooks/key_hook.c
 		sources/hooks/mouse_hook.c
 		sources/hooks/player_moves.c
 		sources/game_logic/player_actions.c
-		sources/hooks/player_look.c sources/hooks/menu_interactions.c)
+		sources/hooks/player_look.c
+		sources/hooks/menu_interactions.c)
+
 set(parsing
 		sources/parsing/image_parser.c
 		sources/parsing/map_parser.c
@@ -91,6 +97,7 @@ set(parsing
 		sources/parsing/sprites_parser.c
 		sources/parsing/texture_parsing_utils.c
 		sources/parsing/texture_table_parser.c)
+
 set(terminal
 		sources/terminal/term_init.c
 		sources/terminal/term_render.c
