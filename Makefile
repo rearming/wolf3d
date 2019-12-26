@@ -6,7 +6,7 @@
 #    By: sleonard <sleonard@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/10 23:20:41 by sleonard          #+#    #+#              #
-#    Updated: 2019/11/21 11:00:35 by sleonard         ###   ########.fr        #
+#    Updated: 2019/12/26 17:43:52 by sleonard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -214,6 +214,8 @@ all : configure $(NAME)
 configure:
 	#echo "not installing"
 	./install_libs.sh
+	git submodule init
+	git submodule update --merge --remote
 
 $(NAME) : $(LIBFT) $(OBJ_DIR) $(OBJ)
 	$(COMPILE) $(OBJ) $(LIBS) -o $(NAME)
